@@ -596,7 +596,7 @@ body {
   font-size: 11px;
 }
 
-/* ---- PLANNING BOARD ---- */
+/* ---- PLANNING BOARD (Gantt-style) ---- */
 .planning-grid {
   overflow-x: auto;
   background: var(--white);
@@ -605,46 +605,79 @@ body {
 
 .planning-table {
   width: 100%;
-  min-width: 1200px;
+  min-width: 1400px;
   border-collapse: collapse;
   font-size: 12px;
 }
 
-.planning-table thead th {
+.planning-table thead tr.week-row th {
+  background: var(--charcoal);
+  color: var(--spartan-gold);
+  padding: 6px 0;
+  text-align: center;
+  font-family: 'PT Serif', Georgia, serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  border-right: 2px solid var(--slate-dark);
+}
+
+.planning-table thead tr.week-row th.job-header {
+  background: var(--charcoal);
+  color: var(--white);
+}
+
+.planning-table thead tr.date-row th {
   background: var(--slate-dark);
   color: var(--white);
-  padding: 8px 6px;
+  padding: 6px 2px;
   text-align: center;
   font-family: 'Montserrat', sans-serif;
-  font-size: 10px;
+  font-size: 9px;
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.3px;
   border-right: 1px solid rgba(255,255,255,0.1);
-  position: sticky;
-  top: 0;
+  min-width: 38px;
+}
+
+.planning-table thead tr.date-row th.weekend {
+  background: #2A2A2A;
+  color: var(--steel);
+}
+
+.planning-table thead tr.date-row th.today {
+  background: var(--spartan-red);
+  color: var(--white);
+  font-weight: 700;
 }
 
 .planning-table thead th.job-header {
   text-align: left;
-  min-width: 200px;
+  min-width: 240px;
   position: sticky;
   left: 0;
-  z-index: 2;
+  z-index: 3;
+}
+
+.planning-table thead tr.date-row th.job-header {
+  background: var(--slate-dark);
 }
 
 .planning-table tbody td {
-  padding: 6px;
+  padding: 0;
   text-align: center;
   border-right: 1px solid var(--fog);
   border-bottom: 1px solid var(--fog);
   font-family: 'Montserrat', sans-serif;
   font-weight: 500;
+  font-size: 11px;
+  height: 36px;
 }
 
 .planning-table tbody td.job-cell {
   text-align: left;
-  padding: 6px 10px;
+  padding: 8px 10px;
   font-family: 'PT Sans', sans-serif;
   font-weight: 700;
   font-size: 12px;
@@ -653,11 +686,41 @@ body {
   left: 0;
   z-index: 1;
   border-right: 2px solid var(--silver);
-  min-width: 200px;
+  min-width: 240px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.planning-table tbody td.job-cell:hover {
+  background: var(--fog);
+}
+
+.planning-table tbody td.job-cell .job-row-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.planning-table tbody td.job-cell .expand-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  font-size: 10px;
+  color: var(--steel);
+  transition: transform 0.2s;
+  flex-shrink: 0;
+}
+
+.planning-table tbody tr.expanded > td.job-cell .expand-icon {
+  transform: rotate(90deg);
+  color: var(--spartan-red);
 }
 
 .planning-table tbody td.job-cell .job-customer {
   color: var(--charcoal);
+  font-size: 13px;
 }
 
 .planning-table tbody td.job-cell .job-location {
@@ -666,27 +729,130 @@ body {
   color: var(--slate);
 }
 
+.planning-table tbody td.job-cell .job-equip-count {
+  font-weight: 400;
+  font-size: 10px;
+  color: var(--steel);
+  font-family: 'Montserrat', sans-serif;
+}
+
+/* Gantt bar cells */
+.gantt-deployed {
+  background: #16A34A !important;
+}
+.gantt-inop {
+  background: #2563EB !important;
+}
+.gantt-mobilizing {
+  background: var(--spartan-gold) !important;
+}
+.gantt-demob {
+  background: #D97706 !important;
+}
+.gantt-empty {
+  background: var(--white);
+}
+.gantt-shortfall {
+  background: #FEE2E2 !important;
+  position: relative;
+}
+.gantt-shortfall::after {
+  content: '!';
+  font-size: 9px;
+  font-weight: 800;
+  color: #991B1B;
+}
+
+/* Equipment sub-rows (expanded detail) */
+.equip-sub-row {
+  display: none;
+}
+.equip-sub-row.visible {
+  display: table-row;
+}
+.equip-sub-row td.job-cell {
+  padding: 4px 10px 4px 36px;
+  font-size: 11px;
+  font-weight: 500;
+  background: #FAFAFA;
+  cursor: default;
+  border-bottom: 1px solid #F0F0F0;
+}
+.equip-sub-row td.job-cell:hover {
+  background: #FAFAFA;
+}
+.equip-sub-row td.job-cell .equip-name {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  color: var(--slate-dark);
+  font-size: 11px;
+}
+.equip-sub-row td {
+  height: 28px;
+  background: #FAFAFA;
+  border-bottom: 1px solid #F0F0F0;
+  font-size: 10px;
+  font-weight: 600;
+}
+.equip-sub-row td.equip-qty {
+  color: var(--slate-dark);
+}
+.equip-sub-row td.equip-qty-green {
+  background: #DCFCE7 !important;
+  color: #166534;
+}
+.equip-sub-row td.equip-qty-pink {
+  background: #FCE7F3 !important;
+  color: #9D174D;
+}
+.equip-sub-row td.equip-qty-checkered {
+  background: repeating-linear-gradient(45deg, #EDE9FE, #EDE9FE 3px, #F5F3FF 3px, #F5F3FF 6px) !important;
+  color: #5B21B6;
+}
+.equip-sub-row td.equip-qty-red {
+  background: #FEE2E2 !important;
+  color: #991B1B;
+  font-weight: 700;
+}
+
+/* Gantt legend */
+.gantt-legend {
+  display: flex;
+  gap: 20px;
+  padding: 12px 0;
+  font-size: 12px;
+  font-family: 'Montserrat', sans-serif;
+  flex-wrap: wrap;
+}
+.gantt-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.gantt-legend-swatch {
+  width: 16px;
+  height: 10px;
+}
+
+/* Summary rows */
 .planning-table tbody tr.summary-row td {
   background: var(--charcoal);
   color: var(--white);
   font-weight: 700;
-  font-size: 12px;
+  font-size: 11px;
   border-right: 1px solid var(--slate-dark);
+  height: 32px;
 }
-
 .planning-table tbody tr.summary-row td.job-cell {
   background: var(--charcoal);
   color: var(--white);
+  cursor: default;
 }
-
-.planning-table tbody tr.avail-row td {
-  background: var(--fog);
-  font-weight: 700;
-}
-
-.planning-table tbody tr.util-row td {
-  font-weight: 700;
-  font-size: 11px;
+.planning-table tbody tr.summary-row td.job-cell:hover {
+  background: var(--charcoal);
 }
 
 .cell-green { background: #DCFCE7 !important; color: #166534; }
@@ -1791,7 +1957,7 @@ body {
   <div class="page-header">
     <div class="page-title">Planning Board</div>
     <div class="page-title-bar"></div>
-    <div class="page-subtitle">4-week rolling forecast &bull; Equipment allocation by job</div>
+    <div class="page-subtitle">4-week rolling forecast &bull; Click any job to expand equipment detail</div>
   </div>
   <div class="page-body">
     <div class="tab-bar">
@@ -1801,210 +1967,26 @@ body {
     </div>
 
     <div class="filter-row">
-      <select class="filter-select"><option>All Equipment Types</option></select>
-      <select class="filter-select"><option>All Districts</option></select>
+      <select class="filter-select"><option>All Districts</option><option>Midland</option><option>Keithville</option><option>Pleasanton</option></select>
+      <select class="filter-select"><option>All Statuses</option><option>Active</option><option>Shortfall</option></select>
       <button class="btn btn-secondary btn-sm">+ New Work Order</button>
     </div>
 
-    <!-- Planning Grid -->
-    <div class="planning-grid">
-      <table class="planning-table">
-        <thead>
-          <tr>
-            <th class="job-header">Job / Customer</th>
-            <th>Wings<br>Hyd 4 15</th>
-            <th>Wings<br>Man 4 15</th>
-            <th>7 15<br>Masters</th>
-            <th>7 15<br>Zip MV</th>
-            <th>Rot<br>Spool</th>
-            <th>Stud<br>Tee</th>
-            <th>5 15<br>HYD Wg</th>
-            <th>Javelin</th>
-            <th>Accum</th>
-            <th>Spartan<br>Hands</th>
-            <th>Contract<br>Hands</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td class="job-cell">
-              <div class="job-customer">BPX Permian Pad 7</div>
-              <div class="job-location">Midland &bull; Apr 1 - Apr 18</div>
-            </td>
-            <td class="cell-green">10</td>
-            <td class="cell-green">4</td>
-            <td class="cell-green">6</td>
-            <td class="cell-green">4</td>
-            <td class="cell-green">8</td>
-            <td class="cell-green">4</td>
-            <td>--</td>
-            <td class="cell-green">2</td>
-            <td class="cell-green">8</td>
-            <td>4</td>
-            <td>2</td>
-          </tr>
-          <tr>
-            <td class="job-cell">
-              <div class="job-customer">Rockcliffe Haynesville 12</div>
-              <div class="job-location">Keithville &bull; Mar 28 - Apr 14</div>
-            </td>
-            <td class="cell-green">8</td>
-            <td class="cell-green">4</td>
-            <td class="cell-green">5</td>
-            <td class="cell-pink">3</td>
-            <td class="cell-green">6</td>
-            <td class="cell-green">3</td>
-            <td>--</td>
-            <td class="cell-green">1</td>
-            <td class="cell-pink">6</td>
-            <td>3</td>
-            <td>1</td>
-          </tr>
-          <tr>
-            <td class="job-cell">
-              <div class="job-customer">PPX Eagle Ford #3</div>
-              <div class="job-location">Pleasanton &bull; Apr 2 - Apr 20</div>
-            </td>
-            <td class="cell-pink">6</td>
-            <td class="cell-green">2</td>
-            <td class="cell-green">4</td>
-            <td class="cell-green">4</td>
-            <td class="cell-green">4</td>
-            <td class="cell-green">2</td>
-            <td class="cell-green">6</td>
-            <td class="cell-green">1</td>
-            <td class="cell-pink">8</td>
-            <td>3</td>
-            <td>2</td>
-          </tr>
-          <tr>
-            <td class="job-cell">
-              <div class="job-customer">Lewis Permian 4A</div>
-              <div class="job-location">Midland &bull; Apr 5 - Apr 22</div>
-            </td>
-            <td class="cell-checkered">8</td>
-            <td class="cell-green">4</td>
-            <td class="cell-green">6</td>
-            <td class="cell-pink">4</td>
-            <td class="cell-green">6</td>
-            <td class="cell-green">4</td>
-            <td>--</td>
-            <td class="cell-green">1</td>
-            <td class="cell-green">6</td>
-            <td>4</td>
-            <td>0</td>
-          </tr>
-          <tr>
-            <td class="job-cell">
-              <div class="job-customer">Coterra Marcellus 8H</div>
-              <div class="job-location">Keithville &bull; Apr 8 - Apr 28</div>
-            </td>
-            <td class="cell-green">6</td>
-            <td class="cell-green">2</td>
-            <td class="cell-green">4</td>
-            <td class="cell-green">3</td>
-            <td class="cell-green">4</td>
-            <td class="cell-green">2</td>
-            <td>--</td>
-            <td class="cell-green">1</td>
-            <td class="cell-green">4</td>
-            <td>2</td>
-            <td>2</td>
-          </tr>
-          <tr>
-            <td class="job-cell">
-              <div class="job-customer">Diamondback Midland B12</div>
-              <div class="job-location">Midland &bull; Apr 10 - Apr 30</div>
-            </td>
-            <td class="cell-red">10</td>
-            <td class="cell-green">4</td>
-            <td class="cell-red">8</td>
-            <td class="cell-green">4</td>
-            <td class="cell-green">6</td>
-            <td class="cell-green">3</td>
-            <td class="cell-green">4</td>
-            <td class="cell-red">2</td>
-            <td class="cell-green">6</td>
-            <td>4</td>
-            <td>3</td>
-          </tr>
-          <tr>
-            <td class="job-cell">
-              <div class="job-customer">Ovintiv Eagle Ford 5</div>
-              <div class="job-location">Pleasanton &bull; Apr 12 - May 2</div>
-            </td>
-            <td class="cell-red">8</td>
-            <td class="cell-green">4</td>
-            <td class="cell-red">6</td>
-            <td class="cell-amber">4</td>
-            <td class="cell-green">6</td>
-            <td class="cell-green">3</td>
-            <td class="cell-green">4</td>
-            <td>--</td>
-            <td class="cell-green">6</td>
-            <td>3</td>
-            <td>2</td>
-          </tr>
+    <!-- Gantt Legend -->
+    <div class="gantt-legend">
+      <div class="gantt-legend-item"><div class="gantt-legend-swatch" style="background:#C5A55A"></div> Mobilizing</div>
+      <div class="gantt-legend-item"><div class="gantt-legend-swatch" style="background:#16A34A"></div> Deployed</div>
+      <div class="gantt-legend-item"><div class="gantt-legend-swatch" style="background:#2563EB"></div> In-Operation</div>
+      <div class="gantt-legend-item"><div class="gantt-legend-swatch" style="background:#D97706"></div> Demobilizing</div>
+      <div class="gantt-legend-item"><div class="gantt-legend-swatch" style="background:#FEE2E2;border:1px solid #FCA5A5"></div> Shortfall</div>
+      <div class="gantt-legend-item" style="margin-left:12px;border-left:1px solid var(--silver);padding-left:20px"><span class="ownership-dot owned" style="width:8px;height:8px"></span> Owned</div>
+      <div class="gantt-legend-item"><span class="ownership-dot consignment" style="width:8px;height:8px"></span> Consignment</div>
+      <div class="gantt-legend-item"><span class="ownership-dot sub-rental" style="width:8px;height:8px"></span> Sub-Rental</div>
+    </div>
 
-          <!-- Summary rows -->
-          <tr class="summary-row">
-            <td class="job-cell">TOTAL DEPLOYED</td>
-            <td>56</td>
-            <td>24</td>
-            <td>39</td>
-            <td>26</td>
-            <td>40</td>
-            <td>21</td>
-            <td>14</td>
-            <td>8</td>
-            <td>44</td>
-            <td>23</td>
-            <td>12</td>
-          </tr>
-          <tr class="summary-row">
-            <td class="job-cell">TOTAL OWNED</td>
-            <td>62</td>
-            <td>28</td>
-            <td>45</td>
-            <td>38</td>
-            <td>52</td>
-            <td>40</td>
-            <td>34</td>
-            <td>8</td>
-            <td>72</td>
-            <td>--</td>
-            <td>--</td>
-          </tr>
-          <tr class="avail-row">
-            <td class="job-cell" style="background:var(--fog)"><strong>AVAILABLE</strong></td>
-            <td style="color:var(--status-critical);font-weight:700">-6</td>
-            <td style="color:var(--status-available)">4</td>
-            <td style="color:var(--status-critical);font-weight:700">-8</td>
-            <td style="color:var(--status-available)">2</td>
-            <td style="color:var(--status-available)">6</td>
-            <td style="color:var(--status-available)">5</td>
-            <td style="color:var(--status-available)">4</td>
-            <td style="color:var(--status-critical);font-weight:700">0</td>
-            <td style="color:var(--status-available)">6</td>
-            <td>--</td>
-            <td>--</td>
-          </tr>
-          <tr class="util-row">
-            <td class="job-cell"><strong>UTILIZATION</strong></td>
-            <td class="text-red">101%</td>
-            <td>86%</td>
-            <td class="text-red">107%</td>
-            <td class="text-amber">95%</td>
-            <td>85%</td>
-            <td>80%</td>
-            <td>82%</td>
-            <td class="text-red">100%</td>
-            <td class="text-amber">89%</td>
-            <td>--</td>
-            <td>--</td>
-          </tr>
-        </tbody>
-      </table>
+    <!-- Planning Grid (Gantt) -->
+    <div class="planning-grid" id="gantt-grid">
+      <!-- Populated by JavaScript -->
     </div>
 
     <!-- Shortfall Alerts -->
@@ -2489,6 +2471,320 @@ const userFlows = [
     hasWaterfall: false
   }
 ];
+
+// ====================== PLANNING BOARD (GANTT) ======================
+const ganttJobs = [
+  {
+    id: 'bpx', customer: 'BPX Permian Pad 7', district: 'Midland',
+    start: '2026-04-01', end: '2026-04-18', mobDays: 1, demobDays: 1,
+    equipment: [
+      { name: 'Wings Hyd 4 15', qty: 10, ownership: 'green' },
+      { name: 'Wings Man 4 15', qty: 4, ownership: 'green' },
+      { name: '7 15 Masters', qty: 6, ownership: 'green' },
+      { name: '7 15 Zip MV Hyd', qty: 4, ownership: 'green' },
+      { name: 'Rot Spool', qty: 8, ownership: 'green' },
+      { name: 'Stud Tee', qty: 4, ownership: 'green' },
+      { name: 'Javelin', qty: 2, ownership: 'green' },
+      { name: 'Accumulator', qty: 8, ownership: 'green' },
+      { name: 'Spartan Hands', qty: 4, ownership: 'labor' },
+      { name: 'Contract Hands', qty: 2, ownership: 'labor' }
+    ]
+  },
+  {
+    id: 'rock', customer: 'Rockcliffe Haynesville 12', district: 'Keithville',
+    start: '2026-03-28', end: '2026-04-14', mobDays: 1, demobDays: 1,
+    equipment: [
+      { name: 'Wings Hyd 4 15', qty: 8, ownership: 'green' },
+      { name: 'Wings Man 4 15', qty: 4, ownership: 'green' },
+      { name: '7 15 Masters', qty: 5, ownership: 'green' },
+      { name: '7 15 Zip MV Hyd', qty: 3, ownership: 'pink' },
+      { name: 'Rot Spool', qty: 6, ownership: 'green' },
+      { name: 'Stud Tee', qty: 3, ownership: 'green' },
+      { name: 'Javelin', qty: 1, ownership: 'green' },
+      { name: 'Accumulator', qty: 6, ownership: 'pink' },
+      { name: 'Spartan Hands', qty: 3, ownership: 'labor' },
+      { name: 'Contract Hands', qty: 1, ownership: 'labor' }
+    ]
+  },
+  {
+    id: 'ppx', customer: 'PPX Eagle Ford #3', district: 'Pleasanton',
+    start: '2026-04-02', end: '2026-04-20', mobDays: 1, demobDays: 1,
+    equipment: [
+      { name: 'Wings Hyd 4 15', qty: 6, ownership: 'pink' },
+      { name: 'Wings Man 4 15', qty: 2, ownership: 'green' },
+      { name: '7 15 Masters', qty: 4, ownership: 'green' },
+      { name: '7 15 Zip MV Hyd', qty: 4, ownership: 'green' },
+      { name: 'Rot Spool', qty: 4, ownership: 'green' },
+      { name: 'Stud Tee', qty: 2, ownership: 'green' },
+      { name: '5 15 HYD Wg', qty: 6, ownership: 'green' },
+      { name: 'Javelin', qty: 1, ownership: 'green' },
+      { name: 'Accumulator', qty: 8, ownership: 'pink' },
+      { name: 'Spartan Hands', qty: 3, ownership: 'labor' },
+      { name: 'Contract Hands', qty: 2, ownership: 'labor' }
+    ]
+  },
+  {
+    id: 'lewis', customer: 'Lewis Permian 4A', district: 'Midland',
+    start: '2026-04-05', end: '2026-04-22', mobDays: 1, demobDays: 1,
+    equipment: [
+      { name: 'Wings Hyd 4 15', qty: 8, ownership: 'checkered' },
+      { name: 'Wings Man 4 15', qty: 4, ownership: 'green' },
+      { name: '7 15 Masters', qty: 6, ownership: 'green' },
+      { name: '7 15 Zip MV Hyd', qty: 4, ownership: 'pink' },
+      { name: 'Rot Spool', qty: 6, ownership: 'green' },
+      { name: 'Stud Tee', qty: 4, ownership: 'green' },
+      { name: 'Javelin', qty: 1, ownership: 'green' },
+      { name: 'Accumulator', qty: 6, ownership: 'green' },
+      { name: 'Spartan Hands', qty: 4, ownership: 'labor' }
+    ]
+  },
+  {
+    id: 'coterra', customer: 'Coterra Marcellus 8H', district: 'Keithville',
+    start: '2026-04-08', end: '2026-04-28', mobDays: 2, demobDays: 1,
+    equipment: [
+      { name: 'Wings Hyd 4 15', qty: 6, ownership: 'green' },
+      { name: 'Wings Man 4 15', qty: 2, ownership: 'green' },
+      { name: '7 15 Masters', qty: 4, ownership: 'green' },
+      { name: '7 15 Zip MV Hyd', qty: 3, ownership: 'green' },
+      { name: 'Rot Spool', qty: 4, ownership: 'green' },
+      { name: 'Stud Tee', qty: 2, ownership: 'green' },
+      { name: 'Javelin', qty: 1, ownership: 'green' },
+      { name: 'Accumulator', qty: 4, ownership: 'green' },
+      { name: 'Spartan Hands', qty: 2, ownership: 'labor' },
+      { name: 'Contract Hands', qty: 2, ownership: 'labor' }
+    ]
+  },
+  {
+    id: 'diamond', customer: 'Diamondback Midland B12', district: 'Midland',
+    start: '2026-04-10', end: '2026-04-30', mobDays: 1, demobDays: 2,
+    shortfall: true,
+    equipment: [
+      { name: 'Wings Hyd 4 15', qty: 10, ownership: 'red' },
+      { name: 'Wings Man 4 15', qty: 4, ownership: 'green' },
+      { name: '7 15 Masters', qty: 8, ownership: 'red' },
+      { name: '7 15 Zip MV Hyd', qty: 4, ownership: 'green' },
+      { name: 'Rot Spool', qty: 6, ownership: 'green' },
+      { name: 'Stud Tee', qty: 3, ownership: 'green' },
+      { name: '5 15 HYD Wg', qty: 4, ownership: 'green' },
+      { name: 'Javelin', qty: 2, ownership: 'red' },
+      { name: 'Accumulator', qty: 6, ownership: 'green' },
+      { name: 'Spartan Hands', qty: 4, ownership: 'labor' },
+      { name: 'Contract Hands', qty: 3, ownership: 'labor' }
+    ]
+  },
+  {
+    id: 'ovintiv', customer: 'Ovintiv Eagle Ford 5', district: 'Pleasanton',
+    start: '2026-04-12', end: '2026-05-02', mobDays: 2, demobDays: 1,
+    shortfall: true,
+    equipment: [
+      { name: 'Wings Hyd 4 15', qty: 8, ownership: 'red' },
+      { name: 'Wings Man 4 15', qty: 4, ownership: 'green' },
+      { name: '7 15 Masters', qty: 6, ownership: 'red' },
+      { name: '7 15 Zip MV Hyd', qty: 4, ownership: 'amber' },
+      { name: 'Rot Spool', qty: 6, ownership: 'green' },
+      { name: 'Stud Tee', qty: 3, ownership: 'green' },
+      { name: '5 15 HYD Wg', qty: 4, ownership: 'green' },
+      { name: 'Accumulator', qty: 6, ownership: 'green' },
+      { name: 'Spartan Hands', qty: 3, ownership: 'labor' },
+      { name: 'Contract Hands', qty: 2, ownership: 'labor' }
+    ]
+  }
+];
+
+function buildGantt() {
+  const gridEl = document.getElementById('gantt-grid');
+  if (!gridEl) return;
+
+  // Generate 28 days starting Mar 31
+  const baseDate = new Date(2026, 2, 31); // Mar 31
+  const days = [];
+  for (let i = 0; i < 28; i++) {
+    const d = new Date(baseDate);
+    d.setDate(d.getDate() + i);
+    days.push(d);
+  }
+
+  const today = new Date(2026, 2, 31); // Mar 31
+  const dayNames = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+  const monthNames = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+
+  // Group days into weeks (Mon-Sun)
+  const weeks = [];
+  let currentWeek = [];
+  days.forEach(d => {
+    if (currentWeek.length > 0 && d.getDay() === 1) {
+      weeks.push(currentWeek);
+      currentWeek = [];
+    }
+    currentWeek.push(d);
+  });
+  if (currentWeek.length) weeks.push(currentWeek);
+
+  // Build table
+  let html = '<table class="planning-table">';
+
+  // Week header row
+  html += '<thead><tr class="week-row">';
+  html += '<th class="job-header" rowspan="2">Job / Customer</th>';
+  weeks.forEach(w => {
+    const start = w[0];
+    const end = w[w.length - 1];
+    const label = `${monthNames[start.getMonth()]} ${start.getDate()} – ${start.getMonth() !== end.getMonth() ? monthNames[end.getMonth()] + ' ' : ''}${end.getDate()}`;
+    html += `<th colspan="${w.length}" style="border-right:2px solid var(--slate-dark)">${label}</th>`;
+  });
+  html += '</tr>';
+
+  // Day header row
+  html += '<tr class="date-row">';
+  days.forEach((d, i) => {
+    const isWeekend = d.getDay() === 0 || d.getDay() === 6;
+    const isToday = d.getTime() === today.getTime();
+    const isLastInWeek = i === days.length - 1 || days[i+1]?.getDay() === 1;
+    let cls = isToday ? 'today' : (isWeekend ? 'weekend' : '');
+    const borderStyle = isLastInWeek ? 'border-right:2px solid rgba(255,255,255,0.3)' : '';
+    html += `<th class="${cls}" style="${borderStyle}">${dayNames[d.getDay()]}<br>${d.getDate()}</th>`;
+  });
+  html += '</tr></thead>';
+
+  // Body
+  html += '<tbody>';
+
+  ganttJobs.forEach(job => {
+    const jobStart = new Date(job.start);
+    const jobEnd = new Date(job.end);
+    const equipCount = job.equipment.filter(e => e.ownership !== 'labor').length;
+    const hasShortfall = job.shortfall;
+
+    // Main job row
+    html += `<tr class="job-parent-row" data-job="${job.id}" onclick="toggleJobExpand('${job.id}')">`;
+    html += `<td class="job-cell">
+      <div class="job-row-header">
+        <span class="expand-icon">&#9654;</span>
+        <div>
+          <div class="job-customer">${job.customer}${hasShortfall ? ' <span style="color:var(--status-critical);font-size:11px">&#9888;</span>' : ''}</div>
+          <div class="job-location">${job.district}</div>
+          <div class="job-equip-count">${equipCount} equipment types &bull; ${job.equipment.reduce((s,e) => s + (e.ownership !== 'labor' ? e.qty : 0), 0)} units</div>
+        </div>
+      </div>
+    </td>`;
+
+    days.forEach((d, i) => {
+      const isLastInWeek = i === days.length - 1 || days[i+1]?.getDay() === 1;
+      const borderStyle = isLastInWeek ? 'border-right:2px solid var(--silver)' : '';
+      const ts = d.getTime();
+      const mobStart = new Date(jobStart);
+      mobStart.setDate(mobStart.getDate() - job.mobDays);
+      const demobEnd = new Date(jobEnd);
+      demobEnd.setDate(demobEnd.getDate() + job.demobDays);
+
+      let cls = 'gantt-empty';
+      if (ts >= mobStart.getTime() && ts < jobStart.getTime()) {
+        cls = 'gantt-mobilizing';
+      } else if (ts >= jobStart.getTime() && ts <= jobEnd.getTime()) {
+        cls = hasShortfall && ts >= jobStart.getTime() && ts <= new Date(jobStart.getTime() + 2*86400000).getTime() ? 'gantt-shortfall' : 'gantt-inop';
+      } else if (ts > jobEnd.getTime() && ts <= demobEnd.getTime()) {
+        cls = 'gantt-demob';
+      }
+
+      // Show "Deployed" (green) for first and last few days of the in-operation window
+      if (ts >= jobStart.getTime() && ts <= jobEnd.getTime()) {
+        const daysFromStart = Math.floor((ts - jobStart.getTime()) / 86400000);
+        const daysToEnd = Math.floor((jobEnd.getTime() - ts) / 86400000);
+        if (daysFromStart < 2 || daysToEnd < 1) {
+          cls = hasShortfall && daysFromStart < 2 ? 'gantt-shortfall' : 'gantt-deployed';
+        }
+      }
+
+      html += `<td class="${cls}" style="${borderStyle}"></td>`;
+    });
+    html += '</tr>';
+
+    // Equipment sub-rows (hidden by default)
+    job.equipment.forEach(eq => {
+      const ownershipClass = {
+        'green': 'equip-qty-green',
+        'pink': 'equip-qty-pink',
+        'checkered': 'equip-qty-checkered',
+        'red': 'equip-qty-red',
+        'amber': 'equip-qty-green',
+        'labor': 'equip-qty'
+      }[eq.ownership] || 'equip-qty';
+
+      const ownershipDot = {
+        'green': '<span class="ownership-dot owned" style="width:7px;height:7px"></span>',
+        'pink': '<span class="ownership-dot consignment" style="width:7px;height:7px"></span>',
+        'checkered': '<span class="ownership-dot sub-rental" style="width:7px;height:7px"></span>',
+        'red': '<span style="color:#991B1B;font-size:11px">&#9888;</span>',
+        'amber': '<span style="color:#92400E;font-size:11px">&#9651;</span>',
+        'labor': '<span style="color:var(--steel);font-size:11px">&#9823;</span>'
+      }[eq.ownership] || '';
+
+      html += `<tr class="equip-sub-row" data-parent="${job.id}">`;
+      html += `<td class="job-cell"><div class="equip-name">${ownershipDot} ${eq.name}</div></td>`;
+
+      days.forEach((d, i) => {
+        const isLastInWeek = i === days.length - 1 || days[i+1]?.getDay() === 1;
+        const borderStyle = isLastInWeek ? 'border-right:2px solid var(--silver)' : '';
+        const ts = d.getTime();
+
+        if (ts >= new Date(job.start).getTime() && ts <= new Date(job.end).getTime()) {
+          html += `<td class="${ownershipClass}" style="${borderStyle}">${eq.qty}</td>`;
+        } else {
+          html += `<td style="${borderStyle}"></td>`;
+        }
+      });
+      html += '</tr>';
+    });
+  });
+
+  // Summary row: active jobs per day
+  html += '<tr class="summary-row"><td class="job-cell">ACTIVE JOBS</td>';
+  days.forEach((d, i) => {
+    const isLastInWeek = i === days.length - 1 || days[i+1]?.getDay() === 1;
+    const borderStyle = isLastInWeek ? 'border-right:2px solid var(--slate-dark)' : '';
+    let count = 0;
+    ganttJobs.forEach(job => {
+      if (d >= new Date(job.start) && d <= new Date(job.end)) count++;
+    });
+    html += `<td style="${borderStyle}">${count}</td>`;
+  });
+  html += '</tr>';
+
+  // Summary row: total units deployed per day
+  html += '<tr class="summary-row"><td class="job-cell">UNITS DEPLOYED</td>';
+  days.forEach((d, i) => {
+    const isLastInWeek = i === days.length - 1 || days[i+1]?.getDay() === 1;
+    const borderStyle = isLastInWeek ? 'border-right:2px solid var(--slate-dark)' : '';
+    let total = 0;
+    ganttJobs.forEach(job => {
+      if (d >= new Date(job.start) && d <= new Date(job.end)) {
+        job.equipment.forEach(eq => { if (eq.ownership !== 'labor') total += eq.qty; });
+      }
+    });
+    html += `<td style="${borderStyle}">${total}</td>`;
+  });
+  html += '</tr>';
+
+  html += '</tbody></table>';
+  gridEl.innerHTML = html;
+}
+
+function toggleJobExpand(jobId) {
+  const parentRow = document.querySelector(`tr.job-parent-row[data-job="${jobId}"]`);
+  const subRows = document.querySelectorAll(`tr.equip-sub-row[data-parent="${jobId}"]`);
+  const isExpanded = parentRow.classList.contains('expanded');
+
+  if (isExpanded) {
+    parentRow.classList.remove('expanded');
+    subRows.forEach(r => r.classList.remove('visible'));
+  } else {
+    parentRow.classList.add('expanded');
+    subRows.forEach(r => r.classList.add('visible'));
+  }
+}
+
+// Build on load
+document.addEventListener('DOMContentLoaded', buildGantt);
 
 // ====================== NAVIGATION ======================
 function doLogin() {
