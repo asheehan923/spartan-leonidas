@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Atlas — Current Workflow Analysis</title>
+<link href="https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&family=PT+Serif:wght@400;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --spartan-red: #B32317;
+  --spartan-red-dark: #8B1A1A;
+  --spartan-gold: #C5A55A;
+  --charcoal: #231F20;
+  --slate: #555555;
+  --steel: #888888;
+  --silver: #D1D5DB;
+  --fog: #F3F4F6;
+  --white: #FFFFFF;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'PT Sans', Helvetica, Arial, sans-serif;
+  background: var(--charcoal);
+  color: var(--charcoal);
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* Slide container */
+.slides { position: relative; height: 100vh; }
+
+.slide {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  display: none;
+  flex-direction: column;
+}
+
+.slide.active { display: flex; }
+
+/* Title slide */
+.title-slide {
+  background: linear-gradient(135deg, var(--charcoal) 0%, #1a1617 50%, var(--spartan-red-dark) 100%);
+  color: var(--white);
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.title-slide .logo-text {
+  font-family: 'PT Serif', Georgia, serif;
+  font-size: 64px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  margin-bottom: 8px;
+}
+
+.title-slide .subtitle {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  color: var(--spartan-gold);
+  margin-bottom: 48px;
+}
+
+.title-slide .headline {
+  font-family: 'PT Serif', Georgia, serif;
+  font-size: 36px;
+  font-weight: 700;
+  max-width: 700px;
+  line-height: 1.3;
+  margin-bottom: 16px;
+}
+
+.title-slide .subhead {
+  font-size: 18px;
+  color: var(--silver);
+  max-width: 600px;
+  line-height: 1.6;
+}
+
+/* Workflow slides */
+.workflow-slide {
+  background: var(--white);
+}
+
+.slide-header {
+  background: var(--charcoal);
+  color: var(--white);
+  padding: 24px 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+}
+
+.slide-header-left {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.slide-id {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  background: var(--spartan-red);
+  color: var(--white);
+  padding: 4px 12px;
+  letter-spacing: 1px;
+}
+
+.slide-title {
+  font-family: 'PT Serif', Georgia, serif;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.slide-nav-indicator {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 13px;
+  color: var(--steel);
+  letter-spacing: 1px;
+}
+
+.slide-body {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+}
+
+/* Left: Workflow */
+.workflow-panel {
+  flex: 1;
+  padding: 40px 48px;
+  overflow-y: auto;
+  border-right: 1px solid var(--silver);
+}
+
+.workflow-label {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--steel);
+  margin-bottom: 24px;
+}
+
+.workflow-purpose {
+  font-size: 15px;
+  color: var(--slate);
+  line-height: 1.6;
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--silver);
+}
+
+.step {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 20px;
+  align-items: flex-start;
+}
+
+.step-num {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--fog);
+  color: var(--slate);
+  flex-shrink: 0;
+  border: 1px solid var(--silver);
+}
+
+.step-text {
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--charcoal);
+  padding-top: 3px;
+}
+
+.step-text em {
+  color: var(--spartan-red);
+  font-style: normal;
+  font-weight: 700;
+}
+
+/* Right: Hours panel */
+.hours-panel {
+  width: 380px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 48px;
+  background: var(--fog);
+  text-align: center;
+}
+
+.hours-label {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--steel);
+  margin-bottom: 16px;
+}
+
+.hours-number {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 96px;
+  font-weight: 700;
+  color: var(--spartan-red);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.hours-unit {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--charcoal);
+  margin-bottom: 40px;
+}
+
+.hours-breakdown {
+  width: 100%;
+  text-align: left;
+  border-top: 1px solid var(--silver);
+  padding-top: 24px;
+}
+
+.hours-breakdown-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--steel);
+  margin-bottom: 16px;
+}
+
+.hours-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  font-size: 14px;
+  border-bottom: 1px solid var(--silver);
+}
+
+.hours-row:last-child {
+  border-bottom: none;
+}
+
+.hours-row-label { color: var(--slate); }
+
+.hours-row-value {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  color: var(--charcoal);
+}
+
+.hours-bar {
+  height: 6px;
+  background: var(--spartan-red);
+  margin-top: 4px;
+  opacity: 0.7;
+}
+
+.hours-context {
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid var(--silver);
+  text-align: center;
+}
+
+.hours-context-text {
+  font-size: 13px;
+  color: var(--steel);
+  line-height: 1.6;
+}
+
+.hours-context-text strong {
+  color: var(--charcoal);
+}
+
+/* Summary slide */
+.summary-slide {
+  background: var(--white);
+}
+
+.summary-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 48px;
+}
+
+.summary-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  max-width: 800px;
+  width: 100%;
+  margin-bottom: 48px;
+}
+
+.summary-card {
+  background: var(--fog);
+  padding: 32px;
+  text-align: center;
+  border-top: 4px solid var(--spartan-red);
+}
+
+.summary-card-label {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--steel);
+  margin-bottom: 8px;
+}
+
+.summary-card-value {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 48px;
+  font-weight: 700;
+  color: var(--spartan-red);
+  margin-bottom: 4px;
+}
+
+.summary-card-unit {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--charcoal);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.summary-total {
+  text-align: center;
+}
+
+.summary-total-label {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--steel);
+  margin-bottom: 8px;
+}
+
+.summary-total-value {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 72px;
+  font-weight: 700;
+  color: var(--spartan-red);
+  line-height: 1;
+}
+
+.summary-total-unit {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--charcoal);
+  margin-top: 4px;
+  margin-bottom: 16px;
+}
+
+.summary-total-context {
+  font-size: 16px;
+  color: var(--slate);
+  max-width: 500px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+.summary-total-context strong {
+  color: var(--spartan-red);
+}
+
+/* Navigation */
+.nav-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: var(--charcoal);
+  padding: 12px 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 100;
+}
+
+.nav-btn {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 10px 24px;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.nav-btn-prev {
+  background: transparent;
+  color: var(--silver);
+  border: 1px solid var(--steel);
+}
+.nav-btn-prev:hover { background: rgba(255,255,255,0.1); }
+.nav-btn-prev:disabled { opacity: 0.3; cursor: default; }
+
+.nav-btn-next {
+  background: var(--spartan-red);
+  color: var(--white);
+}
+.nav-btn-next:hover { background: var(--spartan-red-dark); }
+
+.nav-dots {
+  display: flex;
+  gap: 8px;
+}
+
+.nav-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--steel);
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.nav-dot.active {
+  background: var(--spartan-gold);
+}
+
+/* Keyboard hint */
+.key-hint {
+  position: fixed;
+  bottom: 56px;
+  right: 48px;
+  font-size: 11px;
+  color: var(--steel);
+  z-index: 100;
+}
+</style>
+</head>
+<body>
+
+<div class="slides" id="slides">
+
+  <!-- SLIDE 0: Title -->
+  <div class="slide title-slide active" data-index="0">
+    <div class="logo-text">ATLAS</div>
+    <div class="subtitle">Spartan Energy Services</div>
+    <div class="headline">Where the CEO's Time Goes</div>
+    <div class="subhead">Four workflows that consume a third of Delmar's week — and what Atlas replaces.</div>
+  </div>
+
+  <!-- SLIDE 1: UF1 -->
+  <div class="slide workflow-slide" data-index="1">
+    <div class="slide-header">
+      <div class="slide-header-left">
+        <div class="slide-id">UF1</div>
+        <div class="slide-title">Daily Asset Planning</div>
+      </div>
+      <div class="slide-nav-indicator">1 of 4</div>
+    </div>
+    <div class="slide-body">
+      <div class="workflow-panel">
+        <div class="workflow-label">Current Workflow</div>
+        <div class="workflow-purpose">The core operational heartbeat. Every 2 days, the CEO and President review all active and upcoming jobs, identify equipment shortfalls, and develop a plan to cover them.</div>
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-text">Open the master Excel spreadsheet <em>(updated every 2 days)</em></div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-text">Scroll through <em>30+ job rows</em> reviewing equipment allocations</div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-text">Check the bottom summary section for total deployed, total owned, available, and utilization %</div>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <div class="step-text">Identify equipment types where utilization is at or above 100% <em>(red / negative availability)</em></div>
+        </div>
+        <div class="step">
+          <div class="step-num">5</div>
+          <div class="step-text">For each shortfall, <em>manually search job rows</em> for upcoming end dates — "who's coming in with some freedom?"</div>
+        </div>
+        <div class="step">
+          <div class="step-num">6</div>
+          <div class="step-text">Evaluate options: convert valve sizes, pull from consignment, arrange sub-rental</div>
+        </div>
+        <div class="step">
+          <div class="step-num">7</div>
+          <div class="step-text">Call DMs to communicate changes — <em>"you need to convert this to three-inch wings"</em></div>
+        </div>
+        <div class="step">
+          <div class="step-num">8</div>
+          <div class="step-text">Update spreadsheet cells manually with new allocations</div>
+        </div>
+        <div class="step">
+          <div class="step-num">9</div>
+          <div class="step-text">Repeat every 2 days — <em>takes several hours each session</em></div>
+        </div>
+      </div>
+      <div class="hours-panel">
+        <div class="hours-label">CEO + President Time</div>
+        <div class="hours-number">10</div>
+        <div class="hours-unit">hours / week</div>
+        <div class="hours-breakdown">
+          <div class="hours-breakdown-title">Breakdown</div>
+          <div class="hours-row">
+            <span class="hours-row-label">Planning sessions (3–4x/wk)</span>
+            <span class="hours-row-value">6–8 hrs</span>
+          </div>
+          <div class="hours-bar" style="width:75%"></div>
+          <div class="hours-row">
+            <span class="hours-row-label">DM phone calls</span>
+            <span class="hours-row-value">1–2 hrs</span>
+          </div>
+          <div class="hours-bar" style="width:18%"></div>
+          <div class="hours-row">
+            <span class="hours-row-label">Spreadsheet updates</span>
+            <span class="hours-row-value">1 hr</span>
+          </div>
+          <div class="hours-bar" style="width:10%"></div>
+        </div>
+        <div class="hours-context">
+          <div class="hours-context-text">Spreadsheet is <strong>too large for daily updates</strong> — only refreshed every 2 days. Decisions made on data that's 24–48 hours stale.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 2: UF2 -->
+  <div class="slide workflow-slide" data-index="2">
+    <div class="slide-header">
+      <div class="slide-header-left">
+        <div class="slide-id">UF2</div>
+        <div class="slide-title">New Job Setup & Equipment Forecasting</div>
+      </div>
+      <div class="slide-nav-indicator">2 of 4</div>
+    </div>
+    <div class="slide-body">
+      <div class="workflow-panel">
+        <div class="workflow-label">Current Workflow</div>
+        <div class="workflow-purpose">When a new job is won or a frac schedule is received, the equipment requirements must be entered and checked against available assets. This determines whether Spartan can take the work.</div>
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-text">Sales/operations receives a frac schedule from a customer <em>(e.g., a 6-well pad)</em></div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-text">Delmar determines what equipment is needed: <em>type, size, pressure, quantity per well</em></div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-text">Add a new row to the spreadsheet with customer name and well site</div>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <div class="step-text">Fill in quantities per equipment column <em>(free-text, inconsistent across jobs)</em></div>
+        </div>
+        <div class="step">
+          <div class="step-num">5</div>
+          <div class="step-text">Scroll to the bottom to see if the new job pushes any equipment type <em>into negative availability</em></div>
+        </div>
+        <div class="step">
+          <div class="step-num">6</div>
+          <div class="step-text">If negative — begin the shortage resolution flow <em>(see UF3)</em></div>
+        </div>
+        <div class="step">
+          <div class="step-num">7</div>
+          <div class="step-text">Jobs beyond ~2 weeks are entered speculatively — <em>"the future don't look good... I'm going to be short six right here"</em></div>
+        </div>
+      </div>
+      <div class="hours-panel">
+        <div class="hours-label">CEO Time</div>
+        <div class="hours-number">3</div>
+        <div class="hours-unit">hours / week</div>
+        <div class="hours-breakdown">
+          <div class="hours-breakdown-title">Breakdown</div>
+          <div class="hours-row">
+            <span class="hours-row-label">New job entry (2–3 jobs/wk)</span>
+            <span class="hours-row-value">1.5 hrs</span>
+          </div>
+          <div class="hours-bar" style="width:50%"></div>
+          <div class="hours-row">
+            <span class="hours-row-label">Availability check & math</span>
+            <span class="hours-row-value">1 hr</span>
+          </div>
+          <div class="hours-bar" style="width:33%"></div>
+          <div class="hours-row">
+            <span class="hours-row-label">Customer callback / negotiation</span>
+            <span class="hours-row-value">0.5 hr</span>
+          </div>
+          <div class="hours-bar" style="width:17%"></div>
+        </div>
+        <div class="hours-context">
+          <div class="hours-context-text">No instant impact analysis — Delmar has to <strong>scroll and calculate in his head</strong> to know if a new job breaks something.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 3: UF3 -->
+  <div class="slide workflow-slide" data-index="3">
+    <div class="slide-header">
+      <div class="slide-header-left">
+        <div class="slide-id">UF3</div>
+        <div class="slide-title">Shortage Resolution</div>
+      </div>
+      <div class="slide-nav-indicator">3 of 4</div>
+    </div>
+    <div class="slide-body">
+      <div class="workflow-panel">
+        <div class="workflow-label">Current Workflow — "Robbing Peter to Pay Paul"</div>
+        <div class="workflow-purpose">When demand exceeds supply for a specific equipment type, the CEO must find a way to fill the gap. This is the most complex and time-consuming workflow — it requires evaluating job timelines, size conversions, consignment availability, cross-district transfers, and sub-rentals.</div>
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-text">See a negative number in the availability summary — <em>"-6 on 7-1/16" 15K wing valves"</em></div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-text">Scroll through <em>all 30+ job rows</em> looking for jobs with end dates that release that equipment type before the shortfall date</div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-text">If none found, evaluate size conversion: <em>"can I convert this customer from 4-inch to 3-inch wings?"</em></div>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <div class="step-text">Call the customer to pitch the conversion — <em>"tell them why three-inch is a better deal"</em></div>
+        </div>
+        <div class="step">
+          <div class="step-num">5</div>
+          <div class="step-text">If still short, check consignment availability across partners <em>(separate Excel tabs)</em></div>
+        </div>
+        <div class="step">
+          <div class="step-num">6</div>
+          <div class="step-text">If still short, check other districts — <em>"does Keithville have surplus?"</em> — then verify pulling assets won't create a shortfall there</div>
+        </div>
+        <div class="step">
+          <div class="step-num">7</div>
+          <div class="step-text">If still short, arrange a sub-rental from a third party</div>
+        </div>
+        <div class="step">
+          <div class="step-num">8</div>
+          <div class="step-text">Update the spreadsheet with the solution — <em>previously "black" cells (impossible) may turn green (resolved)</em></div>
+        </div>
+      </div>
+      <div class="hours-panel">
+        <div class="hours-label">CEO + President Time</div>
+        <div class="hours-number">5</div>
+        <div class="hours-unit">hours / week</div>
+        <div class="hours-breakdown">
+          <div class="hours-breakdown-title">Breakdown</div>
+          <div class="hours-row">
+            <span class="hours-row-label">Scanning jobs for solutions</span>
+            <span class="hours-row-value">2 hrs</span>
+          </div>
+          <div class="hours-bar" style="width:40%"></div>
+          <div class="hours-row">
+            <span class="hours-row-label">Cross-district evaluation</span>
+            <span class="hours-row-value">1.5 hrs</span>
+          </div>
+          <div class="hours-bar" style="width:30%"></div>
+          <div class="hours-row">
+            <span class="hours-row-label">Phone calls (customers, DMs)</span>
+            <span class="hours-row-value">1 hr</span>
+          </div>
+          <div class="hours-bar" style="width:20%"></div>
+          <div class="hours-row">
+            <span class="hours-row-label">Sub-rental sourcing</span>
+            <span class="hours-row-value">0.5 hr</span>
+          </div>
+          <div class="hours-bar" style="width:10%"></div>
+        </div>
+        <div class="hours-context">
+          <div class="hours-context-text">Most complex workflow. No systematic evaluation — relies on <strong>Delmar's memory and manual scanning</strong> of every job row.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 4: UF16 -->
+  <div class="slide workflow-slide" data-index="4">
+    <div class="slide-header">
+      <div class="slide-header-left">
+        <div class="slide-id">UF16</div>
+        <div class="slide-title">Job Timing Update & Conflict Check</div>
+      </div>
+      <div class="slide-nav-indicator">4 of 4</div>
+    </div>
+    <div class="slide-body">
+      <div class="workflow-panel">
+        <div class="workflow-label">Current Workflow</div>
+        <div class="workflow-purpose">When a job's start or end date changes — customer delay, early release, schedule extension — the entire spreadsheet must be re-scanned to find what breaks. A single date change can take 30+ minutes on a busy week.</div>
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-text">Learn a job's dates are changing <em>(customer call, field update, weather delay)</em></div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-text">Open the spreadsheet and find the job row</div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-text">Manually adjust the date columns</div>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <div class="step-text">Scroll to the bottom — <em>check if the date change pushes any equipment type into negative availability</em></div>
+        </div>
+        <div class="step">
+          <div class="step-num">5</div>
+          <div class="step-text">If a shortfall is created, <em>manually scan other job rows</em> to find which jobs are affected</div>
+        </div>
+        <div class="step">
+          <div class="step-num">6</div>
+          <div class="step-text">If moving a job earlier, check whether equipment is available sooner — <em>often it's not because other jobs still hold those assets</em></div>
+        </div>
+        <div class="step">
+          <div class="step-num">7</div>
+          <div class="step-text">Call DMs and President to communicate the ripple effect</div>
+        </div>
+        <div class="step">
+          <div class="step-num">8</div>
+          <div class="step-text">Process can take <em>30+ minutes for a single date change</em> on a busy week</div>
+        </div>
+      </div>
+      <div class="hours-panel">
+        <div class="hours-label">CEO Time</div>
+        <div class="hours-number">2</div>
+        <div class="hours-unit">hours / week</div>
+        <div class="hours-breakdown">
+          <div class="hours-breakdown-title">Breakdown</div>
+          <div class="hours-row">
+            <span class="hours-row-label">Date changes (3–5/week)</span>
+            <span class="hours-row-value">1.5 hrs</span>
+          </div>
+          <div class="hours-bar" style="width:75%"></div>
+          <div class="hours-row">
+            <span class="hours-row-label">Ripple-effect phone calls</span>
+            <span class="hours-row-value">0.5 hr</span>
+          </div>
+          <div class="hours-bar" style="width:25%"></div>
+        </div>
+        <div class="hours-context">
+          <div class="hours-context-text">Date changes are <strong>unpredictable and frequent</strong>. Each one requires a full re-scan of the spreadsheet to find cascading conflicts.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 5: Summary -->
+  <div class="slide workflow-slide summary-slide" data-index="5">
+    <div class="slide-header">
+      <div class="slide-header-left">
+        <div class="slide-title">Total CEO Time on Manual Asset Planning</div>
+      </div>
+      <div class="slide-nav-indicator">Summary</div>
+    </div>
+    <div class="summary-body">
+      <div class="summary-grid">
+        <div class="summary-card">
+          <div class="summary-card-label">UF1 — Daily Planning</div>
+          <div class="summary-card-value">10</div>
+          <div class="summary-card-unit">hrs / week</div>
+        </div>
+        <div class="summary-card">
+          <div class="summary-card-label">UF2 — New Job Setup</div>
+          <div class="summary-card-value">3</div>
+          <div class="summary-card-unit">hrs / week</div>
+        </div>
+        <div class="summary-card">
+          <div class="summary-card-label">UF3 — Shortage Resolution</div>
+          <div class="summary-card-value">5</div>
+          <div class="summary-card-unit">hrs / week</div>
+        </div>
+        <div class="summary-card">
+          <div class="summary-card-label">UF16 — Date Change Conflicts</div>
+          <div class="summary-card-value">2</div>
+          <div class="summary-card-unit">hrs / week</div>
+        </div>
+      </div>
+      <div class="summary-total">
+        <div class="summary-total-label">Total</div>
+        <div class="summary-total-value">20</div>
+        <div class="summary-total-unit">hours / week</div>
+        <div class="summary-total-context">That's <strong>roughly a third of Delmar's working week</strong> spent on manual spreadsheet operations that Atlas automates — instant availability checks, automated waterfall resolution, and real-time conflict detection across all districts.</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Navigation -->
+<div class="nav-bar">
+  <button class="nav-btn nav-btn-prev" id="prevBtn" onclick="prevSlide()" disabled>&larr; Back</button>
+  <div class="nav-dots" id="navDots"></div>
+  <button class="nav-btn nav-btn-next" id="nextBtn" onclick="nextSlide()">Next &rarr;</button>
+</div>
+
+<div class="key-hint">Arrow keys or click to navigate</div>
+
+<script>
+let current = 0;
+const slides = document.querySelectorAll('.slide');
+const total = slides.length;
+
+function showSlide(n) {
+  if (n < 0 || n >= total) return;
+  slides[current].classList.remove('active');
+  current = n;
+  slides[current].classList.add('active');
+  updateNav();
+}
+
+function nextSlide() { showSlide(current + 1); }
+function prevSlide() { showSlide(current - 1); }
+
+function updateNav() {
+  document.getElementById('prevBtn').disabled = current === 0;
+  document.getElementById('nextBtn').textContent = current === total - 1 ? 'Done' : 'Next →';
+  if (current === total - 1) {
+    document.getElementById('nextBtn').disabled = true;
+  } else {
+    document.getElementById('nextBtn').disabled = false;
+  }
+  document.querySelectorAll('.nav-dot').forEach((dot, i) => {
+    dot.classList.toggle('active', i === current);
+  });
+}
+
+// Build dots
+const dotsEl = document.getElementById('navDots');
+for (let i = 0; i < total; i++) {
+  const dot = document.createElement('div');
+  dot.className = 'nav-dot' + (i === 0 ? ' active' : '');
+  dot.onclick = () => showSlide(i);
+  dotsEl.appendChild(dot);
+}
+
+// Keyboard navigation
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); nextSlide(); }
+  if (e.key === 'ArrowLeft') { e.preventDefault(); prevSlide(); }
+});
+</script>
+
+</body>
+</html>
