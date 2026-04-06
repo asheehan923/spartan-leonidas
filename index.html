@@ -1520,12 +1520,12 @@ body {
       <div class="kpi-card">
         <div class="kpi-value font-mono" style="color:var(--status-deployed)">412</div>
         <div class="kpi-label">Deployed</div>
-        <div class="kpi-change down">+18 vs last period</div>
+        <div class="kpi-change down">+18 vs last week</div>
       </div>
       <div class="kpi-card">
         <div class="kpi-value font-mono" style="color:var(--status-available)">43</div>
         <div class="kpi-label">Available</div>
-        <div class="kpi-change down">&darr; 6 from last period</div>
+        <div class="kpi-change down">&darr; 6 from last week</div>
       </div>
       <div class="kpi-card">
         <div class="kpi-value font-mono" style="color:var(--status-shop)">22</div>
@@ -1534,11 +1534,7 @@ body {
       <div class="kpi-card">
         <div class="kpi-value font-mono" style="color:var(--status-critical)">87%</div>
         <div class="kpi-label">Utilization</div>
-        <div class="kpi-change up">&uarr; 2% from last period</div>
-      </div>
-      <div class="kpi-card">
-        <div class="kpi-value font-mono" style="color:var(--spartan-gold)">10</div>
-        <div class="kpi-label">Sub-Assemblies Active</div>
+        <div class="kpi-change up">&uarr; 2% from last week</div>
       </div>
     </div>
 
@@ -1846,6 +1842,97 @@ body {
       </div>
     </div>
 
+    <div class="section-header">14-Day Demand vs. Supply Forecast</div>
+    <div class="section-bar"></div>
+    <div style="margin-bottom:8px;font-size:13px;color:var(--slate)">
+      Day-by-day breakdown of scheduled demand, assets on hand, and net position. <span style="color:var(--status-critical);font-weight:700">Red</span> = shortfall.
+    </div>
+    <div class="data-table-wrap">
+      <table class="data-table" style="font-size:13px">
+        <thead>
+          <tr>
+            <th style="min-width:160px">Metric</th>
+            <th>Apr 6<br><span style="font-weight:400;font-size:11px">Mon</span></th>
+            <th>Apr 7<br><span style="font-weight:400;font-size:11px">Tue</span></th>
+            <th>Apr 8<br><span style="font-weight:400;font-size:11px">Wed</span></th>
+            <th>Apr 9<br><span style="font-weight:400;font-size:11px">Thu</span></th>
+            <th>Apr 10<br><span style="font-weight:400;font-size:11px">Fri</span></th>
+            <th>Apr 11<br><span style="font-weight:400;font-size:11px">Sat</span></th>
+            <th>Apr 12<br><span style="font-weight:400;font-size:11px">Sun</span></th>
+            <th>Apr 13<br><span style="font-weight:400;font-size:11px">Mon</span></th>
+            <th>Apr 14<br><span style="font-weight:400;font-size:11px">Tue</span></th>
+            <th>Apr 15<br><span style="font-weight:400;font-size:11px">Wed</span></th>
+            <th>Apr 16<br><span style="font-weight:400;font-size:11px">Thu</span></th>
+            <th>Apr 17<br><span style="font-weight:400;font-size:11px">Fri</span></th>
+            <th>Apr 18<br><span style="font-weight:400;font-size:11px">Sat</span></th>
+            <th>Apr 19<br><span style="font-weight:400;font-size:11px">Sun</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="background:var(--fog)">
+            <td class="fw-700">Requirement (Demand)</td>
+            <td class="font-mono">42</td><td class="font-mono">42</td><td class="font-mono">42</td><td class="font-mono">42</td>
+            <td class="font-mono" style="color:var(--status-critical);font-weight:700">68</td>
+            <td class="font-mono" style="color:var(--status-critical);font-weight:700">68</td>
+            <td class="font-mono" style="color:var(--status-critical);font-weight:700">68</td>
+            <td class="font-mono" style="color:var(--status-critical);font-weight:700">68</td>
+            <td class="font-mono" style="color:var(--status-critical);font-weight:700">68</td>
+            <td class="font-mono" style="color:var(--status-critical);font-weight:700">68</td>
+            <td class="font-mono" style="color:var(--status-critical);font-weight:700">68</td>
+            <td class="font-mono" style="color:var(--status-critical);font-weight:700">68</td>
+            <td class="font-mono" style="color:var(--status-critical);font-weight:700">60</td>
+            <td class="font-mono">52</td>
+          </tr>
+          <tr>
+            <td class="fw-700">Assets on Hand</td>
+            <td class="font-mono">62</td><td class="font-mono">62</td><td class="font-mono">62</td><td class="font-mono">62</td>
+            <td class="font-mono">62</td><td class="font-mono">62</td><td class="font-mono">62</td><td class="font-mono">62</td>
+            <td class="font-mono">62</td><td class="font-mono">62</td><td class="font-mono">62</td><td class="font-mono">62</td>
+            <td class="font-mono">62</td><td class="font-mono">62</td>
+          </tr>
+          <tr style="border-top:2px solid var(--charcoal)">
+            <td class="fw-700">Net Position</td>
+            <td class="font-mono" style="color:var(--status-available);font-weight:700">+20</td>
+            <td class="font-mono" style="color:var(--status-available);font-weight:700">+20</td>
+            <td class="font-mono" style="color:var(--status-available);font-weight:700">+20</td>
+            <td class="font-mono" style="color:var(--status-available);font-weight:700">+20</td>
+            <td class="font-mono" style="color:var(--status-critical);font-weight:700">-6</td>
+            <td class="font-mono" style="color:var(--status-critical);font-weight:700">-6</td>
+            <td class="font-mono" style="color:var(--status-critical);font-weight:700">-6</td>
+            <td class="font-mono" style="color:var(--status-critical);font-weight:700">-6</td>
+            <td class="font-mono" style="color:var(--status-critical);font-weight:700">-6</td>
+            <td class="font-mono" style="color:var(--status-critical);font-weight:700">-6</td>
+            <td class="font-mono" style="color:var(--status-critical);font-weight:700">-6</td>
+            <td class="font-mono" style="color:var(--status-critical);font-weight:700">-6</td>
+            <td class="font-mono" style="color:var(--status-critical);font-weight:700">-2</td>
+            <td class="font-mono" style="color:var(--status-available);font-weight:700">+10</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div style="margin-top:8px;margin-bottom:24px;font-size:12px;color:var(--slate);display:flex;gap:24px">
+      <div><strong>Demand drivers (Apr 10):</strong> BPX Permian Pad 7 (10), Rockcliffe Haynesville 12 (8), Lewis Permian 4A (8), PPX Eagle Ford #3 (6), Coterra Marcellus 8H (6), Diamondback Midland B12 (10), Ovintiv Eagle Ford 5 (8) + shop/transit holds (12)</div>
+    </div>
+
+    <div style="display:flex;gap:16px;margin-bottom:24px">
+      <div class="card" style="flex:1;border-left:3px solid var(--status-critical);padding:16px">
+        <div style="font-family:'Montserrat',sans-serif;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--status-critical);margin-bottom:8px">Shortfall Window</div>
+        <div style="font-size:14px"><strong>9 days</strong> &mdash; Apr 10 through Apr 18</div>
+        <div style="font-size:13px;color:var(--slate);margin-top:4px">Peak shortfall: <strong>-6 units</strong> (Apr 10 – Apr 17)</div>
+        <div style="font-size:13px;color:var(--slate)">Shortfall eases to -2 on Apr 18 as BPX Permian Pad 7 demobilizes</div>
+      </div>
+      <div class="card" style="flex:1;border-left:3px solid var(--spartan-gold);padding:16px">
+        <div style="font-family:'Montserrat',sans-serif;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--spartan-gold);margin-bottom:8px">Resolution Options</div>
+        <div style="font-size:13px;line-height:1.8">
+          <span class="waterfall-priority" style="font-size:11px;width:18px;height:18px;line-height:18px">4</span> Transfer 4x owned from Keithville (surplus 8 through Apr 20)<br>
+          <span class="waterfall-priority" style="font-size:11px;width:18px;height:18px;line-height:18px;background:var(--sub-rental)">3</span> Sub-rent 2x locally in Midland<br>
+          <span style="font-size:12px;color:var(--slate)">Resolves peak shortfall to 0. Est. cost: $2,850 freight + sub-rental TBD.</span>
+        </div>
+        <button class="btn btn-primary btn-sm" style="margin-top:12px" onclick="showScreen('planning')">View on Planning Board</button>
+      </div>
+    </div>
+
     <div class="section-header">Individual Assets</div>
     <div class="section-bar"></div>
     <div class="data-table-wrap">
@@ -1961,108 +2048,470 @@ body {
   </div>
   <div class="page-body">
     <div class="tab-bar">
-      <div class="tab-item active">Forecast Grid</div>
-      <div class="tab-item">Shortfall Alerts</div>
-      <div class="tab-item">What-If Mode</div>
+      <div class="tab-item active" onclick="switchPlanningTab('forecast')">Forecast Grid</div>
+      <div class="tab-item" onclick="switchPlanningTab('shortfalls')">Shortfall Alerts <span style="background:var(--status-critical);color:white;font-size:11px;padding:1px 7px;border-radius:9px;margin-left:4px">4</span></div>
+      <div class="tab-item" onclick="switchPlanningTab('whatif')">What-If Mode</div>
+      <div class="tab-item" onclick="switchPlanningTab('newwo')">+ New Work Order</div>
     </div>
 
-    <div class="filter-row">
-      <select class="filter-select"><option>All Districts</option><option>Midland</option><option>Keithville</option><option>Pleasanton</option></select>
-      <select class="filter-select"><option>All Statuses</option><option>Active</option><option>Shortfall</option></select>
-      <button class="btn btn-secondary btn-sm">+ New Work Order</button>
-    </div>
-
-    <!-- Gantt Legend -->
-    <div class="gantt-legend">
-      <div class="gantt-legend-item"><div class="gantt-legend-swatch" style="background:#C5A55A"></div> Mobilizing</div>
-      <div class="gantt-legend-item"><div class="gantt-legend-swatch" style="background:#16A34A"></div> Deployed</div>
-      <div class="gantt-legend-item"><div class="gantt-legend-swatch" style="background:#2563EB"></div> In-Operation</div>
-      <div class="gantt-legend-item"><div class="gantt-legend-swatch" style="background:#D97706"></div> Demobilizing</div>
-      <div class="gantt-legend-item"><div class="gantt-legend-swatch" style="background:#FEE2E2;border:1px solid #FCA5A5"></div> Shortfall</div>
-      <div class="gantt-legend-item" style="margin-left:12px;border-left:1px solid var(--silver);padding-left:20px"><span class="ownership-dot owned" style="width:8px;height:8px"></span> Owned</div>
-      <div class="gantt-legend-item"><span class="ownership-dot consignment" style="width:8px;height:8px"></span> Consignment</div>
-      <div class="gantt-legend-item"><span class="ownership-dot sub-rental" style="width:8px;height:8px"></span> Sub-Rental</div>
-    </div>
-
-    <!-- Planning Grid (Gantt) -->
-    <div class="planning-grid" id="gantt-grid">
-      <!-- Populated by JavaScript -->
-    </div>
-
-    <!-- Shortfall Alerts -->
-    <div class="section-header mt-24">Shortfall Alerts</div>
-    <div class="section-bar"></div>
-
-    <div class="shortfall-card">
-      <div class="shortfall-title">&#9888; Wings Hyd 4 15 &mdash; Short 6 units by April 10</div>
-      <div style="font-size:13px;color:var(--slate);margin-bottom:12px">Diamondback Midland B12 and Ovintiv Eagle Ford 5 push demand to 68 vs. 62 available</div>
-
-      <div style="font-size:12px;font-weight:700;font-family:'Montserrat',sans-serif;text-transform:uppercase;letter-spacing:1px;color:var(--charcoal);margin-bottom:8px">Shortage Resolution Waterfall</div>
-      <table class="waterfall-table">
-        <thead>
-          <tr><th>Priority</th><th>Source</th><th>Location</th><th>Qty</th><th>Status</th></tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><span class="waterfall-priority">1</span></td>
-            <td><span class="ownership-dot owned"></span> Spartan Owned</td>
-            <td>Local (Midland)</td>
-            <td class="font-mono fw-700">0 avail</td>
-            <td><span class="status-badge critical">Exhausted</span></td>
-          </tr>
-          <tr>
-            <td><span class="waterfall-priority">2</span></td>
-            <td><span class="ownership-dot consignment"></span> Consignment</td>
-            <td>Local (Midland)</td>
-            <td class="font-mono fw-700">0 avail</td>
-            <td><span class="status-badge critical">Exhausted</span></td>
-          </tr>
-          <tr>
-            <td><span class="waterfall-priority">3</span></td>
-            <td><span class="ownership-dot sub-rental"></span> Sub-Rental</td>
-            <td>Local (Midland)</td>
-            <td class="font-mono fw-700">+2 possible</td>
-            <td><span class="status-badge warning">Available</span></td>
-          </tr>
-          <tr style="background:#DCFCE7">
-            <td><span class="waterfall-priority" style="background:var(--status-available)">4</span></td>
-            <td><span class="ownership-dot owned"></span> Spartan Owned</td>
-            <td>Keithville, LA &rarr; Midland (~570mi, ~8.5hr)</td>
-            <td class="font-mono fw-700">+4 avail</td>
-            <td><span class="status-badge available">Recommended</span></td>
-          </tr>
-          <tr>
-            <td><span class="waterfall-priority">5</span></td>
-            <td><span class="ownership-dot consignment"></span> Consignment (MAV)</td>
-            <td>Pleasanton, TX &rarr; Midland (~330mi, ~5hr)</td>
-            <td class="font-mono fw-700">+2 avail</td>
-            <td><span class="status-badge planned">Backup</span></td>
-          </tr>
-        </tbody>
-      </table>
-
-      <div style="background:var(--fog);padding:12px 16px;margin:12px 0;font-size:13px;border-left:3px solid var(--spartan-gold)">
-        <strong>Recommendation:</strong> Transfer 4x owned from Keithville + 2x sub-rental locally. Keithville retains 8 surplus through April 20. Est. transfer cost: $2,850 (scheduled freight).
+    <!-- ======== TAB: FORECAST GRID ======== -->
+    <div class="planning-tab-content" id="planning-tab-forecast">
+      <div class="filter-row">
+        <select class="filter-select"><option>All Districts</option><option>Midland</option><option>Keithville</option><option>Pleasanton</option></select>
+        <select class="filter-select"><option>All Statuses</option><option>Active</option><option>Shortfall</option></select>
+        <button class="btn btn-secondary btn-sm" onclick="switchPlanningTab('newwo')">+ New Work Order</button>
       </div>
 
-      <div style="display:flex;gap:12px;margin-top:16px">
-        <button class="btn btn-primary btn-sm">Approve Recommendation</button>
-        <button class="btn btn-secondary btn-sm">Modify Plan</button>
-        <button class="btn btn-secondary btn-sm">View What-If</button>
+      <!-- Gantt Legend -->
+      <div class="gantt-legend">
+        <div class="gantt-legend-item"><div class="gantt-legend-swatch" style="background:#C5A55A"></div> Mobilizing</div>
+        <div class="gantt-legend-item"><div class="gantt-legend-swatch" style="background:#16A34A"></div> Deployed</div>
+        <div class="gantt-legend-item"><div class="gantt-legend-swatch" style="background:#2563EB"></div> In-Operation</div>
+        <div class="gantt-legend-item"><div class="gantt-legend-swatch" style="background:#D97706"></div> Demobilizing</div>
+        <div class="gantt-legend-item"><div class="gantt-legend-swatch" style="background:#FEE2E2;border:1px solid #FCA5A5"></div> Shortfall</div>
+        <div class="gantt-legend-item" style="margin-left:12px;border-left:1px solid var(--silver);padding-left:20px"><span class="ownership-dot owned" style="width:8px;height:8px"></span> Owned</div>
+        <div class="gantt-legend-item"><span class="ownership-dot consignment" style="width:8px;height:8px"></span> Consignment</div>
+        <div class="gantt-legend-item"><span class="ownership-dot sub-rental" style="width:8px;height:8px"></span> Sub-Rental</div>
+      </div>
+
+      <!-- Planning Grid (Gantt) -->
+      <div class="planning-grid" id="gantt-grid">
+        <!-- Populated by JavaScript -->
+      </div>
+
+      <!-- Inline Shortfall Summary (contextual preview) -->
+      <div class="section-header mt-24">Shortfall Summary</div>
+      <div class="section-bar"></div>
+      <div style="font-size:13px;color:var(--slate);margin-bottom:12px">Critical shortfalls visible in the current forecast window. <a style="color:var(--spartan-red);cursor:pointer;text-decoration:underline" onclick="switchPlanningTab('shortfalls')">View all shortfall alerts &rarr;</a></div>
+
+      <div class="shortfall-card">
+        <div class="shortfall-title">&#9888; Wings Hyd 4 15 &mdash; Short 6 units by April 10</div>
+        <div style="font-size:13px;color:var(--slate);margin-bottom:8px">Diamondback Midland B12 + Ovintiv Eagle Ford 5 push demand to 68 vs. 62 available</div>
+        <div style="display:flex;gap:12px">
+          <button class="btn btn-primary btn-sm" onclick="switchPlanningTab('shortfalls')">View Waterfall &amp; Resolve</button>
+        </div>
+      </div>
+
+      <div class="shortfall-card">
+        <div class="shortfall-title">&#9888; 7 15 SERVICE LESS MASTERS &mdash; Short 8 units by April 10</div>
+        <div style="font-size:13px;color:var(--slate);margin-bottom:8px">Company-wide: 45 owned, 47 needed. Shop has 3 expected back Apr 8.</div>
+        <div style="display:flex;gap:12px">
+          <button class="btn btn-primary btn-sm" onclick="switchPlanningTab('shortfalls')">View Waterfall &amp; Resolve</button>
+        </div>
       </div>
     </div>
 
-    <div class="shortfall-card">
-      <div class="shortfall-title">&#9888; 7 15 SERVICE LESS MASTERS &mdash; Short 8 units by April 10</div>
-      <div style="font-size:13px;color:var(--slate);margin-bottom:12px">Company-wide: 45 owned, 47 needed. Machine shop has 3 expected back by April 8.</div>
-      <div style="background:var(--fog);padding:12px 16px;font-size:13px;border-left:3px solid var(--status-shop)">
-        <strong>Shop insight:</strong> Expediting 3 masters in Keithville shop (expected Apr 8) reduces shortfall to -5. Remaining gap requires sub-rental or consignment.
+    <!-- ======== TAB: SHORTFALL ALERTS ======== -->
+    <div class="planning-tab-content" id="planning-tab-shortfalls" style="display:none">
+      <div class="filter-row">
+        <select class="filter-select"><option>All Districts</option><option>Midland</option><option>Keithville</option><option>Pleasanton</option></select>
+        <select class="filter-select"><option>All Equipment Types</option><option>Wing Valve</option><option>Master Valve</option><option>Zipper Valve</option><option>Rotating Spool</option><option>Javelin</option><option>Accumulator</option></select>
+        <select class="filter-select"><option>All Statuses</option><option>Open</option><option>In Progress</option><option>Resolved</option></select>
+        <select class="filter-select"><option>Sort: Severity (worst first)</option><option>Sort: Date (soonest first)</option><option>Sort: Equipment Type</option><option>Sort: District</option></select>
       </div>
-      <div style="display:flex;gap:12px;margin-top:16px">
-        <button class="btn btn-primary btn-sm">View Full Waterfall</button>
-        <button class="btn btn-secondary btn-sm">Modify Plan</button>
+
+      <!-- Shortfall Stats -->
+      <div style="display:flex;gap:16px;margin-bottom:20px">
+        <div class="card" style="flex:1;text-align:center;border-top:3px solid var(--status-critical)">
+          <div class="kpi-value font-mono" style="color:var(--status-critical)">4</div>
+          <div class="kpi-label">Open Shortfalls</div>
+        </div>
+        <div class="card" style="flex:1;text-align:center;border-top:3px solid var(--status-warning)">
+          <div class="kpi-value font-mono" style="color:var(--status-warning)">2</div>
+          <div class="kpi-label">In Progress</div>
+        </div>
+        <div class="card" style="flex:1;text-align:center;border-top:3px solid var(--status-available)">
+          <div class="kpi-value font-mono" style="color:var(--status-available)">11</div>
+          <div class="kpi-label">Resolved (30 days)</div>
+        </div>
+        <div class="card" style="flex:1;text-align:center;border-top:3px solid var(--charcoal)">
+          <div class="kpi-value font-mono">-22</div>
+          <div class="kpi-label">Total Units Short</div>
+        </div>
+      </div>
+
+      <!-- Shortfall Alert 1: Wings Hyd 4 15 -->
+      <div class="shortfall-card" style="border-left:4px solid var(--status-critical)">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px">
+          <div>
+            <div class="shortfall-title">&#9888; Wings Hyd 4 15 &mdash; Short 6 units</div>
+            <div style="font-size:13px;color:var(--slate)">Shortfall window: <strong>Apr 10 – Apr 18</strong> (9 days) &bull; Peak: -6 units &bull; District: Midland</div>
+          </div>
+          <span class="status-badge critical">Open</span>
+        </div>
+        <div style="font-size:13px;color:var(--slate);margin-bottom:12px">
+          Diamondback Midland B12 (10 units) and Ovintiv Eagle Ford 5 (8 units) starting Apr 10/12 push demand to 68 vs. 62 available company-wide.
+        </div>
+
+        <div style="font-size:12px;font-weight:700;font-family:'Montserrat',sans-serif;text-transform:uppercase;letter-spacing:1px;color:var(--charcoal);margin-bottom:8px">Shortage Resolution Waterfall</div>
+        <table class="waterfall-table">
+          <thead>
+            <tr><th>Priority</th><th>Source</th><th>Location</th><th>Qty</th><th>Status</th><th>Schedule Check (4-wk window)</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="waterfall-priority">1</span></td>
+              <td><span class="ownership-dot owned"></span> Spartan Owned</td>
+              <td>Local (Midland)</td>
+              <td class="font-mono fw-700">0 avail</td>
+              <td><span class="status-badge critical">Exhausted</span></td>
+              <td style="font-size:12px;color:var(--slate)">All 26 local owned deployed through Apr 22</td>
+            </tr>
+            <tr>
+              <td><span class="waterfall-priority">2</span></td>
+              <td><span class="ownership-dot consignment"></span> Consignment</td>
+              <td>Local (Midland)</td>
+              <td class="font-mono fw-700">0 avail</td>
+              <td><span class="status-badge critical">Exhausted</span></td>
+              <td style="font-size:12px;color:var(--slate)">MAV: 4 deployed, 3E: 2 deployed</td>
+            </tr>
+            <tr>
+              <td><span class="waterfall-priority">3</span></td>
+              <td><span class="ownership-dot sub-rental"></span> Sub-Rental</td>
+              <td>Local (Midland)</td>
+              <td class="font-mono fw-700">+2 possible</td>
+              <td><span class="status-badge warning">Available</span></td>
+              <td style="font-size:12px;color:var(--slate)">2 units from Ranger Rentals, 48hr lead time</td>
+            </tr>
+            <tr style="background:#DCFCE7">
+              <td><span class="waterfall-priority" style="background:var(--status-available)">4</span></td>
+              <td><span class="ownership-dot owned"></span> Spartan Owned</td>
+              <td>Keithville, LA &rarr; Midland (~570mi, ~8.5hr)</td>
+              <td class="font-mono fw-700">+4 avail</td>
+              <td><span class="status-badge available">Recommended</span></td>
+              <td style="font-size:12px;color:var(--status-available)">Keithville has 12 surplus through Apr 20. Pulling 4 leaves 8 — covers all Keithville jobs through Apr 28.</td>
+            </tr>
+            <tr>
+              <td><span class="waterfall-priority">5</span></td>
+              <td><span class="ownership-dot consignment"></span> Consignment (MAV)</td>
+              <td>Pleasanton, TX &rarr; Midland (~330mi, ~5hr)</td>
+              <td class="font-mono fw-700">+2 avail</td>
+              <td><span class="status-badge planned">Backup</span></td>
+              <td style="font-size:12px;color:var(--slate)">MAV has 4 idle at Pleasanton. Pleasanton needs 2 for PPX Eagle Ford #3. 2 are spendable.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div style="background:var(--fog);padding:12px 16px;margin:12px 0;font-size:13px;border-left:3px solid var(--spartan-gold)">
+          <strong>Recommendation:</strong> Transfer 4x owned from Keithville + 2x sub-rental locally. Keithville retains 8 surplus through April 20 (verified against their full 4-week schedule). Est. transfer cost: $2,850 (scheduled freight).
+        </div>
+
+        <div style="display:flex;gap:12px;margin-top:16px">
+          <button class="btn btn-primary btn-sm">Approve Recommendation</button>
+          <button class="btn btn-secondary btn-sm">Modify Plan</button>
+          <button class="btn btn-secondary btn-sm" onclick="switchPlanningTab('whatif')">View What-If</button>
+          <button class="btn btn-secondary btn-sm" onclick="showScreen('component-detail')">View Component Detail</button>
+        </div>
+      </div>
+
+      <!-- Shortfall Alert 2: Masters -->
+      <div class="shortfall-card" style="border-left:4px solid var(--status-critical)">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px">
+          <div>
+            <div class="shortfall-title">&#9888; 7 15 SERVICE LESS MASTERS &mdash; Short 8 units</div>
+            <div style="font-size:13px;color:var(--slate)">Shortfall window: <strong>Apr 10 – Apr 30</strong> (21 days) &bull; Peak: -8 units &bull; Districts: Midland, Pleasanton</div>
+          </div>
+          <span class="status-badge critical">Open</span>
+        </div>
+        <div style="font-size:13px;color:var(--slate);margin-bottom:12px">Company-wide: 45 owned, 47 needed. Machine shop has 3 expected back by April 8.</div>
+
+        <div style="font-size:12px;font-weight:700;font-family:'Montserrat',sans-serif;text-transform:uppercase;letter-spacing:1px;color:var(--charcoal);margin-bottom:8px">Shortage Resolution Waterfall</div>
+        <table class="waterfall-table">
+          <thead>
+            <tr><th>Priority</th><th>Source</th><th>Location</th><th>Qty</th><th>Status</th><th>Schedule Check (4-wk window)</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="waterfall-priority">1</span></td>
+              <td><span class="ownership-dot owned"></span> Spartan Owned</td>
+              <td>Local (Midland + Pleasanton)</td>
+              <td class="font-mono fw-700">0 avail</td>
+              <td><span class="status-badge critical">Exhausted</span></td>
+              <td style="font-size:12px;color:var(--slate)">All masters deployed across both districts</td>
+            </tr>
+            <tr>
+              <td><span class="waterfall-priority">2</span></td>
+              <td><span class="ownership-dot consignment"></span> Consignment</td>
+              <td>All districts</td>
+              <td class="font-mono fw-700">0 avail</td>
+              <td><span class="status-badge critical">Exhausted</span></td>
+              <td style="font-size:12px;color:var(--slate)">No consignment masters in fleet</td>
+            </tr>
+            <tr>
+              <td><span class="waterfall-priority">3</span></td>
+              <td><span class="ownership-dot sub-rental"></span> Sub-Rental</td>
+              <td>Local markets</td>
+              <td class="font-mono fw-700">+5 possible</td>
+              <td><span class="status-badge warning">Available</span></td>
+              <td style="font-size:12px;color:var(--slate)">Pricing TBD — serviceless masters are scarce</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div style="background:var(--fog);padding:12px 16px;margin:12px 0;font-size:13px;border-left:3px solid var(--status-shop)">
+          <strong>Shop insight:</strong> Expediting 3 masters in Keithville shop (expected Apr 8) reduces shortfall to -5. Remaining gap requires sub-rental or consignment sourcing.
+        </div>
+        <div style="background:var(--fog);padding:12px 16px;margin:4px 0 12px;font-size:13px;border-left:3px solid var(--status-warning)">
+          <strong>Capital flag:</strong> Serviceless masters have been at 95%+ utilization for 3 consecutive months. Consider procurement (see UF11).
+        </div>
+
+        <div style="display:flex;gap:12px;margin-top:16px">
+          <button class="btn btn-primary btn-sm">View Full Waterfall</button>
+          <button class="btn btn-secondary btn-sm">Modify Plan</button>
+        </div>
+      </div>
+
+      <!-- Shortfall Alert 3: Javelins -->
+      <div class="shortfall-card" style="border-left:4px solid var(--status-warning)">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px">
+          <div>
+            <div class="shortfall-title">&#9888; Javelin &mdash; Short 2 units by April 10</div>
+            <div style="font-size:13px;color:var(--slate)">Shortfall window: <strong>Apr 10 – Apr 18</strong> &bull; Peak: -2 units &bull; District: Midland</div>
+          </div>
+          <span class="status-badge warning">In Progress</span>
+        </div>
+        <div style="font-size:13px;color:var(--slate);margin-bottom:12px">Diamondback Midland B12 needs 2 Javelins. Currently 5 company-wide, 5 deployed. Keithville releases 1 on Apr 14 (Rockcliffe ends).</div>
+        <div style="background:var(--fog);padding:12px 16px;font-size:13px;border-left:3px solid var(--spartan-gold)">
+          <strong>In progress:</strong> Don is negotiating a 1-unit sub-rental with Eagle Rentals for Apr 8 delivery. Pending confirmation.
+        </div>
+        <div style="display:flex;gap:12px;margin-top:16px">
+          <button class="btn btn-secondary btn-sm">View Full Waterfall</button>
+          <button class="btn btn-secondary btn-sm">Update Status</button>
+        </div>
+      </div>
+
+      <!-- Shortfall Alert 4: Zippers -->
+      <div class="shortfall-card" style="border-left:4px solid var(--status-warning)">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px">
+          <div>
+            <div class="shortfall-title">&#9888; 7 15 Zip MV Hyd Valves &mdash; Short 4 units by April 12</div>
+            <div style="font-size:13px;color:var(--slate)">Shortfall window: <strong>Apr 12 – Apr 28</strong> &bull; Peak: -4 units &bull; Districts: Midland, Pleasanton</div>
+          </div>
+          <span class="status-badge warning">In Progress</span>
+        </div>
+        <div style="font-size:13px;color:var(--slate);margin-bottom:12px">Ovintiv Eagle Ford 5 (4 units, consignment-alt) combined with Coterra and Lewis pushes zippers over capacity. Keithville can spare 2 after Rockcliffe ends Apr 14.</div>
+        <div style="display:flex;gap:12px;margin-top:16px">
+          <button class="btn btn-secondary btn-sm">View Full Waterfall</button>
+          <button class="btn btn-secondary btn-sm">Update Status</button>
+        </div>
       </div>
     </div>
+
+    <!-- ======== TAB: WHAT-IF MODE ======== -->
+    <div class="planning-tab-content" id="planning-tab-whatif" style="display:none">
+      <div style="background:var(--white);border:2px dashed var(--spartan-gold);padding:32px;text-align:center;margin-top:16px">
+        <div style="font-size:48px;margin-bottom:12px">&#9881;</div>
+        <div style="font-family:'PT Serif',Georgia,serif;font-size:20px;font-weight:700;margin-bottom:8px">What-If Scenario Builder</div>
+        <div style="color:var(--slate);font-size:14px;max-width:500px;margin:0 auto">
+          Test equipment changes, size conversions, job date shifts, and cross-district transfers before committing. See the ripple effect across all jobs and districts in real time.
+        </div>
+        <div style="margin-top:24px;color:var(--steel);font-size:13px">Coming in Phase 1</div>
+      </div>
+    </div>
+
+    <!-- ======== TAB: NEW WORK ORDER ======== -->
+    <div class="planning-tab-content" id="planning-tab-newwo" style="display:none">
+      <div style="max-width:900px">
+        <div class="section-header">New Work Order</div>
+        <div class="section-bar"></div>
+        <div style="font-size:13px;color:var(--slate);margin-bottom:20px">Enter job details and equipment requirements. The system will immediately check availability and flag any shortfalls.</div>
+
+        <div class="card" style="padding:24px">
+          <!-- Job Info -->
+          <div style="font-family:'Montserrat',sans-serif;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--charcoal);margin-bottom:16px">Job Information</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px">
+            <div>
+              <label style="display:block;font-size:13px;font-weight:700;margin-bottom:4px">Customer Name</label>
+              <input class="filter-input" style="width:100%" placeholder="e.g., Marathon Oil" value="Vital Energy Permian 9H">
+            </div>
+            <div>
+              <label style="display:block;font-size:13px;font-weight:700;margin-bottom:4px">Well Site / Pad</label>
+              <input class="filter-input" style="width:100%" placeholder="e.g., Wolf Camp Pad 3" value="Wolfcamp A-9H Pad">
+            </div>
+            <div>
+              <label style="display:block;font-size:13px;font-weight:700;margin-bottom:4px">District</label>
+              <select class="filter-select" style="width:100%">
+                <option>Midland, TX</option>
+                <option>Keithville, LA</option>
+                <option>Pleasanton, TX</option>
+              </select>
+            </div>
+            <div>
+              <label style="display:block;font-size:13px;font-weight:700;margin-bottom:4px">Status</label>
+              <select class="filter-select" style="width:100%">
+                <option>Planned</option>
+                <option>Confirmed</option>
+              </select>
+            </div>
+            <div>
+              <label style="display:block;font-size:13px;font-weight:700;margin-bottom:4px">Start Date</label>
+              <input class="filter-input" type="date" style="width:100%" value="2026-04-14">
+            </div>
+            <div>
+              <label style="display:block;font-size:13px;font-weight:700;margin-bottom:4px">End Date (Est.)</label>
+              <input class="filter-input" type="date" style="width:100%" value="2026-05-02">
+            </div>
+            <div>
+              <label style="display:block;font-size:13px;font-weight:700;margin-bottom:4px">Mob Days</label>
+              <input class="filter-input" type="number" style="width:100%" value="1" min="0" max="5">
+            </div>
+            <div>
+              <label style="display:block;font-size:13px;font-weight:700;margin-bottom:4px">Demob Days</label>
+              <input class="filter-input" type="number" style="width:100%" value="1" min="0" max="5">
+            </div>
+          </div>
+
+          <!-- Equipment Requirements -->
+          <div style="font-family:'Montserrat',sans-serif;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--charcoal);margin-bottom:16px;padding-top:16px;border-top:1px solid var(--silver)">Equipment Requirements</div>
+          <div style="font-size:12px;color:var(--slate);margin-bottom:12px">Add each equipment type needed for this job. The system will check availability after each addition.</div>
+
+          <table class="data-table" style="font-size:13px;margin-bottom:16px">
+            <thead>
+              <tr>
+                <th>Equipment Type</th>
+                <th>Size</th>
+                <th>Pressure</th>
+                <th>Qty Needed</th>
+                <th>Available (Local)</th>
+                <th>Available (Company)</th>
+                <th>Impact</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Wing Valve, Hyd</td>
+                <td>4"</td>
+                <td>15K</td>
+                <td class="font-mono fw-700">8</td>
+                <td class="font-mono" style="color:var(--status-critical)">0</td>
+                <td class="font-mono" style="color:var(--status-critical)">0</td>
+                <td><span class="status-badge critical">-8 shortfall</span></td>
+                <td><span style="color:var(--steel);cursor:pointer">&#10005;</span></td>
+              </tr>
+              <tr>
+                <td>Wing Valve, Man</td>
+                <td>4"</td>
+                <td>15K</td>
+                <td class="font-mono fw-700">4</td>
+                <td class="font-mono" style="color:var(--status-warning)">3</td>
+                <td class="font-mono" style="color:var(--status-available)">8</td>
+                <td><span class="status-badge warning">-1 local</span></td>
+                <td><span style="color:var(--steel);cursor:pointer">&#10005;</span></td>
+              </tr>
+              <tr>
+                <td>Master Valve (Serviceless)</td>
+                <td>7"</td>
+                <td>15K</td>
+                <td class="font-mono fw-700">6</td>
+                <td class="font-mono" style="color:var(--status-critical)">0</td>
+                <td class="font-mono" style="color:var(--status-critical)">0</td>
+                <td><span class="status-badge critical">-6 shortfall</span></td>
+                <td><span style="color:var(--steel);cursor:pointer">&#10005;</span></td>
+              </tr>
+              <tr>
+                <td>Zipper Valve MV Hyd</td>
+                <td>7"</td>
+                <td>15K</td>
+                <td class="font-mono fw-700">4</td>
+                <td class="font-mono" style="color:var(--status-warning)">1</td>
+                <td class="font-mono" style="color:var(--status-warning)">2</td>
+                <td><span class="status-badge warning">-3 local</span></td>
+                <td><span style="color:var(--steel);cursor:pointer">&#10005;</span></td>
+              </tr>
+              <tr>
+                <td>Rotating Spool</td>
+                <td>7-1/16"</td>
+                <td>15K</td>
+                <td class="font-mono fw-700">6</td>
+                <td class="font-mono" style="color:var(--status-available)">4</td>
+                <td class="font-mono" style="color:var(--status-available)">10</td>
+                <td><span class="status-badge available">OK</span></td>
+                <td><span style="color:var(--steel);cursor:pointer">&#10005;</span></td>
+              </tr>
+              <tr>
+                <td>Studded Tee</td>
+                <td>7"</td>
+                <td>15K</td>
+                <td class="font-mono fw-700">3</td>
+                <td class="font-mono" style="color:var(--status-available)">5</td>
+                <td class="font-mono" style="color:var(--status-available)">12</td>
+                <td><span class="status-badge available">OK</span></td>
+                <td><span style="color:var(--steel);cursor:pointer">&#10005;</span></td>
+              </tr>
+              <tr>
+                <td>Accumulator</td>
+                <td>--</td>
+                <td>--</td>
+                <td class="font-mono fw-700">6</td>
+                <td class="font-mono" style="color:var(--status-available)">4</td>
+                <td class="font-mono" style="color:var(--status-available)">9</td>
+                <td><span class="status-badge available">OK</span></td>
+                <td><span style="color:var(--steel);cursor:pointer">&#10005;</span></td>
+              </tr>
+              <tr>
+                <td>Javelin</td>
+                <td>--</td>
+                <td>--</td>
+                <td class="font-mono fw-700">1</td>
+                <td class="font-mono" style="color:var(--status-critical)">0</td>
+                <td class="font-mono" style="color:var(--status-critical)">0</td>
+                <td><span class="status-badge critical">-1 shortfall</span></td>
+                <td><span style="color:var(--steel);cursor:pointer">&#10005;</span></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div style="display:flex;gap:12px;margin-bottom:24px">
+            <select class="filter-select" style="flex:1"><option>Select equipment type...</option><option>Wing Valve, Hyd</option><option>Wing Valve, Man</option><option>Master Valve (Serviceless)</option><option>Zipper Valve MV Hyd</option><option>Zipper Valve SE Hyd</option><option>Rotating Spool</option><option>Spacer Spool</option><option>Studded Tee</option><option>Cross</option><option>Javelin</option><option>Accumulator</option><option>715 HYD Frac Stack (assembly)</option><option>5 15 MAVI Stack Mark 5 (assembly)</option></select>
+            <select class="filter-select"><option>Size</option><option>3"</option><option>4"</option><option>5"</option><option>7-1/16"</option></select>
+            <select class="filter-select"><option>Pressure</option><option>10K</option><option>15K</option></select>
+            <input class="filter-input" type="number" placeholder="Qty" style="width:80px" min="1">
+            <button class="btn btn-secondary btn-sm">+ Add Line</button>
+          </div>
+
+          <!-- Labor Requirements -->
+          <div style="font-family:'Montserrat',sans-serif;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--charcoal);margin-bottom:16px;padding-top:16px;border-top:1px solid var(--silver)">Labor Requirements</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px">
+            <div>
+              <label style="display:block;font-size:13px;font-weight:700;margin-bottom:4px">Spartan Hands Needed</label>
+              <input class="filter-input" type="number" style="width:100%" value="4" min="0">
+            </div>
+            <div>
+              <label style="display:block;font-size:13px;font-weight:700;margin-bottom:4px">Contract Hands Needed</label>
+              <input class="filter-input" type="number" style="width:100%" value="2" min="0">
+            </div>
+          </div>
+
+          <!-- Impact Summary -->
+          <div style="font-family:'Montserrat',sans-serif;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--charcoal);margin-bottom:12px;padding-top:16px;border-top:1px solid var(--silver)">Availability Impact</div>
+
+          <div style="background:#FEF2F2;border:1px solid #FCA5A5;padding:16px;margin-bottom:16px">
+            <div style="font-weight:700;color:var(--status-critical);margin-bottom:8px">&#9888; This work order creates 3 new shortfalls and worsens 2 existing ones</div>
+            <div style="font-size:13px;color:var(--slate);line-height:1.8">
+              <strong>Wings Hyd 4 15:</strong> Existing shortfall of -6 worsens to <strong>-14</strong> (Apr 14 – May 2)<br>
+              <strong>7 15 SERVICE LESS MASTERS:</strong> Existing shortfall of -8 worsens to <strong>-14</strong> (Apr 14 – Apr 30)<br>
+              <strong>Javelin:</strong> Existing shortfall of -2 worsens to <strong>-3</strong> (Apr 14 – Apr 18)<br>
+              <strong>Wings Man 4 15:</strong> New local shortfall of <strong>-1</strong> at Midland (coverable cross-district)<br>
+              <strong>Zipper Valve MV Hyd:</strong> New local shortfall of <strong>-3</strong> at Midland (partially coverable cross-district)
+            </div>
+          </div>
+
+          <div style="display:flex;gap:12px">
+            <button class="btn btn-primary btn-sm">Save Work Order &amp; Run Waterfall</button>
+            <button class="btn btn-secondary btn-sm">Save as Draft</button>
+            <button class="btn btn-secondary btn-sm" onclick="switchPlanningTab('forecast')">Cancel</button>
+          </div>
+        </div>
+
+        <!-- Notes -->
+        <div style="margin-top:16px">
+          <label style="display:block;font-size:13px;font-weight:700;margin-bottom:4px">Notes / Frac Schedule Reference</label>
+          <textarea class="filter-input" style="width:100%;height:80px;resize:vertical" placeholder="Paste frac schedule details, customer contacts, special requirements...">6-well pad, Wolfcamp A formation. Customer contact: Mike Torres (432-555-0188). Frac schedule received via email Mar 30.</textarea>
+        </div>
+      </div>
+    </div>
+
   </div>
 </div>
 
@@ -2217,7 +2666,7 @@ body {
   <div class="page-header">
     <div class="page-title">User Flows</div>
     <div class="page-title-bar"></div>
-    <div class="page-subtitle">15 operational workflows documented with current state and Atlas future state</div>
+    <div class="page-subtitle">16 operational workflows documented with current state and Atlas future state</div>
   </div>
   <div class="page-body">
     <div class="flow-grid" id="flow-grid">
@@ -2467,6 +2916,31 @@ const userFlows = [
       { text: "Planning board factors in expected shop completions for waterfall projections", screen: "planning" },
       { text: "Shop backlog visible to CEO: total in shop, aging, expected returns this week", screen: null },
       { text: "Shop priority insight: 'Expediting 2 valves would eliminate a cross-district transfer'", screen: "planning" }
+    ],
+    hasWaterfall: false
+  },
+  {
+    id: "UF16", title: "Job Timing Update & Conflict Check",
+    purpose: "When a job's start or end date changes (customer delay, early release, schedule extension), the system must immediately recalculate availability across all equipment types and all districts for the full 4-week forecast window, flag any new shortfalls created by the change, and show which other jobs are affected. Today this is a manual, error-prone process of re-scanning the spreadsheet row by row.",
+    currentSteps: [
+      "Delmar learns a job's dates are changing (customer call, field update, or weather delay)",
+      "Opens the spreadsheet and finds the job row",
+      "Manually adjusts the date columns for the job",
+      "Scrolls to the bottom to check if the date change pushes any equipment type into negative availability",
+      "If a shortfall is created, manually scans other job rows to find which jobs are affected",
+      "If moving a job earlier, checks whether equipment is available sooner — often it's not because other jobs still hold those assets",
+      "Calls DMs and President to communicate the ripple effect",
+      "Process can take 30+ minutes for a single date change on a busy week"
+    ],
+    futureSteps: [
+      { text: "CEO or DM opens the work order and clicks 'Edit Dates' — enters the new start and/or end date", screen: "planning" },
+      { text: "Before saving, system runs a Conflict Check: recalculates availability for every equipment type on this job across the full 4-week forecast window", screen: "planning" },
+      { text: "System displays a Conflict Report showing: (a) new shortfalls created by the date change, (b) existing shortfalls that worsen, (c) shortfalls that are resolved (equipment freed up earlier)", screen: "planning" },
+      { text: "For each new or worsened shortfall, the system runs the Shortage Resolution Waterfall and presents sourcing options — same Priority 1-6 logic as UF3", screen: "planning" },
+      { text: "System highlights which specific jobs are affected: 'Moving BPX Permian Pad 7 to start Apr 8 (2 days earlier) creates a -4 shortfall on Wings Hyd 4 15 because Rockcliffe Haynesville 12 doesn't release until Apr 14'", screen: "planning" },
+      { text: "CEO reviews the conflict report and either: (a) approves the date change and accepts/resolves the shortfalls, (b) modifies the date to a different window that avoids conflicts, or (c) cancels the change", screen: "planning" },
+      { text: "If approved, the system updates the job schedule, recalculates all dashboards, and notifies affected DMs of changes to their district's availability", screen: null },
+      { text: "All date changes are logged in the job's audit trail with before/after dates, who changed it, and what conflicts were flagged", screen: null }
     ],
     hasWaterfall: false
   }
@@ -2785,6 +3259,23 @@ function toggleJobExpand(jobId) {
 
 // Build on load
 document.addEventListener('DOMContentLoaded', buildGantt);
+
+// ====================== PLANNING BOARD TAB SWITCHING ======================
+function switchPlanningTab(tabId) {
+  // Hide all tab contents
+  document.querySelectorAll('.planning-tab-content').forEach(el => el.style.display = 'none');
+  // Show selected tab
+  const target = document.getElementById('planning-tab-' + tabId);
+  if (target) target.style.display = 'block';
+  // Update tab bar active state
+  const tabBar = document.querySelector('#screen-planning .tab-bar');
+  if (tabBar) {
+    const tabMap = { forecast: 0, shortfalls: 1, whatif: 2, newwo: 3 };
+    tabBar.querySelectorAll('.tab-item').forEach((t, i) => {
+      t.classList.toggle('active', i === tabMap[tabId]);
+    });
+  }
+}
 
 // ====================== NAVIGATION ======================
 function doLogin() {
