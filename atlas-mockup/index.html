@@ -1,0 +1,3379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Atlas - Spartan Energy Services</title>
+<link href="https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&family=PT+Serif:wght@400;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ============================================
+   ATLAS DESIGN SYSTEM - Spartan Energy Services
+   ============================================ */
+
+:root {
+  /* Primary */
+  --spartan-red: #B32317;
+  --spartan-red-dark: #8B1A1A;
+  --spartan-red-light: #B44028;
+  --spartan-gold: #C5A55A;
+  --spartan-gold-light: #D4BC7C;
+
+  /* Neutrals */
+  --charcoal: #231F20;
+  --slate-dark: #333333;
+  --slate: #555555;
+  --steel: #888888;
+  --silver: #D1D5DB;
+  --fog: #F3F4F6;
+  --white: #FFFFFF;
+
+  /* Status */
+  --status-available: #16A34A;
+  --status-deployed: #2563EB;
+  --status-warning: #D97706;
+  --status-critical: #B32317;
+  --status-shop: #7C3AED;
+  --status-inactive: #9CA3AF;
+
+  /* Ownership */
+  --owned: #16A34A;
+  --consignment: #EC4899;
+  --consignment-alt: #F59E0B;
+  --sub-rental: #6366F1;
+
+  /* Layout */
+  --sidebar-width: 260px;
+  --header-height: 56px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'PT Sans', Helvetica, Arial, sans-serif;
+  font-size: 15px;
+  color: var(--charcoal);
+  background: var(--fog);
+  overflow: hidden;
+  height: 100vh;
+}
+
+/* ---- LOGIN SCREEN ---- */
+#login-screen {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background: linear-gradient(135deg, var(--charcoal) 0%, #1a1617 50%, var(--spartan-red-dark) 100%);
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  z-index: 9999;
+}
+
+.login-card {
+  background: var(--white);
+  width: 400px;
+  padding: 48px 40px;
+  text-align: center;
+}
+
+.login-logo {
+  width: 180px;
+  margin-bottom: 8px;
+}
+
+.login-title {
+  font-family: 'PT Serif', Georgia, serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--charcoal);
+  margin-bottom: 4px;
+  letter-spacing: 2px;
+}
+
+.login-subtitle {
+  font-size: 12px;
+  color: var(--steel);
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  margin-bottom: 32px;
+}
+
+.login-field {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid var(--silver);
+  font-family: 'PT Sans', sans-serif;
+  font-size: 15px;
+  margin-bottom: 16px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.login-field:focus {
+  border-color: var(--spartan-red);
+}
+
+.login-field::placeholder {
+  color: var(--steel);
+}
+
+.login-btn {
+  width: 100%;
+  padding: 14px;
+  background: var(--spartan-red);
+  color: var(--white);
+  border: none;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.login-btn:hover {
+  background: var(--spartan-red-dark);
+}
+
+.login-role {
+  margin-top: 24px;
+  font-size: 13px;
+  color: var(--steel);
+}
+
+.login-role select {
+  margin-top: 8px;
+  padding: 8px 12px;
+  border: 1px solid var(--silver);
+  font-family: 'PT Sans', sans-serif;
+  font-size: 14px;
+  width: 100%;
+  outline: none;
+}
+
+/* ---- APP SHELL ---- */
+#app-shell {
+  display: none;
+  height: 100vh;
+}
+
+/* ---- SIDEBAR ---- */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: var(--sidebar-width);
+  height: 100vh;
+  background: var(--charcoal);
+  color: var(--white);
+  overflow-y: auto;
+  z-index: 100;
+}
+
+.sidebar-header {
+  padding: 20px 20px 16px;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.sidebar-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 4px;
+}
+
+.sidebar-logo img {
+  width: 36px;
+  height: 36px;
+}
+
+.sidebar-logo-text {
+  font-family: 'PT Serif', Georgia, serif;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.sidebar-brand {
+  font-size: 11px;
+  color: var(--steel);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  padding-left: 48px;
+}
+
+.sidebar-district {
+  margin: 16px 20px;
+  padding: 8px 12px;
+  background: var(--slate-dark);
+  border: 1px solid rgba(255,255,255,0.1);
+  color: var(--white);
+  font-family: 'PT Sans', sans-serif;
+  font-size: 13px;
+  width: calc(100% - 40px);
+  cursor: pointer;
+}
+
+.sidebar-section {
+  padding: 16px 0 8px;
+}
+
+.sidebar-section-label {
+  padding: 0 20px;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--steel);
+  margin-bottom: 8px;
+}
+
+.sidebar-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 20px;
+  color: rgba(255,255,255,0.7);
+  text-decoration: none;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.15s;
+  border-left: 3px solid transparent;
+}
+
+.sidebar-link:hover {
+  background: rgba(255,255,255,0.05);
+  color: var(--white);
+}
+
+.sidebar-link.active {
+  background: rgba(179,35,23,0.15);
+  color: var(--white);
+  border-left-color: var(--spartan-red);
+}
+
+.sidebar-link .icon {
+  width: 20px;
+  text-align: center;
+  font-size: 16px;
+}
+
+.sidebar-link.coming-soon {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.sidebar-link.coming-soon:hover {
+  background: transparent;
+  color: rgba(255,255,255,0.7);
+}
+
+.coming-soon-badge {
+  margin-left: auto;
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  background: var(--slate-dark);
+  padding: 2px 6px;
+  color: var(--steel);
+}
+
+.sidebar-user {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 16px 20px;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.sidebar-avatar {
+  width: 32px;
+  height: 32px;
+  background: var(--spartan-red);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--white);
+}
+
+.sidebar-user-info {
+  flex: 1;
+}
+
+.sidebar-user-name {
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.sidebar-user-role {
+  font-size: 11px;
+  color: var(--steel);
+}
+
+/* ---- MAIN CONTENT ---- */
+.main-content {
+  margin-left: var(--sidebar-width);
+  height: 100vh;
+  overflow-y: auto;
+  background: var(--fog);
+}
+
+.page-header {
+  background: var(--white);
+  padding: 24px 32px 20px;
+  border-bottom: 1px solid var(--silver);
+}
+
+.page-title {
+  font-family: 'PT Serif', Georgia, serif;
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--charcoal);
+}
+
+.page-title-bar {
+  width: 40px;
+  height: 3px;
+  background: var(--spartan-red);
+  margin-top: 8px;
+}
+
+.page-subtitle {
+  font-size: 14px;
+  color: var(--slate);
+  margin-top: 6px;
+}
+
+.page-body {
+  padding: 24px 32px 48px;
+}
+
+/* ---- SCREEN PANELS ---- */
+.screen-panel {
+  display: none;
+}
+
+.screen-panel.active {
+  display: block;
+}
+
+/* ---- KPI CARDS ---- */
+.kpi-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.kpi-card {
+  background: var(--white);
+  padding: 20px;
+  border: 1px solid var(--silver);
+}
+
+.kpi-value {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.kpi-label {
+  font-family: 'PT Serif', Georgia, serif;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--slate);
+  margin-top: 8px;
+}
+
+.kpi-change {
+  font-size: 12px;
+  margin-top: 4px;
+  font-weight: 600;
+}
+
+.kpi-change.up { color: var(--status-available); }
+.kpi-change.down { color: var(--status-critical); }
+
+/* ---- TABLES ---- */
+.data-table-wrap {
+  background: var(--white);
+  border: 1px solid var(--silver);
+  overflow-x: auto;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.data-table thead th {
+  background: var(--slate-dark);
+  color: var(--white);
+  padding: 10px 14px;
+  text-align: left;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  white-space: nowrap;
+}
+
+.data-table tbody tr {
+  border-bottom: 1px solid var(--fog);
+}
+
+.data-table tbody tr:nth-child(even) {
+  background: var(--fog);
+}
+
+.data-table tbody tr:hover {
+  background: #EBF0F5;
+  cursor: pointer;
+}
+
+.data-table tbody td {
+  padding: 10px 14px;
+  white-space: nowrap;
+}
+
+/* Ownership dot */
+.ownership-dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-right: 6px;
+  vertical-align: middle;
+}
+
+.ownership-dot.owned { background: var(--owned); }
+.ownership-dot.consignment { background: var(--consignment); }
+.ownership-dot.sub-rental { background: var(--sub-rental); }
+
+/* Status badge */
+.status-badge {
+  display: inline-block;
+  padding: 3px 10px;
+  font-size: 11px;
+  font-weight: 600;
+  font-family: 'Montserrat', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.status-badge.available { background: #DCFCE7; color: #166534; }
+.status-badge.deployed { background: #DBEAFE; color: #1E40AF; }
+.status-badge.in-transit { background: #FEF3C7; color: #92400E; }
+.status-badge.in-shop { background: #EDE9FE; color: #5B21B6; }
+.status-badge.in-assembly { background: #F3F4F6; color: #374151; }
+.status-badge.planned { background: #FEF3C7; color: #92400E; }
+.status-badge.active { background: #DBEAFE; color: #1E40AF; }
+.status-badge.completed { background: #DCFCE7; color: #166534; }
+.status-badge.critical { background: #FEE2E2; color: #991B1B; }
+.status-badge.warning { background: #FEF3C7; color: #92400E; }
+
+/* Utilization bar */
+.util-bar-wrap {
+  width: 100px;
+  height: 8px;
+  background: var(--fog);
+  border: 1px solid var(--silver);
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 8px;
+}
+
+.util-bar {
+  height: 100%;
+  transition: width 0.3s;
+}
+
+.util-bar.green { background: var(--status-available); }
+.util-bar.amber { background: var(--status-warning); }
+.util-bar.red { background: var(--status-critical); }
+
+/* ---- FILTERS ---- */
+.filter-row {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.filter-select, .filter-input {
+  padding: 8px 12px;
+  border: 1px solid var(--silver);
+  font-family: 'PT Sans', sans-serif;
+  font-size: 13px;
+  background: var(--white);
+  outline: none;
+}
+
+.filter-select:focus, .filter-input:focus {
+  border-color: var(--spartan-red);
+}
+
+/* ---- SECTION HEADERS ---- */
+.section-header {
+  font-family: 'PT Serif', Georgia, serif;
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 4px;
+  color: var(--charcoal);
+}
+
+.section-bar {
+  width: 32px;
+  height: 2px;
+  background: var(--spartan-red);
+  margin-bottom: 16px;
+}
+
+/* ---- CARDS (generic) ---- */
+.card {
+  background: var(--white);
+  border: 1px solid var(--silver);
+  padding: 24px;
+  margin-bottom: 16px;
+}
+
+.card-title {
+  font-family: 'PT Serif', Georgia, serif;
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.card-subtitle {
+  font-size: 13px;
+  color: var(--slate);
+}
+
+/* ---- BUTTONS ---- */
+.btn {
+  display: inline-block;
+  padding: 10px 20px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  cursor: pointer;
+  border: none;
+  text-decoration: none;
+  transition: all 0.15s;
+}
+
+.btn-primary {
+  background: var(--spartan-red);
+  color: var(--white);
+}
+
+.btn-primary:hover { background: var(--spartan-red-dark); }
+
+.btn-secondary {
+  background: var(--white);
+  color: var(--spartan-red);
+  border: 1px solid var(--spartan-red);
+}
+
+.btn-secondary:hover { background: #FEF2F2; }
+
+.btn-sm {
+  padding: 6px 14px;
+  font-size: 11px;
+}
+
+/* ---- PLANNING BOARD (Gantt-style) ---- */
+.planning-grid {
+  overflow-x: auto;
+  background: var(--white);
+  border: 1px solid var(--silver);
+}
+
+.planning-table {
+  width: 100%;
+  min-width: 1400px;
+  border-collapse: collapse;
+  font-size: 12px;
+}
+
+.planning-table thead tr.week-row th {
+  background: var(--charcoal);
+  color: var(--spartan-gold);
+  padding: 6px 0;
+  text-align: center;
+  font-family: 'PT Serif', Georgia, serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  border-right: 2px solid var(--slate-dark);
+}
+
+.planning-table thead tr.week-row th.job-header {
+  background: var(--charcoal);
+  color: var(--white);
+}
+
+.planning-table thead tr.date-row th {
+  background: var(--slate-dark);
+  color: var(--white);
+  padding: 6px 2px;
+  text-align: center;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 9px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  border-right: 1px solid rgba(255,255,255,0.1);
+  min-width: 38px;
+}
+
+.planning-table thead tr.date-row th.weekend {
+  background: #2A2A2A;
+  color: var(--steel);
+}
+
+.planning-table thead tr.date-row th.today {
+  background: var(--spartan-red);
+  color: var(--white);
+  font-weight: 700;
+}
+
+.planning-table thead th.job-header {
+  text-align: left;
+  min-width: 240px;
+  position: sticky;
+  left: 0;
+  z-index: 3;
+}
+
+.planning-table thead tr.date-row th.job-header {
+  background: var(--slate-dark);
+}
+
+.planning-table tbody td {
+  padding: 0;
+  text-align: center;
+  border-right: 1px solid var(--fog);
+  border-bottom: 1px solid var(--fog);
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  font-size: 11px;
+  height: 36px;
+}
+
+.planning-table tbody td.job-cell {
+  text-align: left;
+  padding: 8px 10px;
+  font-family: 'PT Sans', sans-serif;
+  font-weight: 700;
+  font-size: 12px;
+  background: var(--white);
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  border-right: 2px solid var(--silver);
+  min-width: 240px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.planning-table tbody td.job-cell:hover {
+  background: var(--fog);
+}
+
+.planning-table tbody td.job-cell .job-row-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.planning-table tbody td.job-cell .expand-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  font-size: 10px;
+  color: var(--steel);
+  transition: transform 0.2s;
+  flex-shrink: 0;
+}
+
+.planning-table tbody tr.expanded > td.job-cell .expand-icon {
+  transform: rotate(90deg);
+  color: var(--spartan-red);
+}
+
+.planning-table tbody td.job-cell .job-customer {
+  color: var(--charcoal);
+  font-size: 13px;
+}
+
+.planning-table tbody td.job-cell .job-location {
+  font-weight: 400;
+  font-size: 11px;
+  color: var(--slate);
+}
+
+.planning-table tbody td.job-cell .job-equip-count {
+  font-weight: 400;
+  font-size: 10px;
+  color: var(--steel);
+  font-family: 'Montserrat', sans-serif;
+}
+
+/* Gantt bar cells */
+.gantt-deployed {
+  background: #16A34A !important;
+}
+.gantt-inop {
+  background: #2563EB !important;
+}
+.gantt-mobilizing {
+  background: var(--spartan-gold) !important;
+}
+.gantt-demob {
+  background: #D97706 !important;
+}
+.gantt-empty {
+  background: var(--white);
+}
+.gantt-shortfall {
+  background: #FEE2E2 !important;
+  position: relative;
+}
+.gantt-shortfall::after {
+  content: '!';
+  font-size: 9px;
+  font-weight: 800;
+  color: #991B1B;
+}
+
+/* Equipment sub-rows (expanded detail) */
+.equip-sub-row {
+  display: none;
+}
+.equip-sub-row.visible {
+  display: table-row;
+}
+.equip-sub-row td.job-cell {
+  padding: 4px 10px 4px 36px;
+  font-size: 11px;
+  font-weight: 500;
+  background: #FAFAFA;
+  cursor: default;
+  border-bottom: 1px solid #F0F0F0;
+}
+.equip-sub-row td.job-cell:hover {
+  background: #FAFAFA;
+}
+.equip-sub-row td.job-cell .equip-name {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  color: var(--slate-dark);
+  font-size: 11px;
+}
+.equip-sub-row td {
+  height: 28px;
+  background: #FAFAFA;
+  border-bottom: 1px solid #F0F0F0;
+  font-size: 10px;
+  font-weight: 600;
+}
+.equip-sub-row td.equip-qty {
+  color: var(--slate-dark);
+}
+.equip-sub-row td.equip-qty-green {
+  background: #DCFCE7 !important;
+  color: #166534;
+}
+.equip-sub-row td.equip-qty-pink {
+  background: #FCE7F3 !important;
+  color: #9D174D;
+}
+.equip-sub-row td.equip-qty-checkered {
+  background: repeating-linear-gradient(45deg, #EDE9FE, #EDE9FE 3px, #F5F3FF 3px, #F5F3FF 6px) !important;
+  color: #5B21B6;
+}
+.equip-sub-row td.equip-qty-red {
+  background: #FEE2E2 !important;
+  color: #991B1B;
+  font-weight: 700;
+}
+
+/* Gantt legend */
+.gantt-legend {
+  display: flex;
+  gap: 20px;
+  padding: 12px 0;
+  font-size: 12px;
+  font-family: 'Montserrat', sans-serif;
+  flex-wrap: wrap;
+}
+.gantt-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.gantt-legend-swatch {
+  width: 16px;
+  height: 10px;
+}
+
+/* Summary rows */
+.planning-table tbody tr.summary-row td {
+  background: var(--charcoal);
+  color: var(--white);
+  font-weight: 700;
+  font-size: 11px;
+  border-right: 1px solid var(--slate-dark);
+  height: 32px;
+}
+.planning-table tbody tr.summary-row td.job-cell {
+  background: var(--charcoal);
+  color: var(--white);
+  cursor: default;
+}
+.planning-table tbody tr.summary-row td.job-cell:hover {
+  background: var(--charcoal);
+}
+
+.cell-green { background: #DCFCE7 !important; color: #166534; }
+.cell-pink { background: #FCE7F3 !important; color: #9D174D; }
+.cell-red { background: #FEE2E2 !important; color: #991B1B; font-weight: 700; }
+.cell-amber { background: #FEF3C7 !important; color: #92400E; }
+.cell-black { background: var(--charcoal) !important; color: var(--white); }
+.cell-checkered {
+  background: repeating-linear-gradient(45deg, #EDE9FE, #EDE9FE 4px, #F5F3FF 4px, #F5F3FF 8px) !important;
+  color: #5B21B6;
+}
+
+/* ---- COMPONENT DETAIL ---- */
+.detail-grid {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 24px;
+}
+
+.detail-image-box {
+  background: var(--charcoal);
+  height: 260px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--steel);
+  font-size: 13px;
+  font-style: italic;
+  border: 1px solid var(--silver);
+}
+
+.detail-specs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+}
+
+.spec-item {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--fog);
+}
+
+.spec-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--steel);
+  font-family: 'Montserrat', sans-serif;
+}
+
+.spec-value {
+  font-size: 15px;
+  font-weight: 700;
+  margin-top: 2px;
+}
+
+/* ---- ASSEMBLY CROSS-SECTION ---- */
+.assembly-diagram {
+  background: var(--charcoal);
+  padding: 32px;
+  border: 1px solid var(--silver);
+  margin-bottom: 24px;
+}
+
+.assembly-diagram-title {
+  font-family: 'PT Serif', Georgia, serif;
+  font-size: 16px;
+  color: var(--white);
+  margin-bottom: 20px;
+}
+
+.assembly-slots {
+  display: flex;
+  gap: 12px;
+  align-items: flex-end;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.assembly-slot {
+  width: 120px;
+  border: 2px dashed var(--steel);
+  padding: 12px;
+  text-align: center;
+  transition: all 0.2s;
+}
+
+.assembly-slot.filled {
+  border-style: solid;
+}
+
+.assembly-slot.filled.owned-border { border-color: var(--owned); }
+.assembly-slot.filled.consignment-border { border-color: var(--consignment); }
+
+.assembly-slot-icon {
+  width: 60px;
+  height: 60px;
+  margin: 0 auto 8px;
+  background: var(--slate-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  color: var(--steel);
+}
+
+.assembly-slot.filled .assembly-slot-icon {
+  background: var(--slate);
+  color: var(--white);
+}
+
+.assembly-slot-label {
+  font-size: 11px;
+  color: var(--silver);
+  font-family: 'Montserrat', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.assembly-slot-asset {
+  font-size: 10px;
+  color: var(--spartan-gold);
+  margin-top: 4px;
+  font-family: 'Montserrat', sans-serif;
+}
+
+/* ---- SHORTFALL PANEL ---- */
+.shortfall-card {
+  background: var(--white);
+  border: 1px solid var(--silver);
+  border-left: 4px solid var(--status-critical);
+  padding: 20px;
+  margin-bottom: 16px;
+}
+
+.shortfall-title {
+  font-family: 'PT Serif', Georgia, serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--status-critical);
+  margin-bottom: 8px;
+}
+
+.waterfall-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+  margin: 12px 0;
+}
+
+.waterfall-table th {
+  background: var(--fog);
+  padding: 6px 10px;
+  text-align: left;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--slate);
+}
+
+.waterfall-table td {
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--fog);
+}
+
+.waterfall-priority {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 12px;
+  color: var(--white);
+  background: var(--slate-dark);
+  width: 24px;
+  height: 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+/* ---- USER FLOWS ---- */
+.flow-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 16px;
+}
+
+.flow-card {
+  background: var(--white);
+  border: 1px solid var(--silver);
+  padding: 24px;
+  cursor: pointer;
+  transition: all 0.15s;
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.flow-card:hover {
+  border-color: var(--spartan-red);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.flow-card-id {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--spartan-red);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+
+.flow-card-title {
+  font-family: 'PT Serif', Georgia, serif;
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.flow-card-desc {
+  font-size: 13px;
+  color: var(--slate);
+  line-height: 1.5;
+}
+
+/* Flow detail page */
+.flow-detail-header {
+  margin-bottom: 32px;
+}
+
+.flow-id-badge {
+  display: inline-block;
+  background: var(--spartan-red);
+  color: var(--white);
+  font-family: 'Montserrat', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 4px 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 12px;
+}
+
+.flow-purpose {
+  font-size: 15px;
+  color: var(--slate);
+  line-height: 1.6;
+  max-width: 800px;
+  margin-top: 12px;
+}
+
+.flow-section-label {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--steel);
+  margin-bottom: 16px;
+  margin-top: 32px;
+}
+
+.flow-step {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 16px;
+  align-items: flex-start;
+}
+
+.flow-step-num {
+  width: 28px;
+  height: 28px;
+  min-width: 28px;
+  background: var(--slate-dark);
+  color: var(--white);
+  font-family: 'Montserrat', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flow-step-num.current {
+  background: var(--spartan-red);
+}
+
+.flow-step-content {
+  flex: 1;
+  padding: 12px 16px;
+  background: var(--white);
+  border: 1px solid var(--silver);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.flow-step-content.muted {
+  background: var(--fog);
+  color: var(--slate);
+  border-color: var(--fog);
+}
+
+.flow-step-content.muted .flow-step-screen-ref {
+  display: none;
+}
+
+.flow-step-screen-ref {
+  display: inline-block;
+  margin-top: 6px;
+  font-size: 11px;
+  color: var(--spartan-red);
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+}
+
+.flow-step-screen-ref:hover {
+  text-decoration: underline;
+}
+
+.flow-waterfall-embed {
+  margin: 16px 0 24px;
+}
+
+.flow-back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--spartan-red);
+  cursor: pointer;
+  margin-bottom: 16px;
+  font-weight: 600;
+}
+
+.flow-back-btn:hover {
+  text-decoration: underline;
+}
+
+/* ---- MOBILE MOCKUP FRAME ---- */
+.mobile-frame {
+  width: 375px;
+  height: 700px;
+  border: 8px solid var(--charcoal);
+  border-radius: 24px;
+  overflow: hidden;
+  background: var(--fog);
+  margin: 0 auto;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+}
+
+.mobile-status-bar {
+  background: var(--charcoal);
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  color: var(--white);
+  font-family: 'Montserrat', sans-serif;
+}
+
+.mobile-header {
+  background: var(--white);
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--silver);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.mobile-header-title {
+  font-family: 'PT Serif', Georgia, serif;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.mobile-body {
+  padding: 16px;
+  height: calc(100% - 28px - 52px - 56px);
+  overflow-y: auto;
+}
+
+.mobile-bottom-nav {
+  height: 56px;
+  background: var(--white);
+  border-top: 1px solid var(--silver);
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.mobile-nav-item {
+  text-align: center;
+  font-size: 9px;
+  color: var(--steel);
+  font-family: 'Montserrat', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.mobile-nav-item.active {
+  color: var(--spartan-red);
+}
+
+.mobile-nav-item .nav-icon {
+  font-size: 18px;
+  margin-bottom: 2px;
+}
+
+.mobile-loadout-item {
+  background: var(--white);
+  border: 1px solid var(--silver);
+  padding: 12px;
+  margin-bottom: 8px;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.mobile-loadout-img {
+  width: 48px;
+  height: 48px;
+  background: var(--fog);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  color: var(--steel);
+}
+
+.mobile-loadout-info {
+  flex: 1;
+}
+
+.mobile-loadout-name {
+  font-weight: 700;
+  font-size: 13px;
+}
+
+.mobile-loadout-meta {
+  font-size: 11px;
+  color: var(--slate);
+}
+
+.mobile-loadout-qty {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--charcoal);
+}
+
+.mobile-verify-btn {
+  width: 100%;
+  padding: 14px;
+  background: var(--spartan-red);
+  color: var(--white);
+  border: none;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-top: 16px;
+}
+
+/* ---- BREADCRUMB ---- */
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--slate);
+  margin-bottom: 20px;
+}
+
+.breadcrumb a {
+  color: var(--spartan-red);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.breadcrumb a:hover { text-decoration: underline; }
+
+/* ---- TAB BAR ---- */
+.tab-bar {
+  display: flex;
+  gap: 0;
+  border-bottom: 2px solid var(--silver);
+  margin-bottom: 24px;
+}
+
+.tab-item {
+  padding: 10px 20px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--slate);
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -2px;
+  transition: all 0.15s;
+}
+
+.tab-item:hover { color: var(--charcoal); }
+
+.tab-item.active {
+  color: var(--spartan-red);
+  border-bottom-color: var(--spartan-red);
+}
+
+/* ---- MISC ---- */
+.text-red { color: var(--spartan-red); }
+.text-green { color: var(--status-available); }
+.text-amber { color: var(--status-warning); }
+.text-gold { color: var(--spartan-gold); }
+.font-mono { font-family: 'Montserrat', sans-serif; }
+.font-serif { font-family: 'PT Serif', Georgia, serif; }
+.fw-700 { font-weight: 700; }
+.mt-24 { margin-top: 24px; }
+.mb-16 { margin-bottom: 16px; }
+.mb-24 { margin-bottom: 24px; }
+.flex { display: flex; }
+.gap-16 { gap: 16px; }
+.gap-24 { gap: 24px; }
+.items-center { align-items: center; }
+.justify-between { justify-content: space-between; }
+.inline-flex { display: inline-flex; }
+
+</style>
+</head>
+<body>
+
+<!-- ====================== LOGIN SCREEN ====================== -->
+<div id="login-screen">
+  <div class="login-card">
+    <img src="https://spartansenergy.com/wp-content/uploads/Spartan-Energy-Services-V2.png" alt="Spartan Energy Services" class="login-logo">
+    <div class="login-title">ATLAS</div>
+    <div class="login-subtitle">Asset Management System</div>
+    <input type="text" class="login-field" placeholder="Email" value="delmar@spartansenergy.com">
+    <input type="password" class="login-field" placeholder="Password" value="************">
+    <div class="login-role">
+      <select id="login-role-select">
+        <option value="ceo">CEO / President</option>
+        <option value="dm">District Manager</option>
+        <option value="yard">Yard Supervisor</option>
+        <option value="field">Field Crew</option>
+      </select>
+    </div>
+    <button class="login-btn" onclick="doLogin()" style="margin-top:20px">Sign In</button>
+  </div>
+</div>
+
+<!-- ====================== APP SHELL ====================== -->
+<div id="app-shell">
+
+<!-- SIDEBAR -->
+<nav class="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-logo">
+      <img src="https://spartansenergy.com/wp-content/uploads/cropped-spartan-favicon-270x270.png" alt="Spartan">
+      <span class="sidebar-logo-text">ATLAS</span>
+    </div>
+    <div class="sidebar-brand">Spartan Energy Services</div>
+  </div>
+
+  <select class="sidebar-district" id="district-select">
+    <option value="all">All Districts</option>
+    <option value="keithville">Keithville, LA</option>
+    <option value="midland">Midland, TX</option>
+    <option value="pleasanton">Pleasanton, TX</option>
+  </select>
+
+  <div class="sidebar-section">
+    <div class="sidebar-section-label">Operations</div>
+    <a class="sidebar-link active" onclick="showScreen('inventory')">
+      <span class="icon">&#9638;</span> Equipment Inventory
+    </a>
+    <a class="sidebar-link" onclick="showScreen('planning')">
+      <span class="icon">&#9776;</span> Planning Board
+    </a>
+    <a class="sidebar-link coming-soon">
+      <span class="icon">&#8644;</span> Assignments
+      <span class="coming-soon-badge">Phase 1</span>
+    </a>
+    <a class="sidebar-link coming-soon">
+      <span class="icon">&#9881;</span> Assemblies
+      <span class="coming-soon-badge">Phase 1</span>
+    </a>
+    <a class="sidebar-link coming-soon">
+      <span class="icon">&#8634;</span> Transfers
+      <span class="coming-soon-badge">Phase 1</span>
+    </a>
+  </div>
+
+  <div class="sidebar-section">
+    <div class="sidebar-section-label">Management</div>
+    <a class="sidebar-link coming-soon">
+      <span class="icon">&#9733;</span> Consignment
+      <span class="coming-soon-badge">Phase 1</span>
+    </a>
+    <a class="sidebar-link coming-soon">
+      <span class="icon">&#9650;</span> Utilization
+      <span class="coming-soon-badge">Phase 1</span>
+    </a>
+    <a class="sidebar-link coming-soon">
+      <span class="icon">&#9874;</span> Machine Shop
+      <span class="coming-soon-badge">Phase 1</span>
+    </a>
+    <a class="sidebar-link coming-soon">
+      <span class="icon">&#9823;</span> Workforce
+      <span class="coming-soon-badge">Phase 1</span>
+    </a>
+  </div>
+
+  <div class="sidebar-section">
+    <div class="sidebar-section-label">Mobile</div>
+    <a class="sidebar-link" onclick="showScreen('mobile-checkout')">
+      <span class="icon">&#9745;</span> Check-Out / Check-In
+    </a>
+    <a class="sidebar-link coming-soon">
+      <span class="icon">&#9873;</span> Field Crew View
+      <span class="coming-soon-badge">Phase 2</span>
+    </a>
+  </div>
+
+  <div class="sidebar-section">
+    <div class="sidebar-section-label">Reference</div>
+    <a class="sidebar-link" onclick="showScreen('flows-index')">
+      <span class="icon">&#8702;</span> User Flows
+    </a>
+  </div>
+
+  <div class="sidebar-user">
+    <div class="sidebar-avatar">DM</div>
+    <div class="sidebar-user-info">
+      <div class="sidebar-user-name">Delmar</div>
+      <div class="sidebar-user-role">CEO</div>
+    </div>
+  </div>
+</nav>
+
+<!-- ====================== MAIN CONTENT ====================== -->
+<div class="main-content">
+
+<!-- ============ F1: INVENTORY DASHBOARD ============ -->
+<div class="screen-panel active" id="screen-inventory">
+  <div class="page-header">
+    <div class="page-title">Equipment Inventory</div>
+    <div class="page-title-bar"></div>
+    <div class="page-subtitle">Real-time asset visibility across all districts</div>
+  </div>
+  <div class="page-body">
+    <!-- KPIs -->
+    <div class="kpi-row">
+      <div class="kpi-card">
+        <div class="kpi-value font-mono">487</div>
+        <div class="kpi-label">Total Assets</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-value font-mono" style="color:var(--status-deployed)">412</div>
+        <div class="kpi-label">Deployed</div>
+        <div class="kpi-change down">+18 vs last week</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-value font-mono" style="color:var(--status-available)">43</div>
+        <div class="kpi-label">Available</div>
+        <div class="kpi-change down">&darr; 6 from last week</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-value font-mono" style="color:var(--status-shop)">22</div>
+        <div class="kpi-label">In Shop</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-value font-mono" style="color:var(--status-critical)">87%</div>
+        <div class="kpi-label">Utilization</div>
+        <div class="kpi-change up">&uarr; 2% from last week</div>
+      </div>
+    </div>
+
+    <!-- Ownership Legend -->
+    <div style="margin-bottom:16px; font-size:13px; display:flex; gap:20px; color:var(--slate);">
+      <span><span class="ownership-dot owned"></span> Owned (342)</span>
+      <span><span class="ownership-dot consignment"></span> Consignment (118)</span>
+      <span><span class="ownership-dot sub-rental"></span> Sub-Rental (27)</span>
+    </div>
+
+    <!-- Filters -->
+    <div class="filter-row">
+      <select class="filter-select">
+        <option>All Types</option>
+        <option>Wing Valve</option>
+        <option>Master Valve</option>
+        <option>Zipper Valve</option>
+        <option>Rotating Spool</option>
+        <option>Spacer Spool</option>
+        <option>Studded Tee</option>
+        <option>Cross</option>
+        <option>Javelin</option>
+        <option>Accumulator</option>
+      </select>
+      <select class="filter-select">
+        <option>All Sizes</option>
+        <option>3"</option>
+        <option>4"</option>
+        <option>5"</option>
+        <option>7-1/16"</option>
+      </select>
+      <select class="filter-select">
+        <option>All Pressure</option>
+        <option>10K</option>
+        <option>15K</option>
+      </select>
+      <select class="filter-select">
+        <option>All Ownership</option>
+        <option>Owned</option>
+        <option>Consignment</option>
+        <option>Sub-Rental</option>
+      </select>
+      <select class="filter-select">
+        <option>All Status</option>
+        <option>Available</option>
+        <option>Deployed</option>
+        <option>In Transit</option>
+        <option>In Shop</option>
+        <option>In Assembly</option>
+      </select>
+      <input class="filter-input" placeholder="Search asset ID or serial..." style="width:200px">
+    </div>
+
+    <!-- Equipment Summary Table -->
+    <div class="section-header">Equipment by Type</div>
+    <div class="section-bar"></div>
+    <div class="data-table-wrap">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Equipment Type</th>
+            <th>Size</th>
+            <th>Pressure</th>
+            <th>Total</th>
+            <th>Deployed</th>
+            <th>Available</th>
+            <th>In Shop</th>
+            <th>Utilization</th>
+            <th>Ownership Breakdown</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr onclick="showScreen('component-detail')">
+            <td><strong>Wings Hyd</strong></td>
+            <td>4"</td>
+            <td>15K</td>
+            <td class="font-mono fw-700">62</td>
+            <td class="font-mono">60</td>
+            <td class="font-mono text-red fw-700">0</td>
+            <td class="font-mono">2</td>
+            <td>
+              <div class="util-bar-wrap"><div class="util-bar red" style="width:97%"></div></div>
+              <span class="font-mono fw-700 text-red">97%</span>
+            </td>
+            <td><span class="ownership-dot owned"></span>44 &nbsp;<span class="ownership-dot consignment"></span>14 &nbsp;<span class="ownership-dot sub-rental"></span>4</td>
+          </tr>
+          <tr onclick="showScreen('component-detail')">
+            <td><strong>Wings Man</strong></td>
+            <td>4"</td>
+            <td>15K</td>
+            <td class="font-mono fw-700">28</td>
+            <td class="font-mono">24</td>
+            <td class="font-mono text-green">4</td>
+            <td class="font-mono">0</td>
+            <td>
+              <div class="util-bar-wrap"><div class="util-bar amber" style="width:86%"></div></div>
+              <span class="font-mono fw-700 text-amber">86%</span>
+            </td>
+            <td><span class="ownership-dot owned"></span>22 &nbsp;<span class="ownership-dot consignment"></span>6</td>
+          </tr>
+          <tr>
+            <td><strong>7 15 SERVICE LESS MASTERS</strong></td>
+            <td>7"</td>
+            <td>15K</td>
+            <td class="font-mono fw-700">45</td>
+            <td class="font-mono">45</td>
+            <td class="font-mono text-red fw-700">0</td>
+            <td class="font-mono">0</td>
+            <td>
+              <div class="util-bar-wrap"><div class="util-bar red" style="width:100%"></div></div>
+              <span class="font-mono fw-700 text-red">100%</span>
+            </td>
+            <td><span class="ownership-dot owned"></span>30 &nbsp;<span class="ownership-dot consignment"></span>15</td>
+          </tr>
+          <tr>
+            <td><strong>7 15 ZIPPERS MV Hyd</strong></td>
+            <td>7-1/16"</td>
+            <td>15K</td>
+            <td class="font-mono fw-700">38</td>
+            <td class="font-mono">36</td>
+            <td class="font-mono text-amber">2</td>
+            <td class="font-mono">0</td>
+            <td>
+              <div class="util-bar-wrap"><div class="util-bar amber" style="width:95%"></div></div>
+              <span class="font-mono fw-700 text-amber">95%</span>
+            </td>
+            <td><span class="ownership-dot owned"></span>28 &nbsp;<span class="ownership-dot consignment"></span>10</td>
+          </tr>
+          <tr>
+            <td><strong>7 1/16 15M Rotating Spool</strong></td>
+            <td>7-1/16"</td>
+            <td>15K</td>
+            <td class="font-mono fw-700">52</td>
+            <td class="font-mono">44</td>
+            <td class="font-mono text-green">6</td>
+            <td class="font-mono">2</td>
+            <td>
+              <div class="util-bar-wrap"><div class="util-bar amber" style="width:85%"></div></div>
+              <span class="font-mono fw-700">85%</span>
+            </td>
+            <td><span class="ownership-dot owned"></span>40 &nbsp;<span class="ownership-dot consignment"></span>12</td>
+          </tr>
+          <tr>
+            <td><strong>5 15 HYD Wing</strong></td>
+            <td>5"</td>
+            <td>15K</td>
+            <td class="font-mono fw-700">34</td>
+            <td class="font-mono">28</td>
+            <td class="font-mono text-green">4</td>
+            <td class="font-mono">2</td>
+            <td>
+              <div class="util-bar-wrap"><div class="util-bar amber" style="width:82%"></div></div>
+              <span class="font-mono fw-700">82%</span>
+            </td>
+            <td><span class="ownership-dot owned"></span>26 &nbsp;<span class="ownership-dot consignment"></span>8</td>
+          </tr>
+          <tr>
+            <td><strong>JAVELIN</strong></td>
+            <td>--</td>
+            <td>--</td>
+            <td class="font-mono fw-700">8</td>
+            <td class="font-mono">8</td>
+            <td class="font-mono text-red fw-700">0</td>
+            <td class="font-mono">0</td>
+            <td>
+              <div class="util-bar-wrap"><div class="util-bar red" style="width:100%"></div></div>
+              <span class="font-mono fw-700 text-red">100%</span>
+            </td>
+            <td><span class="ownership-dot owned"></span>6 &nbsp;<span class="ownership-dot consignment"></span>2</td>
+          </tr>
+          <tr>
+            <td><strong>7" 15M Studded Tee</strong></td>
+            <td>7"</td>
+            <td>15K</td>
+            <td class="font-mono fw-700">40</td>
+            <td class="font-mono">32</td>
+            <td class="font-mono text-green">5</td>
+            <td class="font-mono">3</td>
+            <td>
+              <div class="util-bar-wrap"><div class="util-bar green" style="width:80%"></div></div>
+              <span class="font-mono fw-700">80%</span>
+            </td>
+            <td><span class="ownership-dot owned"></span>30 &nbsp;<span class="ownership-dot consignment"></span>10</td>
+          </tr>
+          <tr>
+            <td><strong>7 10 ZIPPERS</strong></td>
+            <td>7"</td>
+            <td>10K</td>
+            <td class="font-mono fw-700">18</td>
+            <td class="font-mono">16</td>
+            <td class="font-mono text-amber">1</td>
+            <td class="font-mono">1</td>
+            <td>
+              <div class="util-bar-wrap"><div class="util-bar amber" style="width:89%"></div></div>
+              <span class="font-mono fw-700 text-amber">89%</span>
+            </td>
+            <td><span class="ownership-dot owned"></span>18</td>
+          </tr>
+          <tr>
+            <td><strong>Accumulator</strong></td>
+            <td>--</td>
+            <td>--</td>
+            <td class="font-mono fw-700">72</td>
+            <td class="font-mono">64</td>
+            <td class="font-mono text-green">6</td>
+            <td class="font-mono">2</td>
+            <td>
+              <div class="util-bar-wrap"><div class="util-bar amber" style="width:89%"></div></div>
+              <span class="font-mono fw-700">89%</span>
+            </td>
+            <td><span class="ownership-dot owned"></span>24 &nbsp;<span class="ownership-dot consignment"></span>48</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Sub-Assemblies -->
+    <div class="section-header mt-24">Sub-Assemblies</div>
+    <div class="section-bar"></div>
+    <div class="data-table-wrap">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Assembly Type</th>
+            <th>Active Instances</th>
+            <th>Deployed</th>
+            <th>Available</th>
+            <th>Components Each</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr onclick="showScreen('assembly-detail')">
+            <td><strong>715 HYD Frac Stack</strong></td>
+            <td class="font-mono">6</td>
+            <td class="font-mono">6</td>
+            <td class="font-mono text-red fw-700">0</td>
+            <td class="font-mono">7</td>
+          </tr>
+          <tr>
+            <td><strong>5 15 MAVI Stack Mark 5</strong></td>
+            <td class="font-mono">3</td>
+            <td class="font-mono">3</td>
+            <td class="font-mono text-red fw-700">0</td>
+            <td class="font-mono">6</td>
+          </tr>
+          <tr>
+            <td><strong>7 10 Stack</strong></td>
+            <td class="font-mono">1</td>
+            <td class="font-mono">0</td>
+            <td class="font-mono text-green">1</td>
+            <td class="font-mono">5</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ============ COMPONENT DETAIL ============ -->
+<div class="screen-panel" id="screen-component-detail">
+  <div class="page-header">
+    <div class="breadcrumb">
+      <a onclick="showScreen('inventory')">Equipment Inventory</a>
+      <span>&rsaquo;</span>
+      <span>Wings Hyd 4 15</span>
+    </div>
+    <div class="page-title">Wings Hyd 4 15</div>
+    <div class="page-title-bar"></div>
+    <div class="page-subtitle">Wing Valve &bull; 4" &bull; 15K &bull; Hydraulic</div>
+  </div>
+  <div class="page-body">
+    <div class="detail-grid">
+      <div class="detail-image-box">
+        &#9881; Component Image<br>(Wing Valve, Hydraulic)
+      </div>
+      <div class="card" style="margin:0">
+        <div class="detail-specs">
+          <div class="spec-item"><div class="spec-label">Type</div><div class="spec-value">Wing Valve</div></div>
+          <div class="spec-item"><div class="spec-label">Size</div><div class="spec-value">4"</div></div>
+          <div class="spec-item"><div class="spec-label">Pressure Rating</div><div class="spec-value">15,000 PSI</div></div>
+          <div class="spec-item"><div class="spec-label">Actuation</div><div class="spec-value">Hydraulic</div></div>
+          <div class="spec-item"><div class="spec-label">Brand</div><div class="spec-value">--</div></div>
+          <div class="spec-item"><div class="spec-label">Total Count</div><div class="spec-value">62</div></div>
+          <div class="spec-item"><div class="spec-label">Current Utilization</div><div class="spec-value text-red">97%</div></div>
+          <div class="spec-item"><div class="spec-label">Available Now</div><div class="spec-value text-red">0</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-header mt-24">Ownership Breakdown</div>
+    <div class="section-bar"></div>
+    <div style="display:flex; gap:16px; margin-bottom:24px;">
+      <div class="card" style="flex:1;text-align:center">
+        <div class="kpi-value font-mono" style="color:var(--owned)">44</div>
+        <div class="kpi-label">Spartan Owned</div>
+      </div>
+      <div class="card" style="flex:1;text-align:center">
+        <div class="kpi-value font-mono" style="color:var(--consignment)">14</div>
+        <div class="kpi-label">Consignment</div>
+        <div style="font-size:12px;color:var(--slate);margin-top:4px">MAV: 8 &bull; 3E: 6</div>
+      </div>
+      <div class="card" style="flex:1;text-align:center">
+        <div class="kpi-value font-mono" style="color:var(--sub-rental)">4</div>
+        <div class="kpi-label">Sub-Rental</div>
+      </div>
+    </div>
+
+    <div class="section-header">14-Day Demand vs. Supply Forecast</div>
+    <div class="section-bar"></div>
+    <div style="margin-bottom:8px;font-size:13px;color:var(--slate)">
+      Day-by-day breakdown of scheduled demand, assets on hand, and net position. <span style="color:var(--status-critical);font-weight:700">Red</span> = shortfall.
+    </div>
+    <div class="data-table-wrap">
+      <table class="data-table" style="font-size:13px">
+        <thead>
+          <tr>
+            <th style="min-width:160px">Metric</th>
+            <th>Apr 6<br><span style="font-weight:400;font-size:11px">Mon</span></th>
+            <th>Apr 7<br><span style="font-weight:400;font-size:11px">Tue</span></th>
+            <th>Apr 8<br><span style="font-weight:400;font-size:11px">Wed</span></th>
+            <th>Apr 9<br><span style="font-weight:400;font-size:11px">Thu</span></th>
+            <th>Apr 10<br><span style="font-weight:400;font-size:11px">Fri</span></th>
+            <th>Apr 11<br><span style="font-weight:400;font-size:11px">Sat</span></th>
+            <th>Apr 12<br><span style="font-weight:400;font-size:11px">Sun</span></th>
+            <th>Apr 13<br><span style="font-weight:400;font-size:11px">Mon</span></th>
+            <th>Apr 14<br><span style="font-weight:400;font-size:11px">Tue</span></th>
+            <th>Apr 15<br><span style="font-weight:400;font-size:11px">Wed</span></th>
+            <th>Apr 16<br><span style="font-weight:400;font-size:11px">Thu</span></th>
+            <th>Apr 17<br><span style="font-weight:400;font-size:11px">Fri</span></th>
+            <th>Apr 18<br><span style="font-weight:400;font-size:11px">Sat</span></th>
+            <th>Apr 19<br><span style="font-weight:400;font-size:11px">Sun</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="background:var(--fog)">
+            <td class="fw-700">Requirement (Demand)</td>
+            <td class="font-mono">42</td><td class="font-mono">42</td><td class="font-mono">42</td><td class="font-mono">42</td>
+            <td class="font-mono" style="color:var(--status-critical);font-weight:700">68</td>
+            <td class="font-mono" style="color:var(--status-critical);font-weight:700">68</td>
+            <td class="font-mono" style="color:var(--status-critical);font-weight:700">68</td>
+            <td class="font-mono" style="color:var(--status-critical);font-weight:700">68</td>
+            <td class="font-mono" style="color:var(--status-critical);font-weight:700">68</td>
+            <td class="font-mono" style="color:var(--status-critical);font-weight:700">68</td>
+            <td class="font-mono" style="color:var(--status-critical);font-weight:700">68</td>
+            <td class="font-mono" style="color:var(--status-critical);font-weight:700">68</td>
+            <td class="font-mono" style="color:var(--status-critical);font-weight:700">60</td>
+            <td class="font-mono">52</td>
+          </tr>
+          <tr>
+            <td class="fw-700">Assets on Hand</td>
+            <td class="font-mono">62</td><td class="font-mono">62</td><td class="font-mono">62</td><td class="font-mono">62</td>
+            <td class="font-mono">62</td><td class="font-mono">62</td><td class="font-mono">62</td><td class="font-mono">62</td>
+            <td class="font-mono">62</td><td class="font-mono">62</td><td class="font-mono">62</td><td class="font-mono">62</td>
+            <td class="font-mono">62</td><td class="font-mono">62</td>
+          </tr>
+          <tr style="border-top:2px solid var(--charcoal)">
+            <td class="fw-700">Net Position</td>
+            <td class="font-mono" style="color:var(--status-available);font-weight:700">+20</td>
+            <td class="font-mono" style="color:var(--status-available);font-weight:700">+20</td>
+            <td class="font-mono" style="color:var(--status-available);font-weight:700">+20</td>
+            <td class="font-mono" style="color:var(--status-available);font-weight:700">+20</td>
+            <td class="font-mono" style="color:var(--status-critical);font-weight:700">-6</td>
+            <td class="font-mono" style="color:var(--status-critical);font-weight:700">-6</td>
+            <td class="font-mono" style="color:var(--status-critical);font-weight:700">-6</td>
+            <td class="font-mono" style="color:var(--status-critical);font-weight:700">-6</td>
+            <td class="font-mono" style="color:var(--status-critical);font-weight:700">-6</td>
+            <td class="font-mono" style="color:var(--status-critical);font-weight:700">-6</td>
+            <td class="font-mono" style="color:var(--status-critical);font-weight:700">-6</td>
+            <td class="font-mono" style="color:var(--status-critical);font-weight:700">-6</td>
+            <td class="font-mono" style="color:var(--status-critical);font-weight:700">-2</td>
+            <td class="font-mono" style="color:var(--status-available);font-weight:700">+10</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div style="margin-top:8px;margin-bottom:24px;font-size:12px;color:var(--slate);display:flex;gap:24px">
+      <div><strong>Demand drivers (Apr 10):</strong> BPX Permian Pad 7 (10), Rockcliffe Haynesville 12 (8), Lewis Permian 4A (8), PPX Eagle Ford #3 (6), Coterra Marcellus 8H (6), Diamondback Midland B12 (10), Ovintiv Eagle Ford 5 (8) + shop/transit holds (12)</div>
+    </div>
+
+    <div style="display:flex;gap:16px;margin-bottom:24px">
+      <div class="card" style="flex:1;border-left:3px solid var(--status-critical);padding:16px">
+        <div style="font-family:'Montserrat',sans-serif;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--status-critical);margin-bottom:8px">Shortfall Window</div>
+        <div style="font-size:14px"><strong>9 days</strong> &mdash; Apr 10 through Apr 18</div>
+        <div style="font-size:13px;color:var(--slate);margin-top:4px">Peak shortfall: <strong>-6 units</strong> (Apr 10 – Apr 17)</div>
+        <div style="font-size:13px;color:var(--slate)">Shortfall eases to -2 on Apr 18 as BPX Permian Pad 7 demobilizes</div>
+      </div>
+      <div class="card" style="flex:1;border-left:3px solid var(--spartan-gold);padding:16px">
+        <div style="font-family:'Montserrat',sans-serif;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--spartan-gold);margin-bottom:8px">Resolution Options</div>
+        <div style="font-size:13px;line-height:1.8">
+          <span class="waterfall-priority" style="font-size:11px;width:18px;height:18px;line-height:18px">4</span> Transfer 4x owned from Keithville (surplus 8 through Apr 20)<br>
+          <span class="waterfall-priority" style="font-size:11px;width:18px;height:18px;line-height:18px;background:var(--sub-rental)">3</span> Sub-rent 2x locally in Midland<br>
+          <span style="font-size:12px;color:var(--slate)">Resolves peak shortfall to 0. Est. cost: $2,850 freight + sub-rental TBD.</span>
+        </div>
+        <button class="btn btn-primary btn-sm" style="margin-top:12px" onclick="showScreen('planning')">View on Planning Board</button>
+      </div>
+    </div>
+
+    <div class="section-header">Individual Assets</div>
+    <div class="section-bar"></div>
+    <div class="data-table-wrap">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Asset ID</th>
+            <th>Serial #</th>
+            <th>Ownership</th>
+            <th>Status</th>
+            <th>Location</th>
+            <th>Current Job</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td class="font-mono fw-700">SPT-4015</td><td class="font-mono">WH4-00291</td><td><span class="ownership-dot owned"></span>Owned</td><td><span class="status-badge deployed">Deployed</span></td><td>Midland, TX</td><td>BPX Permian Pad 7</td></tr>
+          <tr><td class="font-mono fw-700">SPT-4016</td><td class="font-mono">WH4-00292</td><td><span class="ownership-dot owned"></span>Owned</td><td><span class="status-badge deployed">Deployed</span></td><td>Midland, TX</td><td>BPX Permian Pad 7</td></tr>
+          <tr><td class="font-mono fw-700">SPT-4028</td><td class="font-mono">WH4-00305</td><td><span class="ownership-dot owned"></span>Owned</td><td><span class="status-badge in-shop">In Shop</span></td><td>Keithville, LA</td><td>--</td></tr>
+          <tr><td class="font-mono fw-700">MAV-1042</td><td class="font-mono">MV-7821</td><td><span class="ownership-dot consignment"></span>MAV</td><td><span class="status-badge deployed">Deployed</span></td><td>Pleasanton, TX</td><td>PPX Eagle Ford #3</td></tr>
+          <tr><td class="font-mono fw-700">3E-0088</td><td class="font-mono">3E-4490</td><td><span class="ownership-dot consignment"></span>3E</td><td><span class="status-badge deployed">Deployed</span></td><td>Keithville, LA</td><td>Rockcliffe Haynesville 12</td></tr>
+          <tr><td class="font-mono fw-700">SUB-R-019</td><td class="font-mono">RNT-55102</td><td><span class="ownership-dot sub-rental"></span>Sub-Rental</td><td><span class="status-badge deployed">Deployed</span></td><td>Midland, TX</td><td>Lewis Permian 4A</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ============ SUB-ASSEMBLY DETAIL ============ -->
+<div class="screen-panel" id="screen-assembly-detail">
+  <div class="page-header">
+    <div class="breadcrumb">
+      <a onclick="showScreen('inventory')">Equipment Inventory</a>
+      <span>&rsaquo;</span>
+      <span>715 HYD Frac Stack #STK-003</span>
+    </div>
+    <div class="page-title">715 HYD Frac Stack</div>
+    <div class="page-title-bar"></div>
+    <div class="page-subtitle">Instance #STK-003 &bull; <span class="status-badge deployed">Deployed</span> &bull; BPX Permian Pad 7</div>
+  </div>
+  <div class="page-body">
+    <!-- Cross-section diagram -->
+    <div class="assembly-diagram">
+      <div class="assembly-diagram-title">Assembly Cross-Section &mdash; 7 Components</div>
+      <div class="assembly-slots">
+        <div class="assembly-slot filled owned-border">
+          <div class="assembly-slot-icon">&#9881;</div>
+          <div class="assembly-slot-label">Master Valve</div>
+          <div class="assembly-slot-asset">SPT-7001</div>
+        </div>
+        <div class="assembly-slot filled owned-border">
+          <div class="assembly-slot-icon">&#9664;</div>
+          <div class="assembly-slot-label">Wing Valve L</div>
+          <div class="assembly-slot-asset">SPT-4015</div>
+        </div>
+        <div class="assembly-slot filled consignment-border">
+          <div class="assembly-slot-icon">&#9654;</div>
+          <div class="assembly-slot-label">Wing Valve R</div>
+          <div class="assembly-slot-asset">MAV-1042</div>
+        </div>
+        <div class="assembly-slot filled owned-border">
+          <div class="assembly-slot-icon">&#9675;</div>
+          <div class="assembly-slot-label">Rotating Spool</div>
+          <div class="assembly-slot-asset">SPT-5201</div>
+        </div>
+        <div class="assembly-slot filled owned-border">
+          <div class="assembly-slot-icon">&#8868;</div>
+          <div class="assembly-slot-label">Studded Tee</div>
+          <div class="assembly-slot-asset">SPT-5301</div>
+        </div>
+        <div class="assembly-slot filled owned-border">
+          <div class="assembly-slot-icon">&#9830;</div>
+          <div class="assembly-slot-label">Zipper L</div>
+          <div class="assembly-slot-asset">SPT-6010</div>
+        </div>
+        <div class="assembly-slot filled consignment-border">
+          <div class="assembly-slot-icon">&#9830;</div>
+          <div class="assembly-slot-label">Zipper R</div>
+          <div class="assembly-slot-asset">3E-0044</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="display:flex;gap:16px;margin-bottom:24px;">
+      <div class="card" style="flex:1">
+        <div class="card-title">Assembly Info</div>
+        <div class="detail-specs" style="margin-top:12px">
+          <div class="spec-item"><div class="spec-label">Instance ID</div><div class="spec-value">STK-003</div></div>
+          <div class="spec-item"><div class="spec-label">Template</div><div class="spec-value">715 HYD Frac Stack</div></div>
+          <div class="spec-item"><div class="spec-label">Build Date</div><div class="spec-value">2026-02-14</div></div>
+          <div class="spec-item"><div class="spec-label">Built By</div><div class="spec-value">Gabriel</div></div>
+          <div class="spec-item"><div class="spec-label">Status</div><div class="spec-value"><span class="status-badge deployed">Deployed</span></div></div>
+          <div class="spec-item"><div class="spec-label">Current Job</div><div class="spec-value">BPX Permian Pad 7</div></div>
+        </div>
+      </div>
+      <div class="card" style="flex:1">
+        <div class="card-title">Ownership Breakdown</div>
+        <div style="margin-top:12px;font-size:14px;line-height:2">
+          <span class="ownership-dot owned"></span> <strong>5</strong> components Spartan-owned<br>
+          <span class="ownership-dot consignment"></span> <strong>1</strong> component MAV consignment<br>
+          <span class="ownership-dot consignment"></span> <strong>1</strong> component 3E consignment
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ F2: PLANNING BOARD ============ -->
+<div class="screen-panel" id="screen-planning">
+  <div class="page-header">
+    <div class="page-title">Planning Board</div>
+    <div class="page-title-bar"></div>
+    <div class="page-subtitle">4-week rolling forecast &bull; Click any job to expand equipment detail</div>
+  </div>
+  <div class="page-body">
+    <div class="tab-bar">
+      <div class="tab-item active" onclick="switchPlanningTab('forecast')">Forecast Grid</div>
+      <div class="tab-item" onclick="switchPlanningTab('shortfalls')">Shortfall Alerts <span style="background:var(--status-critical);color:white;font-size:11px;padding:1px 7px;border-radius:9px;margin-left:4px">4</span></div>
+      <div class="tab-item" onclick="switchPlanningTab('whatif')">What-If Mode</div>
+      <div class="tab-item" onclick="switchPlanningTab('newwo')">+ New Work Order</div>
+    </div>
+
+    <!-- ======== TAB: FORECAST GRID ======== -->
+    <div class="planning-tab-content" id="planning-tab-forecast">
+      <div class="filter-row">
+        <select class="filter-select"><option>All Districts</option><option>Midland</option><option>Keithville</option><option>Pleasanton</option></select>
+        <select class="filter-select"><option>All Statuses</option><option>Active</option><option>Shortfall</option></select>
+        <button class="btn btn-secondary btn-sm" onclick="switchPlanningTab('newwo')">+ New Work Order</button>
+      </div>
+
+      <!-- Gantt Legend -->
+      <div class="gantt-legend">
+        <div class="gantt-legend-item"><div class="gantt-legend-swatch" style="background:#C5A55A"></div> Mobilizing</div>
+        <div class="gantt-legend-item"><div class="gantt-legend-swatch" style="background:#16A34A"></div> Deployed</div>
+        <div class="gantt-legend-item"><div class="gantt-legend-swatch" style="background:#2563EB"></div> In-Operation</div>
+        <div class="gantt-legend-item"><div class="gantt-legend-swatch" style="background:#D97706"></div> Demobilizing</div>
+        <div class="gantt-legend-item"><div class="gantt-legend-swatch" style="background:#FEE2E2;border:1px solid #FCA5A5"></div> Shortfall</div>
+        <div class="gantt-legend-item" style="margin-left:12px;border-left:1px solid var(--silver);padding-left:20px"><span class="ownership-dot owned" style="width:8px;height:8px"></span> Owned</div>
+        <div class="gantt-legend-item"><span class="ownership-dot consignment" style="width:8px;height:8px"></span> Consignment</div>
+        <div class="gantt-legend-item"><span class="ownership-dot sub-rental" style="width:8px;height:8px"></span> Sub-Rental</div>
+      </div>
+
+      <!-- Planning Grid (Gantt) -->
+      <div class="planning-grid" id="gantt-grid">
+        <!-- Populated by JavaScript -->
+      </div>
+
+      <!-- Inline Shortfall Summary (contextual preview) -->
+      <div class="section-header mt-24">Shortfall Summary</div>
+      <div class="section-bar"></div>
+      <div style="font-size:13px;color:var(--slate);margin-bottom:12px">Critical shortfalls visible in the current forecast window. <a style="color:var(--spartan-red);cursor:pointer;text-decoration:underline" onclick="switchPlanningTab('shortfalls')">View all shortfall alerts &rarr;</a></div>
+
+      <div class="shortfall-card">
+        <div class="shortfall-title">&#9888; Wings Hyd 4 15 &mdash; Short 6 units by April 10</div>
+        <div style="font-size:13px;color:var(--slate);margin-bottom:8px">Diamondback Midland B12 + Ovintiv Eagle Ford 5 push demand to 68 vs. 62 available</div>
+        <div style="display:flex;gap:12px">
+          <button class="btn btn-primary btn-sm" onclick="switchPlanningTab('shortfalls')">View Waterfall &amp; Resolve</button>
+        </div>
+      </div>
+
+      <div class="shortfall-card">
+        <div class="shortfall-title">&#9888; 7 15 SERVICE LESS MASTERS &mdash; Short 8 units by April 10</div>
+        <div style="font-size:13px;color:var(--slate);margin-bottom:8px">Company-wide: 45 owned, 47 needed. Shop has 3 expected back Apr 8.</div>
+        <div style="display:flex;gap:12px">
+          <button class="btn btn-primary btn-sm" onclick="switchPlanningTab('shortfalls')">View Waterfall &amp; Resolve</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ======== TAB: SHORTFALL ALERTS ======== -->
+    <div class="planning-tab-content" id="planning-tab-shortfalls" style="display:none">
+      <div class="filter-row">
+        <select class="filter-select"><option>All Districts</option><option>Midland</option><option>Keithville</option><option>Pleasanton</option></select>
+        <select class="filter-select"><option>All Equipment Types</option><option>Wing Valve</option><option>Master Valve</option><option>Zipper Valve</option><option>Rotating Spool</option><option>Javelin</option><option>Accumulator</option></select>
+        <select class="filter-select"><option>All Statuses</option><option>Open</option><option>In Progress</option><option>Resolved</option></select>
+        <select class="filter-select"><option>Sort: Severity (worst first)</option><option>Sort: Date (soonest first)</option><option>Sort: Equipment Type</option><option>Sort: District</option></select>
+      </div>
+
+      <!-- Shortfall Stats -->
+      <div style="display:flex;gap:16px;margin-bottom:20px">
+        <div class="card" style="flex:1;text-align:center;border-top:3px solid var(--status-critical)">
+          <div class="kpi-value font-mono" style="color:var(--status-critical)">4</div>
+          <div class="kpi-label">Open Shortfalls</div>
+        </div>
+        <div class="card" style="flex:1;text-align:center;border-top:3px solid var(--status-warning)">
+          <div class="kpi-value font-mono" style="color:var(--status-warning)">2</div>
+          <div class="kpi-label">In Progress</div>
+        </div>
+        <div class="card" style="flex:1;text-align:center;border-top:3px solid var(--status-available)">
+          <div class="kpi-value font-mono" style="color:var(--status-available)">11</div>
+          <div class="kpi-label">Resolved (30 days)</div>
+        </div>
+        <div class="card" style="flex:1;text-align:center;border-top:3px solid var(--charcoal)">
+          <div class="kpi-value font-mono">-22</div>
+          <div class="kpi-label">Total Units Short</div>
+        </div>
+      </div>
+
+      <!-- Shortfall Alert 1: Wings Hyd 4 15 -->
+      <div class="shortfall-card" style="border-left:4px solid var(--status-critical)">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px">
+          <div>
+            <div class="shortfall-title">&#9888; Wings Hyd 4 15 &mdash; Short 6 units</div>
+            <div style="font-size:13px;color:var(--slate)">Shortfall window: <strong>Apr 10 – Apr 18</strong> (9 days) &bull; Peak: -6 units &bull; District: Midland</div>
+          </div>
+          <span class="status-badge critical">Open</span>
+        </div>
+        <div style="font-size:13px;color:var(--slate);margin-bottom:12px">
+          Diamondback Midland B12 (10 units) and Ovintiv Eagle Ford 5 (8 units) starting Apr 10/12 push demand to 68 vs. 62 available company-wide.
+        </div>
+
+        <div style="font-size:12px;font-weight:700;font-family:'Montserrat',sans-serif;text-transform:uppercase;letter-spacing:1px;color:var(--charcoal);margin-bottom:8px">Shortage Resolution Waterfall</div>
+        <table class="waterfall-table">
+          <thead>
+            <tr><th>Priority</th><th>Source</th><th>Location</th><th>Qty</th><th>Status</th><th>Schedule Check (4-wk window)</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="waterfall-priority">1</span></td>
+              <td><span class="ownership-dot owned"></span> Spartan Owned</td>
+              <td>Local (Midland)</td>
+              <td class="font-mono fw-700">0 avail</td>
+              <td><span class="status-badge critical">Exhausted</span></td>
+              <td style="font-size:12px;color:var(--slate)">All 26 local owned deployed through Apr 22</td>
+            </tr>
+            <tr>
+              <td><span class="waterfall-priority">2</span></td>
+              <td><span class="ownership-dot consignment"></span> Consignment</td>
+              <td>Local (Midland)</td>
+              <td class="font-mono fw-700">0 avail</td>
+              <td><span class="status-badge critical">Exhausted</span></td>
+              <td style="font-size:12px;color:var(--slate)">MAV: 4 deployed, 3E: 2 deployed</td>
+            </tr>
+            <tr>
+              <td><span class="waterfall-priority">3</span></td>
+              <td><span class="ownership-dot sub-rental"></span> Sub-Rental</td>
+              <td>Local (Midland)</td>
+              <td class="font-mono fw-700">+2 possible</td>
+              <td><span class="status-badge warning">Available</span></td>
+              <td style="font-size:12px;color:var(--slate)">2 units from Ranger Rentals, 48hr lead time</td>
+            </tr>
+            <tr style="background:#DCFCE7">
+              <td><span class="waterfall-priority" style="background:var(--status-available)">4</span></td>
+              <td><span class="ownership-dot owned"></span> Spartan Owned</td>
+              <td>Keithville, LA &rarr; Midland (~570mi, ~8.5hr)</td>
+              <td class="font-mono fw-700">+4 avail</td>
+              <td><span class="status-badge available">Recommended</span></td>
+              <td style="font-size:12px;color:var(--status-available)">Keithville has 12 surplus through Apr 20. Pulling 4 leaves 8 — covers all Keithville jobs through Apr 28.</td>
+            </tr>
+            <tr>
+              <td><span class="waterfall-priority">5</span></td>
+              <td><span class="ownership-dot consignment"></span> Consignment (MAV)</td>
+              <td>Pleasanton, TX &rarr; Midland (~330mi, ~5hr)</td>
+              <td class="font-mono fw-700">+2 avail</td>
+              <td><span class="status-badge planned">Backup</span></td>
+              <td style="font-size:12px;color:var(--slate)">MAV has 4 idle at Pleasanton. Pleasanton needs 2 for PPX Eagle Ford #3. 2 are spendable.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div style="background:var(--fog);padding:12px 16px;margin:12px 0;font-size:13px;border-left:3px solid var(--spartan-gold)">
+          <strong>Recommendation:</strong> Transfer 4x owned from Keithville + 2x sub-rental locally. Keithville retains 8 surplus through April 20 (verified against their full 4-week schedule). Est. transfer cost: $2,850 (scheduled freight).
+        </div>
+
+        <div style="display:flex;gap:12px;margin-top:16px">
+          <button class="btn btn-primary btn-sm">Approve Recommendation</button>
+          <button class="btn btn-secondary btn-sm">Modify Plan</button>
+          <button class="btn btn-secondary btn-sm" onclick="switchPlanningTab('whatif')">View What-If</button>
+          <button class="btn btn-secondary btn-sm" onclick="showScreen('component-detail')">View Component Detail</button>
+        </div>
+      </div>
+
+      <!-- Shortfall Alert 2: Masters -->
+      <div class="shortfall-card" style="border-left:4px solid var(--status-critical)">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px">
+          <div>
+            <div class="shortfall-title">&#9888; 7 15 SERVICE LESS MASTERS &mdash; Short 8 units</div>
+            <div style="font-size:13px;color:var(--slate)">Shortfall window: <strong>Apr 10 – Apr 30</strong> (21 days) &bull; Peak: -8 units &bull; Districts: Midland, Pleasanton</div>
+          </div>
+          <span class="status-badge critical">Open</span>
+        </div>
+        <div style="font-size:13px;color:var(--slate);margin-bottom:12px">Company-wide: 45 owned, 47 needed. Machine shop has 3 expected back by April 8.</div>
+
+        <div style="font-size:12px;font-weight:700;font-family:'Montserrat',sans-serif;text-transform:uppercase;letter-spacing:1px;color:var(--charcoal);margin-bottom:8px">Shortage Resolution Waterfall</div>
+        <table class="waterfall-table">
+          <thead>
+            <tr><th>Priority</th><th>Source</th><th>Location</th><th>Qty</th><th>Status</th><th>Schedule Check (4-wk window)</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="waterfall-priority">1</span></td>
+              <td><span class="ownership-dot owned"></span> Spartan Owned</td>
+              <td>Local (Midland + Pleasanton)</td>
+              <td class="font-mono fw-700">0 avail</td>
+              <td><span class="status-badge critical">Exhausted</span></td>
+              <td style="font-size:12px;color:var(--slate)">All masters deployed across both districts</td>
+            </tr>
+            <tr>
+              <td><span class="waterfall-priority">2</span></td>
+              <td><span class="ownership-dot consignment"></span> Consignment</td>
+              <td>All districts</td>
+              <td class="font-mono fw-700">0 avail</td>
+              <td><span class="status-badge critical">Exhausted</span></td>
+              <td style="font-size:12px;color:var(--slate)">No consignment masters in fleet</td>
+            </tr>
+            <tr>
+              <td><span class="waterfall-priority">3</span></td>
+              <td><span class="ownership-dot sub-rental"></span> Sub-Rental</td>
+              <td>Local markets</td>
+              <td class="font-mono fw-700">+5 possible</td>
+              <td><span class="status-badge warning">Available</span></td>
+              <td style="font-size:12px;color:var(--slate)">Pricing TBD — serviceless masters are scarce</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div style="background:var(--fog);padding:12px 16px;margin:12px 0;font-size:13px;border-left:3px solid var(--status-shop)">
+          <strong>Shop insight:</strong> Expediting 3 masters in Keithville shop (expected Apr 8) reduces shortfall to -5. Remaining gap requires sub-rental or consignment sourcing.
+        </div>
+        <div style="background:var(--fog);padding:12px 16px;margin:4px 0 12px;font-size:13px;border-left:3px solid var(--status-warning)">
+          <strong>Capital flag:</strong> Serviceless masters have been at 95%+ utilization for 3 consecutive months. Consider procurement (see UF11).
+        </div>
+
+        <div style="display:flex;gap:12px;margin-top:16px">
+          <button class="btn btn-primary btn-sm">View Full Waterfall</button>
+          <button class="btn btn-secondary btn-sm">Modify Plan</button>
+        </div>
+      </div>
+
+      <!-- Shortfall Alert 3: Javelins -->
+      <div class="shortfall-card" style="border-left:4px solid var(--status-warning)">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px">
+          <div>
+            <div class="shortfall-title">&#9888; Javelin &mdash; Short 2 units by April 10</div>
+            <div style="font-size:13px;color:var(--slate)">Shortfall window: <strong>Apr 10 – Apr 18</strong> &bull; Peak: -2 units &bull; District: Midland</div>
+          </div>
+          <span class="status-badge warning">In Progress</span>
+        </div>
+        <div style="font-size:13px;color:var(--slate);margin-bottom:12px">Diamondback Midland B12 needs 2 Javelins. Currently 5 company-wide, 5 deployed. Keithville releases 1 on Apr 14 (Rockcliffe ends).</div>
+        <div style="background:var(--fog);padding:12px 16px;font-size:13px;border-left:3px solid var(--spartan-gold)">
+          <strong>In progress:</strong> Don is negotiating a 1-unit sub-rental with Eagle Rentals for Apr 8 delivery. Pending confirmation.
+        </div>
+        <div style="display:flex;gap:12px;margin-top:16px">
+          <button class="btn btn-secondary btn-sm">View Full Waterfall</button>
+          <button class="btn btn-secondary btn-sm">Update Status</button>
+        </div>
+      </div>
+
+      <!-- Shortfall Alert 4: Zippers -->
+      <div class="shortfall-card" style="border-left:4px solid var(--status-warning)">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px">
+          <div>
+            <div class="shortfall-title">&#9888; 7 15 Zip MV Hyd Valves &mdash; Short 4 units by April 12</div>
+            <div style="font-size:13px;color:var(--slate)">Shortfall window: <strong>Apr 12 – Apr 28</strong> &bull; Peak: -4 units &bull; Districts: Midland, Pleasanton</div>
+          </div>
+          <span class="status-badge warning">In Progress</span>
+        </div>
+        <div style="font-size:13px;color:var(--slate);margin-bottom:12px">Ovintiv Eagle Ford 5 (4 units, consignment-alt) combined with Coterra and Lewis pushes zippers over capacity. Keithville can spare 2 after Rockcliffe ends Apr 14.</div>
+        <div style="display:flex;gap:12px;margin-top:16px">
+          <button class="btn btn-secondary btn-sm">View Full Waterfall</button>
+          <button class="btn btn-secondary btn-sm">Update Status</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ======== TAB: WHAT-IF MODE ======== -->
+    <div class="planning-tab-content" id="planning-tab-whatif" style="display:none">
+      <div style="background:var(--white);border:2px dashed var(--spartan-gold);padding:32px;text-align:center;margin-top:16px">
+        <div style="font-size:48px;margin-bottom:12px">&#9881;</div>
+        <div style="font-family:'PT Serif',Georgia,serif;font-size:20px;font-weight:700;margin-bottom:8px">What-If Scenario Builder</div>
+        <div style="color:var(--slate);font-size:14px;max-width:500px;margin:0 auto">
+          Test equipment changes, size conversions, job date shifts, and cross-district transfers before committing. See the ripple effect across all jobs and districts in real time.
+        </div>
+        <div style="margin-top:24px;color:var(--steel);font-size:13px">Coming in Phase 1</div>
+      </div>
+    </div>
+
+    <!-- ======== TAB: NEW WORK ORDER ======== -->
+    <div class="planning-tab-content" id="planning-tab-newwo" style="display:none">
+      <div style="max-width:900px">
+        <div class="section-header">New Work Order</div>
+        <div class="section-bar"></div>
+        <div style="font-size:13px;color:var(--slate);margin-bottom:20px">Enter job details and equipment requirements. The system will immediately check availability and flag any shortfalls.</div>
+
+        <div class="card" style="padding:24px">
+          <!-- Job Info -->
+          <div style="font-family:'Montserrat',sans-serif;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--charcoal);margin-bottom:16px">Job Information</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px">
+            <div>
+              <label style="display:block;font-size:13px;font-weight:700;margin-bottom:4px">Customer Name</label>
+              <input class="filter-input" style="width:100%" placeholder="e.g., Marathon Oil" value="Vital Energy Permian 9H">
+            </div>
+            <div>
+              <label style="display:block;font-size:13px;font-weight:700;margin-bottom:4px">Well Site / Pad</label>
+              <input class="filter-input" style="width:100%" placeholder="e.g., Wolf Camp Pad 3" value="Wolfcamp A-9H Pad">
+            </div>
+            <div>
+              <label style="display:block;font-size:13px;font-weight:700;margin-bottom:4px">District</label>
+              <select class="filter-select" style="width:100%">
+                <option>Midland, TX</option>
+                <option>Keithville, LA</option>
+                <option>Pleasanton, TX</option>
+              </select>
+            </div>
+            <div>
+              <label style="display:block;font-size:13px;font-weight:700;margin-bottom:4px">Status</label>
+              <select class="filter-select" style="width:100%">
+                <option>Planned</option>
+                <option>Confirmed</option>
+              </select>
+            </div>
+            <div>
+              <label style="display:block;font-size:13px;font-weight:700;margin-bottom:4px">Start Date</label>
+              <input class="filter-input" type="date" style="width:100%" value="2026-04-14">
+            </div>
+            <div>
+              <label style="display:block;font-size:13px;font-weight:700;margin-bottom:4px">End Date (Est.)</label>
+              <input class="filter-input" type="date" style="width:100%" value="2026-05-02">
+            </div>
+            <div>
+              <label style="display:block;font-size:13px;font-weight:700;margin-bottom:4px">Mob Days</label>
+              <input class="filter-input" type="number" style="width:100%" value="1" min="0" max="5">
+            </div>
+            <div>
+              <label style="display:block;font-size:13px;font-weight:700;margin-bottom:4px">Demob Days</label>
+              <input class="filter-input" type="number" style="width:100%" value="1" min="0" max="5">
+            </div>
+          </div>
+
+          <!-- Equipment Requirements -->
+          <div style="font-family:'Montserrat',sans-serif;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--charcoal);margin-bottom:16px;padding-top:16px;border-top:1px solid var(--silver)">Equipment Requirements</div>
+          <div style="font-size:12px;color:var(--slate);margin-bottom:12px">Add each equipment type needed for this job. The system will check availability after each addition.</div>
+
+          <table class="data-table" style="font-size:13px;margin-bottom:16px">
+            <thead>
+              <tr>
+                <th>Equipment Type</th>
+                <th>Size</th>
+                <th>Pressure</th>
+                <th>Qty Needed</th>
+                <th>Available (Local)</th>
+                <th>Available (Company)</th>
+                <th>Impact</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Wing Valve, Hyd</td>
+                <td>4"</td>
+                <td>15K</td>
+                <td class="font-mono fw-700">8</td>
+                <td class="font-mono" style="color:var(--status-critical)">0</td>
+                <td class="font-mono" style="color:var(--status-critical)">0</td>
+                <td><span class="status-badge critical">-8 shortfall</span></td>
+                <td><span style="color:var(--steel);cursor:pointer">&#10005;</span></td>
+              </tr>
+              <tr>
+                <td>Wing Valve, Man</td>
+                <td>4"</td>
+                <td>15K</td>
+                <td class="font-mono fw-700">4</td>
+                <td class="font-mono" style="color:var(--status-warning)">3</td>
+                <td class="font-mono" style="color:var(--status-available)">8</td>
+                <td><span class="status-badge warning">-1 local</span></td>
+                <td><span style="color:var(--steel);cursor:pointer">&#10005;</span></td>
+              </tr>
+              <tr>
+                <td>Master Valve (Serviceless)</td>
+                <td>7"</td>
+                <td>15K</td>
+                <td class="font-mono fw-700">6</td>
+                <td class="font-mono" style="color:var(--status-critical)">0</td>
+                <td class="font-mono" style="color:var(--status-critical)">0</td>
+                <td><span class="status-badge critical">-6 shortfall</span></td>
+                <td><span style="color:var(--steel);cursor:pointer">&#10005;</span></td>
+              </tr>
+              <tr>
+                <td>Zipper Valve MV Hyd</td>
+                <td>7"</td>
+                <td>15K</td>
+                <td class="font-mono fw-700">4</td>
+                <td class="font-mono" style="color:var(--status-warning)">1</td>
+                <td class="font-mono" style="color:var(--status-warning)">2</td>
+                <td><span class="status-badge warning">-3 local</span></td>
+                <td><span style="color:var(--steel);cursor:pointer">&#10005;</span></td>
+              </tr>
+              <tr>
+                <td>Rotating Spool</td>
+                <td>7-1/16"</td>
+                <td>15K</td>
+                <td class="font-mono fw-700">6</td>
+                <td class="font-mono" style="color:var(--status-available)">4</td>
+                <td class="font-mono" style="color:var(--status-available)">10</td>
+                <td><span class="status-badge available">OK</span></td>
+                <td><span style="color:var(--steel);cursor:pointer">&#10005;</span></td>
+              </tr>
+              <tr>
+                <td>Studded Tee</td>
+                <td>7"</td>
+                <td>15K</td>
+                <td class="font-mono fw-700">3</td>
+                <td class="font-mono" style="color:var(--status-available)">5</td>
+                <td class="font-mono" style="color:var(--status-available)">12</td>
+                <td><span class="status-badge available">OK</span></td>
+                <td><span style="color:var(--steel);cursor:pointer">&#10005;</span></td>
+              </tr>
+              <tr>
+                <td>Accumulator</td>
+                <td>--</td>
+                <td>--</td>
+                <td class="font-mono fw-700">6</td>
+                <td class="font-mono" style="color:var(--status-available)">4</td>
+                <td class="font-mono" style="color:var(--status-available)">9</td>
+                <td><span class="status-badge available">OK</span></td>
+                <td><span style="color:var(--steel);cursor:pointer">&#10005;</span></td>
+              </tr>
+              <tr>
+                <td>Javelin</td>
+                <td>--</td>
+                <td>--</td>
+                <td class="font-mono fw-700">1</td>
+                <td class="font-mono" style="color:var(--status-critical)">0</td>
+                <td class="font-mono" style="color:var(--status-critical)">0</td>
+                <td><span class="status-badge critical">-1 shortfall</span></td>
+                <td><span style="color:var(--steel);cursor:pointer">&#10005;</span></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div style="display:flex;gap:12px;margin-bottom:24px">
+            <select class="filter-select" style="flex:1"><option>Select equipment type...</option><option>Wing Valve, Hyd</option><option>Wing Valve, Man</option><option>Master Valve (Serviceless)</option><option>Zipper Valve MV Hyd</option><option>Zipper Valve SE Hyd</option><option>Rotating Spool</option><option>Spacer Spool</option><option>Studded Tee</option><option>Cross</option><option>Javelin</option><option>Accumulator</option><option>715 HYD Frac Stack (assembly)</option><option>5 15 MAVI Stack Mark 5 (assembly)</option></select>
+            <select class="filter-select"><option>Size</option><option>3"</option><option>4"</option><option>5"</option><option>7-1/16"</option></select>
+            <select class="filter-select"><option>Pressure</option><option>10K</option><option>15K</option></select>
+            <input class="filter-input" type="number" placeholder="Qty" style="width:80px" min="1">
+            <button class="btn btn-secondary btn-sm">+ Add Line</button>
+          </div>
+
+          <!-- Labor Requirements -->
+          <div style="font-family:'Montserrat',sans-serif;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--charcoal);margin-bottom:16px;padding-top:16px;border-top:1px solid var(--silver)">Labor Requirements</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px">
+            <div>
+              <label style="display:block;font-size:13px;font-weight:700;margin-bottom:4px">Spartan Hands Needed</label>
+              <input class="filter-input" type="number" style="width:100%" value="4" min="0">
+            </div>
+            <div>
+              <label style="display:block;font-size:13px;font-weight:700;margin-bottom:4px">Contract Hands Needed</label>
+              <input class="filter-input" type="number" style="width:100%" value="2" min="0">
+            </div>
+          </div>
+
+          <!-- Impact Summary -->
+          <div style="font-family:'Montserrat',sans-serif;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--charcoal);margin-bottom:12px;padding-top:16px;border-top:1px solid var(--silver)">Availability Impact</div>
+
+          <div style="background:#FEF2F2;border:1px solid #FCA5A5;padding:16px;margin-bottom:16px">
+            <div style="font-weight:700;color:var(--status-critical);margin-bottom:8px">&#9888; This work order creates 3 new shortfalls and worsens 2 existing ones</div>
+            <div style="font-size:13px;color:var(--slate);line-height:1.8">
+              <strong>Wings Hyd 4 15:</strong> Existing shortfall of -6 worsens to <strong>-14</strong> (Apr 14 – May 2)<br>
+              <strong>7 15 SERVICE LESS MASTERS:</strong> Existing shortfall of -8 worsens to <strong>-14</strong> (Apr 14 – Apr 30)<br>
+              <strong>Javelin:</strong> Existing shortfall of -2 worsens to <strong>-3</strong> (Apr 14 – Apr 18)<br>
+              <strong>Wings Man 4 15:</strong> New local shortfall of <strong>-1</strong> at Midland (coverable cross-district)<br>
+              <strong>Zipper Valve MV Hyd:</strong> New local shortfall of <strong>-3</strong> at Midland (partially coverable cross-district)
+            </div>
+          </div>
+
+          <div style="display:flex;gap:12px">
+            <button class="btn btn-primary btn-sm">Save Work Order &amp; Run Waterfall</button>
+            <button class="btn btn-secondary btn-sm">Save as Draft</button>
+            <button class="btn btn-secondary btn-sm" onclick="switchPlanningTab('forecast')">Cancel</button>
+          </div>
+        </div>
+
+        <!-- Notes -->
+        <div style="margin-top:16px">
+          <label style="display:block;font-size:13px;font-weight:700;margin-bottom:4px">Notes / Frac Schedule Reference</label>
+          <textarea class="filter-input" style="width:100%;height:80px;resize:vertical" placeholder="Paste frac schedule details, customer contacts, special requirements...">6-well pad, Wolfcamp A formation. Customer contact: Mike Torres (432-555-0188). Frac schedule received via email Mar 30.</textarea>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ============ MOBILE CHECK-OUT (Phone Mockup) ============ -->
+<div class="screen-panel" id="screen-mobile-checkout">
+  <div class="page-header">
+    <div class="page-title">Mobile: Check-Out / Check-In</div>
+    <div class="page-title-bar"></div>
+    <div class="page-subtitle">Phone-sized preview of the yard supervisor experience</div>
+  </div>
+  <div class="page-body">
+    <div style="display:flex;gap:32px;flex-wrap:wrap;justify-content:center">
+      <!-- Check-Out -->
+      <div>
+        <div style="text-align:center;margin-bottom:12px;font-family:'PT Serif',Georgia,serif;font-weight:700;font-size:16px">Check-Out (Loadout)</div>
+        <div class="mobile-frame">
+          <div class="mobile-status-bar">9:41 AM</div>
+          <div class="mobile-header">
+            <span style="color:var(--spartan-red);font-size:18px">&#9664;</span>
+            <span class="mobile-header-title">Loadout #2048</span>
+            <span class="status-badge planned" style="margin-left:auto">Pending</span>
+          </div>
+          <div class="mobile-body">
+            <div style="font-size:12px;color:var(--slate);margin-bottom:4px">BPX Permian Pad 7 &bull; Midland</div>
+            <div style="font-size:11px;color:var(--steel);margin-bottom:16px">Created Mar 31 &bull; Ship by Apr 1</div>
+
+            <div class="mobile-loadout-item">
+              <div class="mobile-loadout-img">&#9881;</div>
+              <div class="mobile-loadout-info">
+                <div class="mobile-loadout-name">Wings Hyd 4 15</div>
+                <div class="mobile-loadout-meta"><span class="ownership-dot owned" style="width:8px;height:8px"></span> Owned (8) + <span class="ownership-dot consignment" style="width:8px;height:8px"></span> MAV (2)</div>
+              </div>
+              <div class="mobile-loadout-qty">10</div>
+            </div>
+
+            <div class="mobile-loadout-item">
+              <div class="mobile-loadout-img">&#9881;</div>
+              <div class="mobile-loadout-info">
+                <div class="mobile-loadout-name">7 15 SERVICE LESS MASTERS</div>
+                <div class="mobile-loadout-meta"><span class="ownership-dot owned" style="width:8px;height:8px"></span> Owned</div>
+              </div>
+              <div class="mobile-loadout-qty">6</div>
+            </div>
+
+            <div class="mobile-loadout-item">
+              <div class="mobile-loadout-img">&#9830;</div>
+              <div class="mobile-loadout-info">
+                <div class="mobile-loadout-name">7 15 ZIPPERS MV Hyd</div>
+                <div class="mobile-loadout-meta"><span class="ownership-dot owned" style="width:8px;height:8px"></span> Owned (3) + <span class="ownership-dot consignment" style="width:8px;height:8px"></span> 3E (1)</div>
+              </div>
+              <div class="mobile-loadout-qty">4</div>
+            </div>
+
+            <div class="mobile-loadout-item">
+              <div class="mobile-loadout-img">&#9675;</div>
+              <div class="mobile-loadout-info">
+                <div class="mobile-loadout-name">715 HYD Frac Stack</div>
+                <div class="mobile-loadout-meta">Sub-Assembly &bull; STK-003</div>
+              </div>
+              <div class="mobile-loadout-qty">1</div>
+            </div>
+
+            <div class="mobile-loadout-item">
+              <div class="mobile-loadout-img">&#9632;</div>
+              <div class="mobile-loadout-info">
+                <div class="mobile-loadout-name">Accumulator</div>
+                <div class="mobile-loadout-meta"><span class="ownership-dot consignment" style="width:8px;height:8px"></span> MAV Consignment</div>
+              </div>
+              <div class="mobile-loadout-qty">8</div>
+            </div>
+
+            <button class="mobile-verify-btn">&#9745; Verify & Submit for Approval</button>
+            <div style="text-align:center;font-size:11px;color:var(--steel);margin-top:8px">Requires supervisor confirmation</div>
+          </div>
+          <div class="mobile-bottom-nav">
+            <div class="mobile-nav-item"><div class="nav-icon">&#9638;</div>Inventory</div>
+            <div class="mobile-nav-item active"><div class="nav-icon">&#9745;</div>Tickets</div>
+            <div class="mobile-nav-item"><div class="nav-icon">&#9881;</div>Shop</div>
+            <div class="mobile-nav-item"><div class="nav-icon">&#9823;</div>More</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Check-In -->
+      <div>
+        <div style="text-align:center;margin-bottom:12px;font-family:'PT Serif',Georgia,serif;font-weight:700;font-size:16px">Check-In (Receiving)</div>
+        <div class="mobile-frame">
+          <div class="mobile-status-bar">2:15 PM</div>
+          <div class="mobile-header">
+            <span style="color:var(--spartan-red);font-size:18px">&#9664;</span>
+            <span class="mobile-header-title">Return: Loadout #2041</span>
+          </div>
+          <div class="mobile-body">
+            <div style="font-size:12px;color:var(--slate);margin-bottom:4px">Rockcliffe Haynesville 12 &bull; Keithville</div>
+            <div style="font-size:11px;color:var(--steel);margin-bottom:16px">Job completed Mar 30</div>
+
+            <div class="mobile-loadout-item" style="border-left:3px solid var(--status-available)">
+              <div class="mobile-loadout-img">&#9881;</div>
+              <div class="mobile-loadout-info">
+                <div class="mobile-loadout-name">Wings Hyd 4 15</div>
+                <div class="mobile-loadout-meta">Sent: 8 &bull; <strong style="color:var(--status-available)">Returned: 8 &#10003;</strong></div>
+              </div>
+              <div class="mobile-loadout-qty" style="color:var(--status-available)">8</div>
+            </div>
+
+            <div class="mobile-loadout-item" style="border-left:3px solid var(--status-available)">
+              <div class="mobile-loadout-img">&#9881;</div>
+              <div class="mobile-loadout-info">
+                <div class="mobile-loadout-name">7 15 MASTERS</div>
+                <div class="mobile-loadout-meta">Sent: 5 &bull; <strong style="color:var(--status-available)">Returned: 5 &#10003;</strong></div>
+              </div>
+              <div class="mobile-loadout-qty" style="color:var(--status-available)">5</div>
+            </div>
+
+            <div class="mobile-loadout-item" style="border-left:3px solid var(--status-critical)">
+              <div class="mobile-loadout-img" style="background:#FEE2E2">&#9888;</div>
+              <div class="mobile-loadout-info">
+                <div class="mobile-loadout-name" style="color:var(--status-critical)">7 15 ZIPPERS MV Hyd</div>
+                <div class="mobile-loadout-meta">Sent: 3 &bull; <strong style="color:var(--status-critical)">Returned: 2 &#10007;</strong></div>
+                <div style="margin-top:6px;padding:6px 10px;background:#FEF2F2;font-size:11px;color:var(--status-critical);font-weight:600">
+                  &#9888; QUANTITY MISMATCH &mdash; Serial # verification required
+                </div>
+              </div>
+              <div class="mobile-loadout-qty" style="color:var(--status-critical)">2</div>
+            </div>
+
+            <div class="mobile-loadout-item" style="border-left:3px solid var(--status-available)">
+              <div class="mobile-loadout-img">&#9632;</div>
+              <div class="mobile-loadout-info">
+                <div class="mobile-loadout-name">Accumulator</div>
+                <div class="mobile-loadout-meta">Sent: 6 &bull; <strong style="color:var(--status-available)">Returned: 6 &#10003;</strong></div>
+              </div>
+              <div class="mobile-loadout-qty" style="color:var(--status-available)">6</div>
+            </div>
+
+            <button class="mobile-verify-btn" style="background:var(--status-warning)">&#9888; Resolve 1 Discrepancy</button>
+          </div>
+          <div class="mobile-bottom-nav">
+            <div class="mobile-nav-item"><div class="nav-icon">&#9638;</div>Inventory</div>
+            <div class="mobile-nav-item active"><div class="nav-icon">&#9745;</div>Tickets</div>
+            <div class="mobile-nav-item"><div class="nav-icon">&#9881;</div>Shop</div>
+            <div class="mobile-nav-item"><div class="nav-icon">&#9823;</div>More</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ USER FLOWS INDEX ============ -->
+<div class="screen-panel" id="screen-flows-index">
+  <div class="page-header">
+    <div class="page-title">User Flows</div>
+    <div class="page-title-bar"></div>
+    <div class="page-subtitle">16 operational workflows documented with current state and Atlas future state</div>
+  </div>
+  <div class="page-body">
+    <div class="flow-grid" id="flow-grid">
+      <!-- Populated by JS -->
+    </div>
+  </div>
+</div>
+
+<!-- ============ USER FLOW DETAIL (template, populated by JS) ============ -->
+<div class="screen-panel" id="screen-flow-detail">
+  <div class="page-header">
+    <div class="flow-back-btn" onclick="showScreen('flows-index')">&larr; Back to User Flows</div>
+    <div id="flow-detail-content"></div>
+  </div>
+  <div class="page-body" id="flow-detail-body"></div>
+</div>
+
+</div><!-- /main-content -->
+</div><!-- /app-shell -->
+
+<script>
+// ====================== USER FLOW DATA ======================
+const userFlows = [
+  {
+    id: "UF1", title: "Daily/Bi-Daily Asset Planning",
+    purpose: "The core operational heartbeat of the company. Every 2 days, the CEO and President review all active and upcoming jobs, identify equipment shortfalls, and develop a plan to cover them. This is the workflow that consumes a third of the CEO's time and is the primary target for automation.",
+    currentSteps: [
+      "Delmar opens the master Excel spreadsheet (updated every 2 days)",
+      "Scrolls through 30+ job rows reviewing equipment allocations",
+      "Checks the bottom summary section for total deployed, total owned, available, and utilization %",
+      "Identifies equipment types where utilization is at or above 100%",
+      "For each shortfall, manually searches job rows for upcoming end dates",
+      "Evaluates options: convert valve sizes, pull from consignment, arrange sub-rental",
+      "Calls DMs to communicate changes",
+      "Updates spreadsheet cells manually with new allocations",
+      "Process repeats every 2 days; takes several hours each session with the President"
+    ],
+    futureSteps: [
+      { text: "CEO opens the Planning Board \u2192 sees 4-week rolling forecast with auto-calculated availability", screen: "planning" },
+      { text: "System highlights shortfalls in red with specific dates when equipment will go negative", screen: "planning" },
+      { text: "CEO clicks a shortfall \u2192 system runs the Shortage Resolution Waterfall and presents options in priority order: local owned \u2192 local consignment \u2192 local sub-rental \u2192 cross-district owned \u2192 cross-district consignment \u2192 cross-district sub-rental", screen: "planning" },
+      { text: "CEO uses 'what-if' mode to test size conversions (drag 4\" \u2192 3\") and see the ripple effect across all jobs", screen: "planning" },
+      { text: "Once a plan is set, CEO assigns equipment following the waterfall priority \u2192 system updates all dashboards in real time", screen: null },
+      { text: "DMs receive notifications of changes in their district view", screen: null },
+      { text: "Total planning time drops from hours to minutes for routine adjustments", screen: null }
+    ],
+    hasWaterfall: false
+  },
+  {
+    id: "UF2", title: "New Job Setup & Equipment Forecasting",
+    purpose: "When a new job is won or a frac schedule is received, the equipment requirements must be entered into the system and checked against available assets. This flow determines whether Spartan can take the work and what it will cost to resource it.",
+    currentSteps: [
+      "Sales/operations receives a frac schedule from a customer (e.g., a 6-well pad)",
+      "Delmar determines what equipment is needed: type, size, pressure, quantity per well",
+      "Adds a new row to the spreadsheet with the customer name and well site",
+      "Fills in quantities per equipment column",
+      "Scrolls to the bottom to see if the new job pushes any equipment type into negative availability",
+      "If negative, begins the shortage resolution flow (UF3)"
+    ],
+    futureSteps: [
+      { text: "Sales, DM or CEO creates a new Work Order with customer, well site, district, start/end dates", screen: "planning" },
+      { text: "Selects equipment requirements from a standardized equipment type picker", screen: "planning" },
+      { text: "System immediately shows impact on availability", screen: "planning" },
+      { text: "If shortfall detected, system automatically runs the Shortage Resolution Waterfall and presents sourcing options", screen: "planning" },
+      { text: "CEO can accept the suggested sourcing, modify it, or defer the job", screen: null },
+      { text: "Approved jobs appear on the 4-week forecast for all users with appropriate access", screen: "planning" },
+      { text: "Equipment requirements can specify individual components or sub-assemblies", screen: null }
+    ],
+    hasWaterfall: false
+  },
+  {
+    id: "UF3", title: "Shortage Resolution",
+    purpose: "When demand exceeds supply for a specific equipment type, the CEO must find a way to fill the gap. This is the most complex and time-consuming workflow. The Shortage Resolution Waterfall defines the strict priority order the system follows to resolve shortfalls.",
+    currentSteps: [
+      "Delmar sees a negative number in the availability summary",
+      "Scrolls through all job rows looking for jobs with end dates that release that equipment type",
+      "If none found, evaluates size conversion: can I convert this customer from 4\" to 3\" wings?",
+      "Calls the customer to pitch the conversion",
+      "If still short, checks consignment availability across partners (separate Excel tabs)",
+      "If still short, arranges a sub-rental from a third party",
+      "Updates the spreadsheet with the solution"
+    ],
+    futureSteps: [
+      { text: "System proactively alerts: \"Wings Hyd 4 15 will be at -6 on April 15 at Midland\"", screen: "planning" },
+      { text: "System runs the Shortage Resolution Waterfall (see table below)", screen: "planning" },
+      { text: "Alert includes auto-suggested resolutions following the waterfall priority", screen: "planning" },
+      { text: "CEO or President selects a resolution \u2192 system updates all affected jobs and recalculates availability", screen: null },
+      { text: "If cross-district transfer is selected, system auto-generates transfer order and loadout ticket", screen: null },
+      { text: "If sub-rental is needed, system logs the sub-rental commitment and tracks cost", screen: null }
+    ],
+    hasWaterfall: true
+  },
+  {
+    id: "UF4", title: "Consignment Partner Onboarding",
+    purpose: "Spartan manages ~$7M in equipment owned by consignment partners who earn monthly revenue in exchange for Spartan operating their assets. Each partnership has unique terms. This flow covers bringing a new partner's equipment into the system and maintaining transparent reporting.",
+    currentSteps: ["Negotiate a deal with a partner", "Partner delivers equipment \u2192 create a new Excel tab", "Log assets with partner name, serial numbers, terms", "Manually note which job each asset is on", "At month end, compile a report and send with payment"],
+    futureSteps: [
+      { text: "Create new consignment partner in the system with contact info and unique terms", screen: null },
+      { text: "Register partner's assets in Equipment Registry with ownership_class = 'consignment'", screen: "inventory" },
+      { text: "System automatically tracks days on job per asset", screen: null },
+      { text: "Month-end: click 'Generate Consignment Report' for auto-generated report", screen: null },
+      { text: "Equity accrual is auto-calculated with running total per partner", screen: null }
+    ],
+    hasWaterfall: false
+  },
+  {
+    id: "UF5", title: "Equipment Location Tracking",
+    purpose: "Knowing where assets are at any given moment is critical for planning and shortage resolution. Today this relies on unreliable geo-trackers (65-70% accuracy) and phone calls. This flow replaces that detective work with a system of record based on check-in/check-out logs.",
+    currentSteps: ["Need to find specific assets", "Check geo-trackers \u2192 only 65-70% reliable", "If not found, check KPA system", "If still not found, call DMs", "Old school detective work: trace back through last known job"],
+    futureSteps: [
+      { text: "Every equipment movement is logged via check-in/check-out", screen: "mobile-checkout" },
+      { text: "System shows last known location for every asset", screen: "component-detail" },
+      { text: "CEO can query: 'show me all 7-1/16\" 15K hydraulics' with district, status, and job assignment", screen: "inventory" },
+      { text: "Discrepancy alerts when checked-out quantities don't match check-in", screen: "mobile-checkout" },
+      { text: "Geo-trackers become supplementary, not primary", screen: null }
+    ],
+    hasWaterfall: false
+  },
+  {
+    id: "UF6", title: "District Manager Communication",
+    purpose: "District managers currently have no independent visibility into their own assets -- they rely entirely on the CEO to tell them what's available. This flow gives DMs self-service access and a structured way to request what they need.",
+    currentSteps: ["CEO determines available equipment company-wide", "CEO calls the DM with instructions", "DM may push back with constraints", "CEO goes back to the spreadsheet", "DM has no independent view"],
+    futureSteps: [
+      { text: "DM opens District Manager View \u2192 sees all assets by type, status, and ownership class", screen: null },
+      { text: "DM can answer their own questions: 'I have 18 hydraulics available in my yard'", screen: null },
+      { text: "System checks local availability following the waterfall priority", screen: null },
+      { text: "If local assets insufficient, system flags the gap and suggests cross-district sourcing", screen: null },
+      { text: "DM submits a sourcing request \u2192 CEO or President approves", screen: null }
+    ],
+    hasWaterfall: false
+  },
+  {
+    id: "UF7", title: "Loadout \u2014 Shipping Equipment",
+    purpose: "When equipment ships from a yard to a job site, a verified record must be created. Today this is a handwritten delivery ticket entered into Basis 4 days late. This flow replaces that with a mobile-verified loadout ticket that updates asset status in real time.",
+    currentSteps: ["DM or operations decides what to send", "Yard crew loads equipment onto trucks", "Someone writes a handwritten delivery ticket", "Delivery ticket is entered into Basis ~4 days later", "Quality pack assembled -- but only 85% of customers get one when busy"],
+    futureSteps: [
+      { text: "Work order is approved \u2192 system generates a loadout ticket", screen: "mobile-checkout" },
+      { text: "Yard supervisor opens mobile app, verifies each line item with component image", screen: "mobile-checkout" },
+      { text: "A supervisor confirms the loadout as second verifier", screen: "mobile-checkout" },
+      { text: "System marks loadout as 'verified' \u2192 equipment status changes to 'in transit'", screen: null },
+      { text: "Loadout ticket is immediately visible to field crew at destination", screen: null },
+      { text: "No handwritten tickets. No 4-day lag. Real-time visibility.", screen: null }
+    ],
+    hasWaterfall: false
+  },
+  {
+    id: "UF8", title: "Check-In \u2014 Receiving Equipment",
+    purpose: "When equipment returns from a job, it must be verified against what was sent. This is where assets go 'missing' today. The smart serial number verification (only required on quantity mismatch) keeps the process fast while catching losses.",
+    currentSteps: ["Job ends or equipment is released", "Equipment arrives back at a yard", "Yard crew unloads and stages", "Someone is supposed to update tracking but it's delayed", "Equipment may sit 'lost' until someone physically finds it"],
+    futureSteps: [
+      { text: "Job ends \u2192 system shows which equipment should be returning", screen: "mobile-checkout" },
+      { text: "Yard supervisor opens mobile app, selects the job/loadout ticket", screen: "mobile-checkout" },
+      { text: "Quantity match = fast path, no serial number check needed", screen: "mobile-checkout" },
+      { text: "Quantity mismatch = serial number drill-down required to identify missing assets", screen: "mobile-checkout" },
+      { text: "Discrepancies routed to DM and operations with full details", screen: null },
+      { text: "Returned equipment immediately available in the receiving yard's inventory", screen: "inventory" }
+    ],
+    hasWaterfall: false
+  },
+  {
+    id: "UF9", title: "Sub-Assembly Build & Deploy",
+    purpose: "Frac stacks are built from multiple individual components that ship as a single unit. Today, assembly composition lives in Delmar's head. This flow formalizes assembly definitions with visual cross-section diagrams and tracks which serialized assets are in each slot.",
+    currentSteps: ["Delmar tracks frac stacks as single line items in the spreadsheet", "Individual components are not explicitly linked", "When a stack comes back, damaged components are manually tracked", "Some stacks have mixed ownership"],
+    futureSteps: [
+      { text: "CEO or operations defines an assembly template with a cross-section diagram", screen: "assembly-detail" },
+      { text: "Yard supervisor opens Assembly Builder, clicks slots in the cross-section to assign assets", screen: "assembly-detail" },
+      { text: "System validates all slots filled \u2192 marks assembly as 'ready'", screen: "assembly-detail" },
+      { text: "Assembly gets its own asset ID and appears as a deployable unit", screen: "inventory" },
+      { text: "On loadout tickets, the stack appears as a single line item with expandable cross-section", screen: "mobile-checkout" },
+      { text: "On check-in, intact assembly = fast path. Component swap = break down and reconcile.", screen: "mobile-checkout" }
+    ],
+    hasWaterfall: false
+  },
+  {
+    id: "UF10", title: "Monthly Consignment Reporting",
+    purpose: "Each consignment partner receives a report showing exactly which assets were deployed, on which jobs, for how many days, at what rate. This is the foundation of Delmar's trust-based partnerships. Accuracy and format consistency are non-negotiable.",
+    currentSteps: ["At month end, open the consignment partner's Excel tab", "Review each asset: job, days, rate", "Calculate total revenue per asset and grand total", "Generate a report and send with payment", "Track equity accrual separately"],
+    futureSteps: [
+      { text: "CEO clicks 'Generate Report' for a partner \u2192 system auto-generates", screen: null },
+      { text: "Report includes: serial number, type, job, days deployed, rate, line total, grand total", screen: null },
+      { text: "Matches the format partners already receive", screen: null },
+      { text: "Equity accrual shown as running balance", screen: null },
+      { text: "Export as PDF or Excel and email directly", screen: null }
+    ],
+    hasWaterfall: false
+  },
+  {
+    id: "UF11", title: "Capital Planning & Procurement",
+    purpose: "When an equipment type is chronically at high utilization, Delmar decides whether to buy, arrange consignment, or continue sub-renting. This flow uses waterfall utilization data to show the true cost of being undercapitalized.",
+    currentSteps: ["Review utilization trends over time", "Identify equipment at 100%+ utilization", "Decide: buy, consignment, or sub-rental", "Update the capital plan section of the spreadsheet"],
+    futureSteps: [
+      { text: "System provides utilization trend reports: '95%+ utilization for 3 consecutive months'", screen: null },
+      { text: "System shows how often the waterfall reaches each priority level for this asset type", screen: null },
+      { text: "Cost comparison: Buy (Priority 1) vs. Consignment (Priority 2) vs. Sub-Rental (Priority 3/6)", screen: null },
+      { text: "CEO adds new assets \u2192 system recalculates all forecasts", screen: "inventory" }
+    ],
+    hasWaterfall: false
+  },
+  {
+    id: "UF12", title: "Inter-District Equipment Transfer",
+    purpose: "Moving assets between Keithville, Midland, and Pleasanton to fill shortfalls that can't be resolved locally. Transfers are triggered when the Waterfall reaches Priority 4-6. Every transfer has a logistics cost ($580K/year total).",
+    currentSteps: ["CEO identifies surplus in District A and shortfall in District B", "CEO calls the DM: 'send 5 wing valves to Midland'", "Equipment is hot-shotted ($580K/year in trucking)", "CEO manually updates the spreadsheet"],
+    futureSteps: [
+      { text: "Waterfall reaches Priority 4+ \u2192 system identifies which districts have surplus", screen: "planning" },
+      { text: "System recommends source district factoring in schedule, route distance, and cost", screen: "planning" },
+      { text: "CEO or President approves \u2192 system creates transfer order", screen: null },
+      { text: "Loadout/receiving tickets generated for both yards", screen: "mobile-checkout" },
+      { text: "Transfer logged with cost for pattern analysis", screen: null }
+    ],
+    hasWaterfall: false
+  },
+  {
+    id: "UF13", title: "Multi-District Supply Optimization",
+    purpose: "System-level orchestration when the Waterfall reaches Priority 4-6. Evaluates all districts' current and forecasted availability, calculates logistics costs, and presents an optimized sourcing recommendation. Midland and Pleasanton (~330 mi) are often interchangeable.",
+    currentSteps: ["Job comes in requiring more equipment than the local district has", "Delmar manually scrolls the spreadsheet for surplus in other districts", "Checks whether pulling from another district creates a shortfall there", "No systematic evaluation of which sourcing minimizes total disruption"],
+    futureSteps: [
+      { text: "System detects shortfall and runs the Supply Optimization Engine", screen: "planning" },
+      { text: "Step 1: Cross-district owned assets (Waterfall Priority 4)", screen: "planning" },
+      { text: "Step 2: Cross-district consignment assets (Priority 5)", screen: null },
+      { text: "Step 3: Cross-district sub-rental (Priority 6)", screen: null },
+      { text: "Evaluate Midland/Pleasanton interchangeability", screen: null },
+      { text: "Present sourcing recommendation with waterfall priority per line item", screen: "planning" },
+      { text: "CEO or President approves \u2192 auto-generates transfer orders", screen: null }
+    ],
+    hasWaterfall: true
+  },
+  {
+    id: "UF14", title: "Workforce / Labor Management",
+    purpose: "Every job requires hands. Like equipment, labor follows a waterfall: Spartan internal first, then contract. With 30+ simultaneous jobs, knowing who is available and where is its own planning challenge.",
+    currentSteps: ["Delmar tracks 'Spartan Hands needed' and 'Contract Hands' per job", "Internal employees assigned first; contract labor fills gaps", "No systematic tracking of who is where or who is available"],
+    futureSteps: [
+      { text: "Each work order includes labor requirements", screen: "planning" },
+      { text: "System maintains a workforce roster of all Spartan employees and contract providers", screen: null },
+      { text: "System runs the labor waterfall: Spartan local \u2192 Spartan cross-district \u2192 Contract local \u2192 Contract cross-district", screen: null },
+      { text: "Spartan employees assigned to jobs; contract gaps flagged for DM to source", screen: null },
+      { text: "Company-wide labor utilization dashboard: % deployed, contract hand count, cost", screen: null }
+    ],
+    hasWaterfall: false
+  },
+  {
+    id: "UF15", title: "Machine Shop / Maintenance Tracking",
+    purpose: "Assets in the machine shop are unavailable for deployment but today they're a black hole in the planning system. This flow makes the shop queue visible so expected completions can be factored into the waterfall and shop priorities informed by upcoming demand.",
+    currentSteps: ["Spreadsheet shows 'what's in the machine shop' as unavailable", "No visibility into what's being repaired or when it will be ready", "Assets in shop are effectively 'lost' to the planning system"],
+    futureSteps: [
+      { text: "Maintenance order created when asset goes to shop: asset ID, issue, expected completion", screen: null },
+      { text: "Asset status changes to 'in shop' \u2192 excluded from available but visible in shop queue", screen: null },
+      { text: "Planning board factors in expected shop completions for waterfall projections", screen: "planning" },
+      { text: "Shop backlog visible to CEO: total in shop, aging, expected returns this week", screen: null },
+      { text: "Shop priority insight: 'Expediting 2 valves would eliminate a cross-district transfer'", screen: "planning" }
+    ],
+    hasWaterfall: false
+  },
+  {
+    id: "UF16", title: "Job Timing Update & Conflict Check",
+    purpose: "When a job's start or end date changes (customer delay, early release, schedule extension), the system must immediately recalculate availability across all equipment types and all districts for the full 4-week forecast window, flag any new shortfalls created by the change, and show which other jobs are affected. Today this is a manual, error-prone process of re-scanning the spreadsheet row by row.",
+    currentSteps: [
+      "Delmar learns a job's dates are changing (customer call, field update, or weather delay)",
+      "Opens the spreadsheet and finds the job row",
+      "Manually adjusts the date columns for the job",
+      "Scrolls to the bottom to check if the date change pushes any equipment type into negative availability",
+      "If a shortfall is created, manually scans other job rows to find which jobs are affected",
+      "If moving a job earlier, checks whether equipment is available sooner — often it's not because other jobs still hold those assets",
+      "Calls DMs and President to communicate the ripple effect",
+      "Process can take 30+ minutes for a single date change on a busy week"
+    ],
+    futureSteps: [
+      { text: "CEO or DM opens the work order and clicks 'Edit Dates' — enters the new start and/or end date", screen: "planning" },
+      { text: "Before saving, system runs a Conflict Check: recalculates availability for every equipment type on this job across the full 4-week forecast window", screen: "planning" },
+      { text: "System displays a Conflict Report showing: (a) new shortfalls created by the date change, (b) existing shortfalls that worsen, (c) shortfalls that are resolved (equipment freed up earlier)", screen: "planning" },
+      { text: "For each new or worsened shortfall, the system runs the Shortage Resolution Waterfall and presents sourcing options — same Priority 1-6 logic as UF3", screen: "planning" },
+      { text: "System highlights which specific jobs are affected: 'Moving BPX Permian Pad 7 to start Apr 8 (2 days earlier) creates a -4 shortfall on Wings Hyd 4 15 because Rockcliffe Haynesville 12 doesn't release until Apr 14'", screen: "planning" },
+      { text: "CEO reviews the conflict report and either: (a) approves the date change and accepts/resolves the shortfalls, (b) modifies the date to a different window that avoids conflicts, or (c) cancels the change", screen: "planning" },
+      { text: "If approved, the system updates the job schedule, recalculates all dashboards, and notifies affected DMs of changes to their district's availability", screen: null },
+      { text: "All date changes are logged in the job's audit trail with before/after dates, who changed it, and what conflicts were flagged", screen: null }
+    ],
+    hasWaterfall: false
+  }
+];
+
+// ====================== PLANNING BOARD (GANTT) ======================
+const ganttJobs = [
+  {
+    id: 'bpx', customer: 'BPX Permian Pad 7', district: 'Midland',
+    start: '2026-04-01', end: '2026-04-18', mobDays: 1, demobDays: 1,
+    equipment: [
+      { name: 'Wings Hyd 4 15', qty: 10, ownership: 'green' },
+      { name: 'Wings Man 4 15', qty: 4, ownership: 'green' },
+      { name: '7 15 Masters', qty: 6, ownership: 'green' },
+      { name: '7 15 Zip MV Hyd', qty: 4, ownership: 'green' },
+      { name: 'Rot Spool', qty: 8, ownership: 'green' },
+      { name: 'Stud Tee', qty: 4, ownership: 'green' },
+      { name: 'Javelin', qty: 2, ownership: 'green' },
+      { name: 'Accumulator', qty: 8, ownership: 'green' },
+      { name: 'Spartan Hands', qty: 4, ownership: 'labor' },
+      { name: 'Contract Hands', qty: 2, ownership: 'labor' }
+    ]
+  },
+  {
+    id: 'rock', customer: 'Rockcliffe Haynesville 12', district: 'Keithville',
+    start: '2026-03-28', end: '2026-04-14', mobDays: 1, demobDays: 1,
+    equipment: [
+      { name: 'Wings Hyd 4 15', qty: 8, ownership: 'green' },
+      { name: 'Wings Man 4 15', qty: 4, ownership: 'green' },
+      { name: '7 15 Masters', qty: 5, ownership: 'green' },
+      { name: '7 15 Zip MV Hyd', qty: 3, ownership: 'pink' },
+      { name: 'Rot Spool', qty: 6, ownership: 'green' },
+      { name: 'Stud Tee', qty: 3, ownership: 'green' },
+      { name: 'Javelin', qty: 1, ownership: 'green' },
+      { name: 'Accumulator', qty: 6, ownership: 'pink' },
+      { name: 'Spartan Hands', qty: 3, ownership: 'labor' },
+      { name: 'Contract Hands', qty: 1, ownership: 'labor' }
+    ]
+  },
+  {
+    id: 'ppx', customer: 'PPX Eagle Ford #3', district: 'Pleasanton',
+    start: '2026-04-02', end: '2026-04-20', mobDays: 1, demobDays: 1,
+    equipment: [
+      { name: 'Wings Hyd 4 15', qty: 6, ownership: 'pink' },
+      { name: 'Wings Man 4 15', qty: 2, ownership: 'green' },
+      { name: '7 15 Masters', qty: 4, ownership: 'green' },
+      { name: '7 15 Zip MV Hyd', qty: 4, ownership: 'green' },
+      { name: 'Rot Spool', qty: 4, ownership: 'green' },
+      { name: 'Stud Tee', qty: 2, ownership: 'green' },
+      { name: '5 15 HYD Wg', qty: 6, ownership: 'green' },
+      { name: 'Javelin', qty: 1, ownership: 'green' },
+      { name: 'Accumulator', qty: 8, ownership: 'pink' },
+      { name: 'Spartan Hands', qty: 3, ownership: 'labor' },
+      { name: 'Contract Hands', qty: 2, ownership: 'labor' }
+    ]
+  },
+  {
+    id: 'lewis', customer: 'Lewis Permian 4A', district: 'Midland',
+    start: '2026-04-05', end: '2026-04-22', mobDays: 1, demobDays: 1,
+    equipment: [
+      { name: 'Wings Hyd 4 15', qty: 8, ownership: 'checkered' },
+      { name: 'Wings Man 4 15', qty: 4, ownership: 'green' },
+      { name: '7 15 Masters', qty: 6, ownership: 'green' },
+      { name: '7 15 Zip MV Hyd', qty: 4, ownership: 'pink' },
+      { name: 'Rot Spool', qty: 6, ownership: 'green' },
+      { name: 'Stud Tee', qty: 4, ownership: 'green' },
+      { name: 'Javelin', qty: 1, ownership: 'green' },
+      { name: 'Accumulator', qty: 6, ownership: 'green' },
+      { name: 'Spartan Hands', qty: 4, ownership: 'labor' }
+    ]
+  },
+  {
+    id: 'coterra', customer: 'Coterra Marcellus 8H', district: 'Keithville',
+    start: '2026-04-08', end: '2026-04-28', mobDays: 2, demobDays: 1,
+    equipment: [
+      { name: 'Wings Hyd 4 15', qty: 6, ownership: 'green' },
+      { name: 'Wings Man 4 15', qty: 2, ownership: 'green' },
+      { name: '7 15 Masters', qty: 4, ownership: 'green' },
+      { name: '7 15 Zip MV Hyd', qty: 3, ownership: 'green' },
+      { name: 'Rot Spool', qty: 4, ownership: 'green' },
+      { name: 'Stud Tee', qty: 2, ownership: 'green' },
+      { name: 'Javelin', qty: 1, ownership: 'green' },
+      { name: 'Accumulator', qty: 4, ownership: 'green' },
+      { name: 'Spartan Hands', qty: 2, ownership: 'labor' },
+      { name: 'Contract Hands', qty: 2, ownership: 'labor' }
+    ]
+  },
+  {
+    id: 'diamond', customer: 'Diamondback Midland B12', district: 'Midland',
+    start: '2026-04-10', end: '2026-04-30', mobDays: 1, demobDays: 2,
+    shortfall: true,
+    equipment: [
+      { name: 'Wings Hyd 4 15', qty: 10, ownership: 'red' },
+      { name: 'Wings Man 4 15', qty: 4, ownership: 'green' },
+      { name: '7 15 Masters', qty: 8, ownership: 'red' },
+      { name: '7 15 Zip MV Hyd', qty: 4, ownership: 'green' },
+      { name: 'Rot Spool', qty: 6, ownership: 'green' },
+      { name: 'Stud Tee', qty: 3, ownership: 'green' },
+      { name: '5 15 HYD Wg', qty: 4, ownership: 'green' },
+      { name: 'Javelin', qty: 2, ownership: 'red' },
+      { name: 'Accumulator', qty: 6, ownership: 'green' },
+      { name: 'Spartan Hands', qty: 4, ownership: 'labor' },
+      { name: 'Contract Hands', qty: 3, ownership: 'labor' }
+    ]
+  },
+  {
+    id: 'ovintiv', customer: 'Ovintiv Eagle Ford 5', district: 'Pleasanton',
+    start: '2026-04-12', end: '2026-05-02', mobDays: 2, demobDays: 1,
+    shortfall: true,
+    equipment: [
+      { name: 'Wings Hyd 4 15', qty: 8, ownership: 'red' },
+      { name: 'Wings Man 4 15', qty: 4, ownership: 'green' },
+      { name: '7 15 Masters', qty: 6, ownership: 'red' },
+      { name: '7 15 Zip MV Hyd', qty: 4, ownership: 'amber' },
+      { name: 'Rot Spool', qty: 6, ownership: 'green' },
+      { name: 'Stud Tee', qty: 3, ownership: 'green' },
+      { name: '5 15 HYD Wg', qty: 4, ownership: 'green' },
+      { name: 'Accumulator', qty: 6, ownership: 'green' },
+      { name: 'Spartan Hands', qty: 3, ownership: 'labor' },
+      { name: 'Contract Hands', qty: 2, ownership: 'labor' }
+    ]
+  }
+];
+
+function buildGantt() {
+  const gridEl = document.getElementById('gantt-grid');
+  if (!gridEl) return;
+
+  // Generate 28 days starting Mar 31
+  const baseDate = new Date(2026, 2, 31); // Mar 31
+  const days = [];
+  for (let i = 0; i < 28; i++) {
+    const d = new Date(baseDate);
+    d.setDate(d.getDate() + i);
+    days.push(d);
+  }
+
+  const today = new Date(2026, 2, 31); // Mar 31
+  const dayNames = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+  const monthNames = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+
+  // Group days into weeks (Mon-Sun)
+  const weeks = [];
+  let currentWeek = [];
+  days.forEach(d => {
+    if (currentWeek.length > 0 && d.getDay() === 1) {
+      weeks.push(currentWeek);
+      currentWeek = [];
+    }
+    currentWeek.push(d);
+  });
+  if (currentWeek.length) weeks.push(currentWeek);
+
+  // Build table
+  let html = '<table class="planning-table">';
+
+  // Week header row
+  html += '<thead><tr class="week-row">';
+  html += '<th class="job-header" rowspan="2">Job / Customer</th>';
+  weeks.forEach(w => {
+    const start = w[0];
+    const end = w[w.length - 1];
+    const label = `${monthNames[start.getMonth()]} ${start.getDate()} – ${start.getMonth() !== end.getMonth() ? monthNames[end.getMonth()] + ' ' : ''}${end.getDate()}`;
+    html += `<th colspan="${w.length}" style="border-right:2px solid var(--slate-dark)">${label}</th>`;
+  });
+  html += '</tr>';
+
+  // Day header row
+  html += '<tr class="date-row">';
+  days.forEach((d, i) => {
+    const isWeekend = d.getDay() === 0 || d.getDay() === 6;
+    const isToday = d.getTime() === today.getTime();
+    const isLastInWeek = i === days.length - 1 || days[i+1]?.getDay() === 1;
+    let cls = isToday ? 'today' : (isWeekend ? 'weekend' : '');
+    const borderStyle = isLastInWeek ? 'border-right:2px solid rgba(255,255,255,0.3)' : '';
+    html += `<th class="${cls}" style="${borderStyle}">${dayNames[d.getDay()]}<br>${d.getDate()}</th>`;
+  });
+  html += '</tr></thead>';
+
+  // Body
+  html += '<tbody>';
+
+  ganttJobs.forEach(job => {
+    const jobStart = new Date(job.start);
+    const jobEnd = new Date(job.end);
+    const equipCount = job.equipment.filter(e => e.ownership !== 'labor').length;
+    const hasShortfall = job.shortfall;
+
+    // Main job row
+    html += `<tr class="job-parent-row" data-job="${job.id}" onclick="toggleJobExpand('${job.id}')">`;
+    html += `<td class="job-cell">
+      <div class="job-row-header">
+        <span class="expand-icon">&#9654;</span>
+        <div>
+          <div class="job-customer">${job.customer}${hasShortfall ? ' <span style="color:var(--status-critical);font-size:11px">&#9888;</span>' : ''}</div>
+          <div class="job-location">${job.district}</div>
+          <div class="job-equip-count">${equipCount} equipment types &bull; ${job.equipment.reduce((s,e) => s + (e.ownership !== 'labor' ? e.qty : 0), 0)} units</div>
+        </div>
+      </div>
+    </td>`;
+
+    days.forEach((d, i) => {
+      const isLastInWeek = i === days.length - 1 || days[i+1]?.getDay() === 1;
+      const borderStyle = isLastInWeek ? 'border-right:2px solid var(--silver)' : '';
+      const ts = d.getTime();
+      const mobStart = new Date(jobStart);
+      mobStart.setDate(mobStart.getDate() - job.mobDays);
+      const demobEnd = new Date(jobEnd);
+      demobEnd.setDate(demobEnd.getDate() + job.demobDays);
+
+      let cls = 'gantt-empty';
+      if (ts >= mobStart.getTime() && ts < jobStart.getTime()) {
+        cls = 'gantt-mobilizing';
+      } else if (ts >= jobStart.getTime() && ts <= jobEnd.getTime()) {
+        cls = hasShortfall && ts >= jobStart.getTime() && ts <= new Date(jobStart.getTime() + 2*86400000).getTime() ? 'gantt-shortfall' : 'gantt-inop';
+      } else if (ts > jobEnd.getTime() && ts <= demobEnd.getTime()) {
+        cls = 'gantt-demob';
+      }
+
+      // Show "Deployed" (green) for first and last few days of the in-operation window
+      if (ts >= jobStart.getTime() && ts <= jobEnd.getTime()) {
+        const daysFromStart = Math.floor((ts - jobStart.getTime()) / 86400000);
+        const daysToEnd = Math.floor((jobEnd.getTime() - ts) / 86400000);
+        if (daysFromStart < 2 || daysToEnd < 1) {
+          cls = hasShortfall && daysFromStart < 2 ? 'gantt-shortfall' : 'gantt-deployed';
+        }
+      }
+
+      html += `<td class="${cls}" style="${borderStyle}"></td>`;
+    });
+    html += '</tr>';
+
+    // Equipment sub-rows (hidden by default)
+    job.equipment.forEach(eq => {
+      const ownershipClass = {
+        'green': 'equip-qty-green',
+        'pink': 'equip-qty-pink',
+        'checkered': 'equip-qty-checkered',
+        'red': 'equip-qty-red',
+        'amber': 'equip-qty-green',
+        'labor': 'equip-qty'
+      }[eq.ownership] || 'equip-qty';
+
+      const ownershipDot = {
+        'green': '<span class="ownership-dot owned" style="width:7px;height:7px"></span>',
+        'pink': '<span class="ownership-dot consignment" style="width:7px;height:7px"></span>',
+        'checkered': '<span class="ownership-dot sub-rental" style="width:7px;height:7px"></span>',
+        'red': '<span style="color:#991B1B;font-size:11px">&#9888;</span>',
+        'amber': '<span style="color:#92400E;font-size:11px">&#9651;</span>',
+        'labor': '<span style="color:var(--steel);font-size:11px">&#9823;</span>'
+      }[eq.ownership] || '';
+
+      html += `<tr class="equip-sub-row" data-parent="${job.id}">`;
+      html += `<td class="job-cell"><div class="equip-name">${ownershipDot} ${eq.name}</div></td>`;
+
+      days.forEach((d, i) => {
+        const isLastInWeek = i === days.length - 1 || days[i+1]?.getDay() === 1;
+        const borderStyle = isLastInWeek ? 'border-right:2px solid var(--silver)' : '';
+        const ts = d.getTime();
+
+        if (ts >= new Date(job.start).getTime() && ts <= new Date(job.end).getTime()) {
+          html += `<td class="${ownershipClass}" style="${borderStyle}">${eq.qty}</td>`;
+        } else {
+          html += `<td style="${borderStyle}"></td>`;
+        }
+      });
+      html += '</tr>';
+    });
+  });
+
+  // Summary row: active jobs per day
+  html += '<tr class="summary-row"><td class="job-cell">ACTIVE JOBS</td>';
+  days.forEach((d, i) => {
+    const isLastInWeek = i === days.length - 1 || days[i+1]?.getDay() === 1;
+    const borderStyle = isLastInWeek ? 'border-right:2px solid var(--slate-dark)' : '';
+    let count = 0;
+    ganttJobs.forEach(job => {
+      if (d >= new Date(job.start) && d <= new Date(job.end)) count++;
+    });
+    html += `<td style="${borderStyle}">${count}</td>`;
+  });
+  html += '</tr>';
+
+  // Summary row: total units deployed per day
+  html += '<tr class="summary-row"><td class="job-cell">UNITS DEPLOYED</td>';
+  days.forEach((d, i) => {
+    const isLastInWeek = i === days.length - 1 || days[i+1]?.getDay() === 1;
+    const borderStyle = isLastInWeek ? 'border-right:2px solid var(--slate-dark)' : '';
+    let total = 0;
+    ganttJobs.forEach(job => {
+      if (d >= new Date(job.start) && d <= new Date(job.end)) {
+        job.equipment.forEach(eq => { if (eq.ownership !== 'labor') total += eq.qty; });
+      }
+    });
+    html += `<td style="${borderStyle}">${total}</td>`;
+  });
+  html += '</tr>';
+
+  html += '</tbody></table>';
+  gridEl.innerHTML = html;
+}
+
+function toggleJobExpand(jobId) {
+  const parentRow = document.querySelector(`tr.job-parent-row[data-job="${jobId}"]`);
+  const subRows = document.querySelectorAll(`tr.equip-sub-row[data-parent="${jobId}"]`);
+  const isExpanded = parentRow.classList.contains('expanded');
+
+  if (isExpanded) {
+    parentRow.classList.remove('expanded');
+    subRows.forEach(r => r.classList.remove('visible'));
+  } else {
+    parentRow.classList.add('expanded');
+    subRows.forEach(r => r.classList.add('visible'));
+  }
+}
+
+// Build on load
+document.addEventListener('DOMContentLoaded', buildGantt);
+
+// ====================== PLANNING BOARD TAB SWITCHING ======================
+function switchPlanningTab(tabId) {
+  // Hide all tab contents
+  document.querySelectorAll('.planning-tab-content').forEach(el => el.style.display = 'none');
+  // Show selected tab
+  const target = document.getElementById('planning-tab-' + tabId);
+  if (target) target.style.display = 'block';
+  // Update tab bar active state
+  const tabBar = document.querySelector('#screen-planning .tab-bar');
+  if (tabBar) {
+    const tabMap = { forecast: 0, shortfalls: 1, whatif: 2, newwo: 3 };
+    tabBar.querySelectorAll('.tab-item').forEach((t, i) => {
+      t.classList.toggle('active', i === tabMap[tabId]);
+    });
+  }
+}
+
+// ====================== NAVIGATION ======================
+function doLogin() {
+  document.getElementById('login-screen').style.display = 'none';
+  document.getElementById('app-shell').style.display = 'flex';
+}
+
+function showScreen(screenId) {
+  // Hide all panels
+  document.querySelectorAll('.screen-panel').forEach(p => p.classList.remove('active'));
+  // Show target
+  const el = document.getElementById('screen-' + screenId);
+  if (el) el.classList.add('active');
+  // Update sidebar active state
+  document.querySelectorAll('.sidebar-link').forEach(l => l.classList.remove('active'));
+  const sidebarMap = {
+    'inventory': 0, 'component-detail': 0, 'assembly-detail': 0,
+    'planning': 1,
+    'mobile-checkout': 9,
+    'flows-index': 10, 'flow-detail': 10
+  };
+  const links = document.querySelectorAll('.sidebar-link:not(.coming-soon)');
+  const idx = sidebarMap[screenId];
+  if (idx !== undefined && links[idx]) links[idx].classList.add('active');
+  // Scroll to top
+  document.querySelector('.main-content').scrollTop = 0;
+}
+
+function showFlowDetail(flowId) {
+  const flow = userFlows.find(f => f.id === flowId);
+  if (!flow) return;
+  showScreen('flow-detail');
+
+  const headerHtml = `
+    <div class="flow-id-badge">${flow.id}</div>
+    <div class="page-title">${flow.title}</div>
+    <div class="page-title-bar"></div>
+    <div class="flow-purpose">${flow.purpose}</div>
+  `;
+  document.getElementById('flow-detail-content').innerHTML = headerHtml;
+
+  let bodyHtml = '';
+
+  // Current state
+  bodyHtml += '<div class="flow-section-label">Current State (As-Is)</div>';
+  flow.currentSteps.forEach((step, i) => {
+    bodyHtml += `<div class="flow-step">
+      <div class="flow-step-num">${i+1}</div>
+      <div class="flow-step-content muted">${step}</div>
+    </div>`;
+  });
+
+  // Future state
+  bodyHtml += '<div class="flow-section-label" style="margin-top:40px">Future State (Atlas)</div>';
+  flow.futureSteps.forEach((step, i) => {
+    const screenRef = step.screen ? `<div class="flow-step-screen-ref" onclick="showScreen('${step.screen}')">&#8594; View ${step.screen.replace('-', ' ').replace(/\b\w/g, l => l.toUpperCase())} Screen</div>` : '';
+    bodyHtml += `<div class="flow-step">
+      <div class="flow-step-num current">${i+1}</div>
+      <div class="flow-step-content">${step.text}${screenRef}</div>
+    </div>`;
+  });
+
+  // Waterfall table if applicable
+  if (flow.hasWaterfall) {
+    bodyHtml += `
+    <div class="flow-waterfall-embed">
+      <div class="flow-section-label">Shortage Resolution Waterfall</div>
+      <table class="waterfall-table" style="max-width:800px">
+        <thead><tr><th>Priority</th><th>Source</th><th>Location</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td><span class="waterfall-priority">1</span></td><td><span class="ownership-dot owned"></span> Spartan Owned</td><td>Local District</td><td>Available owned assets at the job's district</td></tr>
+          <tr><td><span class="waterfall-priority">2</span></td><td><span class="ownership-dot consignment"></span> Consignment</td><td>Local District</td><td>Available consignment partner assets at the same district</td></tr>
+          <tr><td><span class="waterfall-priority">3</span></td><td><span class="ownership-dot sub-rental"></span> Sub-Rental</td><td>Local District</td><td>Rent from a third party and deliver to the local district</td></tr>
+          <tr><td><span class="waterfall-priority">4</span></td><td><span class="ownership-dot owned"></span> Spartan Owned</td><td>Other District(s)</td><td>Transfer owned assets from another district</td></tr>
+          <tr><td><span class="waterfall-priority">5</span></td><td><span class="ownership-dot consignment"></span> Consignment</td><td>Other District(s)</td><td>Transfer consignment assets from another district</td></tr>
+          <tr><td><span class="waterfall-priority">6</span></td><td><span class="ownership-dot sub-rental"></span> Sub-Rental</td><td>Other District(s)</td><td>Rent from a third party near another district and ship</td></tr>
+        </tbody>
+      </table>
+    </div>`;
+  }
+
+  document.getElementById('flow-detail-body').innerHTML = bodyHtml;
+}
+
+// ====================== POPULATE FLOW INDEX ======================
+function populateFlowIndex() {
+  const grid = document.getElementById('flow-grid');
+  grid.innerHTML = userFlows.map(flow => `
+    <a class="flow-card" onclick="showFlowDetail('${flow.id}')">
+      <div class="flow-card-id">${flow.id}</div>
+      <div class="flow-card-title">${flow.title}</div>
+      <div class="flow-card-desc">${flow.purpose.substring(0, 150)}...</div>
+    </a>
+  `).join('');
+}
+
+populateFlowIndex();
+</script>
+
+</body>
+</html>
