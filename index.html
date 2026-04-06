@@ -2359,6 +2359,14 @@ body {
               <label style="display:block;font-size:13px;font-weight:700;margin-bottom:4px">Demob Days</label>
               <input class="filter-input" type="number" style="width:100%" value="1" min="0" max="5">
             </div>
+            <div>
+              <label style="display:block;font-size:13px;font-weight:700;margin-bottom:4px">Latitude</label>
+              <input class="filter-input" type="text" style="width:100%" placeholder="e.g., 31.9973" value="31.9973">
+            </div>
+            <div>
+              <label style="display:block;font-size:13px;font-weight:700;margin-bottom:4px">Longitude</label>
+              <input class="filter-input" type="text" style="width:100%" placeholder="e.g., -102.0779" value="-102.0779">
+            </div>
           </div>
 
           <!-- Equipment Requirements -->
@@ -2383,7 +2391,7 @@ body {
                 <td>Wing Valve, Hyd</td>
                 <td>4"</td>
                 <td>15K</td>
-                <td class="font-mono fw-700">8</td>
+                <td><input class="filter-input font-mono fw-700" type="number" value="8" min="0" style="width:60px;text-align:center;padding:4px 6px"></td>
                 <td class="font-mono" style="color:var(--status-critical)">0</td>
                 <td class="font-mono" style="color:var(--status-critical)">0</td>
                 <td><span class="status-badge critical">-8 shortfall</span></td>
@@ -2393,7 +2401,7 @@ body {
                 <td>Wing Valve, Man</td>
                 <td>4"</td>
                 <td>15K</td>
-                <td class="font-mono fw-700">4</td>
+                <td><input class="filter-input font-mono fw-700" type="number" value="4" min="0" style="width:60px;text-align:center;padding:4px 6px"></td>
                 <td class="font-mono" style="color:var(--status-warning)">3</td>
                 <td class="font-mono" style="color:var(--status-available)">8</td>
                 <td><span class="status-badge warning">-1 local</span></td>
@@ -2403,7 +2411,7 @@ body {
                 <td>Master Valve (Serviceless)</td>
                 <td>7"</td>
                 <td>15K</td>
-                <td class="font-mono fw-700">6</td>
+                <td><input class="filter-input font-mono fw-700" type="number" value="6" min="0" style="width:60px;text-align:center;padding:4px 6px"></td>
                 <td class="font-mono" style="color:var(--status-critical)">0</td>
                 <td class="font-mono" style="color:var(--status-critical)">0</td>
                 <td><span class="status-badge critical">-6 shortfall</span></td>
@@ -2413,7 +2421,7 @@ body {
                 <td>Zipper Valve MV Hyd</td>
                 <td>7"</td>
                 <td>15K</td>
-                <td class="font-mono fw-700">4</td>
+                <td><input class="filter-input font-mono fw-700" type="number" value="4" min="0" style="width:60px;text-align:center;padding:4px 6px"></td>
                 <td class="font-mono" style="color:var(--status-warning)">1</td>
                 <td class="font-mono" style="color:var(--status-warning)">2</td>
                 <td><span class="status-badge warning">-3 local</span></td>
@@ -2423,7 +2431,7 @@ body {
                 <td>Rotating Spool</td>
                 <td>7-1/16"</td>
                 <td>15K</td>
-                <td class="font-mono fw-700">6</td>
+                <td><input class="filter-input font-mono fw-700" type="number" value="6" min="0" style="width:60px;text-align:center;padding:4px 6px"></td>
                 <td class="font-mono" style="color:var(--status-available)">4</td>
                 <td class="font-mono" style="color:var(--status-available)">10</td>
                 <td><span class="status-badge available">OK</span></td>
@@ -2433,7 +2441,7 @@ body {
                 <td>Studded Tee</td>
                 <td>7"</td>
                 <td>15K</td>
-                <td class="font-mono fw-700">3</td>
+                <td><input class="filter-input font-mono fw-700" type="number" value="3" min="0" style="width:60px;text-align:center;padding:4px 6px"></td>
                 <td class="font-mono" style="color:var(--status-available)">5</td>
                 <td class="font-mono" style="color:var(--status-available)">12</td>
                 <td><span class="status-badge available">OK</span></td>
@@ -2443,7 +2451,7 @@ body {
                 <td>Accumulator</td>
                 <td>--</td>
                 <td>--</td>
-                <td class="font-mono fw-700">6</td>
+                <td><input class="filter-input font-mono fw-700" type="number" value="6" min="0" style="width:60px;text-align:center;padding:4px 6px"></td>
                 <td class="font-mono" style="color:var(--status-available)">4</td>
                 <td class="font-mono" style="color:var(--status-available)">9</td>
                 <td><span class="status-badge available">OK</span></td>
@@ -2453,7 +2461,7 @@ body {
                 <td>Javelin</td>
                 <td>--</td>
                 <td>--</td>
-                <td class="font-mono fw-700">1</td>
+                <td><input class="filter-input font-mono fw-700" type="number" value="1" min="0" style="width:60px;text-align:center;padding:4px 6px"></td>
                 <td class="font-mono" style="color:var(--status-critical)">0</td>
                 <td class="font-mono" style="color:var(--status-critical)">0</td>
                 <td><span class="status-badge critical">-1 shortfall</span></td>
@@ -2486,15 +2494,17 @@ body {
           <!-- Impact Summary -->
           <div style="font-family:'Montserrat',sans-serif;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--charcoal);margin-bottom:12px;padding-top:16px;border-top:1px solid var(--silver)">Availability Impact</div>
 
-          <div style="background:#FEF2F2;border:1px solid #FCA5A5;padding:16px;margin-bottom:16px">
+          <div style="background:#FEF2F2;border:1px solid #FCA5A5;padding:16px;margin-bottom:16px;overflow:hidden;box-sizing:border-box;max-width:100%">
             <div style="font-weight:700;color:var(--status-critical);margin-bottom:8px">&#9888; This work order creates 3 new shortfalls and worsens 2 existing ones</div>
-            <div style="font-size:13px;color:var(--slate);line-height:1.8">
-              <strong>Wings Hyd 4 15:</strong> Existing shortfall of -6 worsens to <strong>-14</strong> (Apr 14 – May 2)<br>
-              <strong>7 15 SERVICE LESS MASTERS:</strong> Existing shortfall of -8 worsens to <strong>-14</strong> (Apr 14 – Apr 30)<br>
-              <strong>Javelin:</strong> Existing shortfall of -2 worsens to <strong>-3</strong> (Apr 14 – Apr 18)<br>
-              <strong>Wings Man 4 15:</strong> New local shortfall of <strong>-1</strong> at Midland (coverable cross-district)<br>
-              <strong>Zipper Valve MV Hyd:</strong> New local shortfall of <strong>-3</strong> at Midland (partially coverable cross-district)
-            </div>
+            <table style="font-size:13px;color:var(--slate);width:100%;border-collapse:collapse">
+              <tbody>
+                <tr><td style="padding:4px 8px 4px 0;white-space:nowrap;font-weight:700;vertical-align:top">Wings Hyd 4 15</td><td style="padding:4px 0">Existing shortfall of -6 worsens to <strong>-14</strong> (Apr 14 – May 2)</td></tr>
+                <tr><td style="padding:4px 8px 4px 0;white-space:nowrap;font-weight:700;vertical-align:top">7 15 MASTERS</td><td style="padding:4px 0">Existing shortfall of -8 worsens to <strong>-14</strong> (Apr 14 – Apr 30)</td></tr>
+                <tr><td style="padding:4px 8px 4px 0;white-space:nowrap;font-weight:700;vertical-align:top">Javelin</td><td style="padding:4px 0">Existing shortfall of -2 worsens to <strong>-3</strong> (Apr 14 – Apr 18)</td></tr>
+                <tr><td style="padding:4px 8px 4px 0;white-space:nowrap;font-weight:700;vertical-align:top">Wings Man 4 15</td><td style="padding:4px 0">New local shortfall of <strong>-1</strong> at Midland (coverable cross-district)</td></tr>
+                <tr><td style="padding:4px 8px 4px 0;white-space:nowrap;font-weight:700;vertical-align:top">Zip MV Hyd</td><td style="padding:4px 0">New local shortfall of <strong>-3</strong> at Midland (partially coverable cross-district)</td></tr>
+              </tbody>
+            </table>
           </div>
 
           <div style="display:flex;gap:12px">
