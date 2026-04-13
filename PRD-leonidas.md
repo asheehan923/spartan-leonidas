@@ -1,4 +1,4 @@
-# Atlas - Product Requirements Document
+# Leonidas - Product Requirements Document
 
 **Client:** Spartan Energy Services (Delmar, CEO)
 **Author:** Alex Sheehan, VectisOS
@@ -36,6 +36,12 @@ The result: the CEO and President spend hours daily robbing Peter to pay Paul --
 
 This is not an AI problem -- it's a data structure and workflow problem. AI accelerates the *development* of the solution, reducing the cost to build custom software by ~95% compared to two years ago.
 
+### Scope Boundary -- Asset Classes
+
+**Leonidas is built around the asset classes Delmar tracks in his master spreadsheet today, not the full Spartan asset base.** These are the high-utilization, high-value, mobility-constrained assets that drive the planning headache: primarily serviceless valves, plus the specific frac iron, accumulators, and sub-assemblies that appear on Delmar's sheet (see Section 1.3). Lower-utilization or yard-staple items ("adapters, spools that are already on the yard") are explicitly **out of Phase 1 scope**. Spartan's broader asset base (consumables, shop tooling, vehicles, etc.) is also out of scope.
+
+Asset class expansion is intentionally deferred: prove the model on the assets that hurt today, then add classes once the data discipline (check-in/out, location accuracy, partner reporting) is real. Every user flow, data model, and dashboard in this PRD should be read as "for in-scope asset classes." See Section 1.3 for the in-scope taxonomy and Section 3.5 for the out-of-scope list.
+
 ---
 
 ## 1. Background & Context
@@ -63,18 +69,50 @@ The spreadsheet is organized as:
 - **Update frequency:** Every 2 days (too large for daily updates)
 - **Forecast horizon:** ~2 weeks reliable, beyond that is speculative
 
-### 1.3 Equipment Taxonomy (from transcript + screenshots)
-Primary tracked assets are **serviceless valves** (hydraulic actuated, ~200% more expensive than standard but faster to maintain), plus spools, tees, crosses, and other frac iron. Key dimensions:
+### 1.3 Pain Points (Ranked)
+
+*Section relocated and expanded 2026-04-13 to surface pain points immediately after the current-state description, before equipment taxonomy and ownership detail.*
+
+1. **CEO time sink** -- ~1/3 of CEO time on spreadsheet management; planning is bottlenecked on one person
+2. **No district-level visibility** -- can't tell a DM "you have 18 valves available in your yard"
+3. **No asset location tracking** -- geo-trackers only 65-70% reliable; forklifts destroy them
+4. **Consignment tracked separately** -- can't see blended utilization (owned + consignment + sub-rental) in one view
+5. **Sub-rentals not tracked systematically** -- ~$200K/month spend with no vendor registry, insurance/compliance tracking, or rate history
+6. **Consignment partner obligations are implicit** -- Delmar promised partners utilization; no system tracks actual vs. expected utilization per partner ("I didn't max his utilization")
+7. **Standby state is invisible** -- when Spartan goes on standby, partner goes on standby; no asset state or billing path captures this
+8. **Inconsistent job rows** -- spreadsheet grew organically; not every job tracks the same equipment columns; per-customer differences are tribal knowledge
+9. **Frac schedule volatility** -- customer schedules shift roughly every 2 weeks; no diff/re-plan workflow when a new schedule arrives
+10. **Pre-positioned consignment is unmodeled** -- $2.8M in accumulators staged at customer/well sites to avoid trucking; the planner has no concept of "asset at customer site, ready for use"
+11. **Customer brand preferences and conversion campaigns are tribal** -- Delmar actively converts customers from Best Way → 3E for margin/equity; no tracking of candidates, win/loss, or revenue impact
+12. **Margin economics not surfaced at decision time** -- when sourcing options exist (owned full margin / consignment ~30% + equity / sub-rental ~5%), the trade-off lives in Delmar's head
+13. **Emergency rebalancing is manual** -- a single shortfall can ripple to "negative six, reroute the whole company"; no triage UX for cascading impact
+14. **No integration with KPA** -- quality certs, redress history, and asset tracking are disconnected; KPA is sometimes the only way to find a "lost" valve
+15. **Delayed data entry** -- delivery tickets are handwritten, entered into Basis ~4 days late
+16. **Logistics costs inflated by poor visibility** -- ~$580K/year in trucking; hot-shot premiums driven by last-minute discoveries
+17. **No loadout / quality pack generation** -- only ~85% of customers get quality packs when busy; the rest are deferred until "scared to lose" customers come up
+18. **No tiered customer SLA** -- the only thing differentiating customer treatment under load is how scared Spartan is to lose them; not a system field
+19. **End-of-job reconciliation is fragmented** -- equipment return, customer invoicing, sub-rental payback, and consignment statements are not threaded through one workflow
+
+### 1.4 Equipment Taxonomy (from transcript + screenshots)
+
+*Updated 2026-04-13 with the MAV consignment rental tracker screenshot (`Screenshot 2026-04-07 144924.png`): added 5K pressure rating, confirmed serial number conventions (MAV-### for Maverick consignment, BWV-### for Best Way), and confirmed the per-partner consignment-rental ledger format (asset serial + well name + days + rate + total) that drives UF10 monthly partner reports.*
+
+Primary tracked assets are **serviceless valves** (hydraulic actuated, ~200% more expensive than standard but faster to maintain), plus spools, tees, crosses, accumulators, javelins, and frac stack sub-assemblies. Lower-utilization yard staples (adapters, etc.) are out of scope per the Scope Boundary above. Key dimensions:
 
 | Dimension | Values Observed |
 |-----------|----------------|
-| **Type** | Wing Valve, Master Valve (Serviceless), Zipper Valve, Rotating Spool, Spacer Spool, Studded Tee, Cross, Accumulator, Javelin |
-| **Size** | 3", 4", 5", 7-1/16" |
-| **Pressure Rating** | 10K, 15K |
+| **Type** | Wing Valve, Master Valve (Serviceless), Zipper Valve, Rotating Spool, Spacer Spool, Studded Tee, Cross, Accumulator, Javelin, Frac Stack (sub-assembly) |
+| **Size** | 3", 4", 5", 5-1/8", 7", 7-1/16" |
+| **Pressure Rating** | 5K, 10K, 15K |
 | **Actuation** | Hydraulic (HYD), Manual (Man) |
-| **Brand/Variant** | Best Way, Maverick (MAVI/MV), SE, Encompass, Crescent 50, State Ranger, Blue May, State Queen C3, State Project, Mark 5 |
+| **Brand/Variant** | Best Way (BWV serial prefix), Maverick (MAV/MAVI/MV serial prefix), 3E, SE, Encompass, Crescent 50, State Ranger, Blue May, State Queen C3, State Project, Mark 5 |
 
 Each combination (e.g., "Wing, Hydraulic, 4" 15K, Best Way") is a distinct inventory line.
+
+**Serial number conventions (from MAV consignment screenshot):**
+- `MAV-####` -- Maverick (consignment partner)
+- `BWV-####` -- Best Way valves
+- Serials appear on partner monthly statements next to well name, days deployed, day rate, and line total -- this is the literal record format Leonidas must reproduce in F4 / UF10.
 
 #### Confirmed Equipment Types (from screenshots)
 
@@ -122,7 +160,7 @@ The spreadsheet also tracks "Spartan Hands needed" and "Contract Hands" per job.
 
 > **Note:** Additional equipment types exist beyond what is shown in these screenshots. The taxonomy table above will be expanded as more data is provided. Screenshots are stored in `VectisOS/Projects/Spartan/` for reference.
 
-### 1.4 Ownership Classes
+### 1.5 Ownership Classes
 | Class | Description | Volume | Tracking |
 |-------|------------|--------|----------|
 | **Owned** | Spartan-purchased assets | ~$14M total value | Serial numbers, asset numbers |
@@ -131,17 +169,47 @@ The spreadsheet also tracks "Spartan Hands needed" and "Contract Hands" per job.
 
 Consignment partners receive monthly reports showing: asset serial numbers, job assignments, days on job, rental rate, total revenue. One partner earns $77K/month; another $40K/month. Equity accrual: 25-33 cents per rental dollar toward future purchase.
 
-### 1.5 Pain Points (Ranked)
-1. **CEO time sink** -- 1/3 of CEO time on spreadsheet management
-2. **No district-level visibility** -- can't tell a DM "you have 18 valves available in your yard"
-3. **No asset location tracking** -- geo-trackers only 65-70% reliable; forklifts destroy them
-4. **Consignment tracked separately** -- can't see blended utilization in one view
-5. **Sub-rentals not tracked** -- no visibility into how much is being sub-rented or from whom
-6. **Inconsistent job rows** -- spreadsheet grew organically; not every job tracks the same equipment columns
-7. **No integration with KPA** -- quality certs and asset tracking are disconnected
-8. **Delayed data entry** -- delivery tickets are handwritten, entered 4 days late into Basis
-9. **Logistics costs** -- $580K/year in trucking, inflated by poor asset visibility
-10. **No loadout/quality pack generation** -- only ~85% of customers get quality packs when busy
+#### 1.5.1 Consignment Equity Model (from 2026-03-31 + 2026-04-07 transcripts)
+
+**The deal in plain English:** A partner (competitor or OEM) gives Spartan their equipment to operate. Spartan deploys it on jobs as if it were owned, bills the customer at Spartan's rate, and at month-end pays the partner a revenue share. A portion of every rental dollar Spartan collects on that asset *also* accrues to Spartan as **equity credit** -- a running balance Spartan can apply against the eventual purchase price if/when Spartan decides to buy the asset outright. Until purchase, the asset stays on the partner's books; Spartan never lays out capital but earns the right to buy it down over time.
+
+**Per-partner terms (from transcripts):**
+
+| Partner | Equity Rate | Monthly Rev to Partner | Notes |
+|---------|-------------|------------------------|-------|
+| **MAV** (Maverick) | **$0.25 per rental dollar** | $37K-$40K typical | Newer relationship; serials prefixed `MAV-####` |
+| **3E** | **$0.33 per rental dollar** | $61K-$77K typical | Longer-running deal -- higher equity rate reflects tenure / volume |
+| (future partners) | Negotiated per deal -- store on Consignment Partner record | -- | Range observed: 25-33% |
+
+**Calculation -- per asset, per month:**
+
+```
+gross_rental_revenue   = sum( day_rate x days_on_job )  for that asset, that month
+                         (across all jobs it touched)
+
+partner_payout         = gross_rental_revenue x partner_revshare_pct
+                         (the % that goes to the partner -- shown on the monthly statement)
+
+equity_accrual_period  = gross_rental_revenue x partner_equity_rate
+                         (e.g., gross x 0.25 for MAV, gross x 0.33 for 3E)
+
+equity_balance_running = equity_balance_prior + equity_accrual_period
+                         (per asset AND aggregated per partner; never resets unless asset is purchased or returned)
+```
+
+**Margin economics (Delmar's framing, 2026-04-07):**
+- **Owned rental** -- full margin to Spartan.
+- **Consignment** -- ~30% margin to Spartan **plus** 25-33% equity accrual on top. Net effect: comparable cash margin to owned, plus a free option to buy the asset later at a discounted basis.
+- **Sub-rental** (e.g., Best Way) -- ~5% margin, **zero equity**. Spartan still insures, trucks, and operates the asset for almost no economic upside. This is why the shortage waterfall (UF3) ranks sub-rental last and why Leonidas must surface consignment availability before sub-rental is even offered.
+
+**Standby:** When an asset is on standby (assigned but idle), the partner standby rate applies instead of the day rate. Equity continues to accrue on standby revenue at the same rate. Standby is rare ("don't happen often") but must be supported -- Delmar specifically called out a standby gig in the 3E statement.
+
+**Purchase trigger (out of scope for Phase 1, but data must support it):**
+- Spartan can elect to purchase a consigned asset at any time. The purchase price is the partner's agreed sale price **minus the accumulated equity balance** for that asset.
+- The partner ultimately collects *more than the original sale price* across the deal lifetime (rev share + final purchase payment) -- that's why partners agree to consign.
+- Conversely, if the market slows, Spartan can return consignment equipment to the partner. Partner keeps all revenue paid to date; Spartan walks away with no capital exposure but forfeits accrued equity on returned assets.
+
+**What Leonidas must store (per consigned asset):** `partner_id`, `partner_revshare_pct`, `partner_equity_rate`, `agreed_purchase_price`, `equity_balance` (running, recomputed from movement log), `standby_day_rate`. Aggregations roll up per-partner for the monthly statement (F4) and the equity dashboard.
 
 ---
 
@@ -201,6 +269,8 @@ When a new job is won or a frac schedule is received, the equipment requirements
 
 ### UF3: Shortage Resolution ("Robbing Peter to Pay Paul")
 
+*Revised 2026-04-13: Added Priority 0 (size conversion / demand-side lever) -- Delmar's first move on a shortfall is to call the customer and pitch a size swap (e.g., 4" → 3") before sourcing more supply. Added customer-negotiation sub-flow. Surfaced margin economics inline with each waterfall option (owned ~full margin / consignment ~30% + equity / sub-rental ~5%) so the recommendation reflects $ impact, not just logistics cost.*
+
 When demand exceeds supply for a specific equipment type, the CEO must find a way to fill the gap. This is the most complex and time-consuming workflow -- it requires evaluating job timelines, size conversions, consignment availability, cross-district transfers, and sub-rentals. The Shortage Resolution Waterfall defines the strict priority order the system follows to resolve shortfalls.
 
 **Current State:**
@@ -219,14 +289,21 @@ When demand exceeds supply for a specific equipment type, the CEO must find a wa
 
 **Shortage Resolution Waterfall (priority order):**
 
-| Priority | Source | Location | Description |
-|----------|--------|----------|-------------|
-| **1** | Spartan-owned assets | Local district | Available owned assets at the district where the job is |
-| **2** | Consignment assets | Local district | Available consignment partner assets at the same district |
-| **3** | Sub-rental assets | Local district | Rent from a third party and deliver to the local district |
-| **4** | Spartan-owned assets | Other district(s) | Transfer owned assets from another district (triggers F10 cross-district optimization) |
-| **5** | Consignment assets | Other district(s) | Transfer consignment assets from another district |
-| **6** | Sub-rental assets | Other district(s) | Rent from a third party near another district and ship to the job |
+| Priority | Source | Location | Description | Margin Profile |
+|----------|--------|----------|-------------|----------------|
+| **0** | **Size conversion (demand-side)** | Customer call | Pitch the customer on a size swap that frees local owned inventory (e.g., 4" → 3"). Always evaluated first when feasible -- no logistics cost, full margin. Requires customer acceptance. | Full margin (no cost change) |
+| **1** | Spartan-owned assets | Local district | Available owned assets at the district where the job is | Full margin |
+| **2** | Consignment assets | Local district | Available consignment partner assets at the same district | ~30% margin + 25-33¢/$ equity accrual |
+| **3** | Sub-rental assets | Local district | Rent from a third party and deliver to the local district | ~5% margin |
+| **4** | Spartan-owned assets | Other district(s) | Transfer owned assets from another district (triggers F10 cross-district optimization) | Full margin minus trucking |
+| **5** | Consignment assets | Other district(s) | Transfer consignment assets from another district | ~30% margin minus trucking |
+| **6** | Sub-rental assets | Other district(s) | Rent from a third party near another district and ship to the job | ~5% margin minus trucking |
+
+**Priority 0 (Size Conversion) sub-flow:**
+1. System identifies candidate jobs where the larger size could be substituted with the shorter-supply smaller size (or vice versa) without violating customer specs
+2. Recommendation includes which customer to call, talking points (why the alternate size is acceptable), and the inventory impact if accepted
+3. CEO/Sales calls the customer; logs result in the system (accepted | declined | pending)
+4. If accepted, the freed inventory is reallocated; if declined, system falls through to Priority 1
 
 At each priority level, the system checks whether the source district can spare the assets without creating a shortfall for its own upcoming jobs. If pulling from another district would cause a problem there, it flags the trade-off and moves to the next option.
 
@@ -268,6 +345,8 @@ Spartan manages ~$7M in equipment owned by consignment partners who earn monthly
 ---
 
 ### UF5: Equipment Location Tracking & Recovery
+
+*Revised 2026-04-13: Added Phase 1 interim location tracking. The full mobile check-in/out (F7) is Phase 2; Phase 1 needs a web-based location update path (DM or yard supervisor records movements via the desktop app or batch CSV upload) so the location-of-record exists before the mobile rollout.*
 
 Knowing where assets are at any given moment is critical for planning and shortage resolution. Today this relies on unreliable geo-trackers (65-70% accuracy), KPA records, and phone calls. This flow replaces that detective work with a system of record based on check-in/check-out logs.
 
@@ -312,6 +391,8 @@ District managers currently have no independent visibility into their own assets
 
 ### UF7: Loadout -- Shipping Equipment to a Job Site
 
+*Revised 2026-04-13: Added verifier fallback. Two-person verification can bottleneck small or after-hours yards; system supports solo loadout with deferred verification (photo proof + supervisor confirms within X hours) and flags any loadout that ships unverified.*
+
 When equipment ships from a yard to a job site, a verified record must be created of exactly what was sent. Today this is a handwritten delivery ticket entered into Basis 4 days late. This flow replaces that with a mobile-verified loadout ticket that updates asset status in real time and is immediately visible to the receiving field crew.
 
 **Current State:**
@@ -337,6 +418,8 @@ When equipment ships from a yard to a job site, a verified record must be create
 
 ### UF8: Check-In -- Receiving Equipment Back from a Job
 
+*Revised 2026-04-13: Explicitly handles returns to a different yard than the original origin (common during cross-district shuffling). Added discrepancy resolution sub-flow with investigation, write-off, and charge-back paths so flagged discrepancies don't sit open indefinitely.*
+
 When equipment returns from a completed job, it must be verified against what was originally sent. This is where assets go "missing" today -- returns aren't logged promptly, and discrepancies aren't caught until someone needs the equipment and can't find it. The smart serial number verification (only required on quantity mismatch) keeps the process fast while catching losses.
 
 **Current State:**
@@ -358,6 +441,8 @@ When equipment returns from a completed job, it must be verified against what wa
 ---
 
 ### UF9: Sub-Assembly Build & Deploy
+
+*Revised 2026-04-13: Added explicit field-swap step (component damaged on-site, replaced from spares) and ad-hoc / customer-specific configurations alongside reusable templates (Q16 confirms templates can vary by customer/job).*
 
 Frac stacks and other assemblies are built from multiple individual components (valves, spools, tees, crosses) that ship and deploy as a single unit. Today, the composition of a stack lives in Delmar's head. This flow formalizes assembly definitions with visual cross-section diagrams, tracks which serialized assets are in each slot, and handles mixed ownership (owned + consignment components in one stack).
 
@@ -455,6 +540,8 @@ Moving assets between Keithville, Midland, and Pleasanton to fill shortfalls tha
 
 ### UF13: Multi-District Supply Optimization
 
+*Revised 2026-04-13: Clarified the boundary with UF3. UF3 is the decision tree (which priority tier wins for each line item); UF13 is the execution engine that runs whenever UF3 lands on Priority 4-6. UF3 always delegates cross-district work to UF13 -- no parallel cross-district logic lives in UF3.*
+
 The system-level orchestration that runs when the Shortage Resolution Waterfall reaches Priority 4-6. Instead of the CEO manually scrolling through job rows to figure out which district can spare equipment, the system evaluates all districts' current and forecasted availability, calculates logistics costs, and presents an optimized sourcing recommendation. Midland and Pleasanton are close enough (~330 mi) to often be interchangeable for the same jobs.
 
 **Current State:**
@@ -497,6 +584,8 @@ UF13 is the system-level orchestration that runs when the **Shortage Resolution 
 ---
 
 ### UF14: Workforce / Labor Management
+
+*Revised 2026-04-13: Labor planning is integrated into the Job Planning Board (F2), not a separate module. Each job row shows equipment availability and labor availability side by side -- the same waterfall pattern, evaluated together so the CEO sees full readiness in one view.*
 
 Every job requires hands -- Spartan employees and/or contract labor. Like equipment, labor follows a waterfall: Spartan internal first, then contract. With 30+ simultaneous jobs, knowing who is available and where is its own planning challenge. This flow tracks workforce allocation so the CEO can see labor utilization alongside equipment utilization.
 
@@ -546,6 +635,122 @@ Assets in the machine shop are unavailable for deployment but today they're a bl
 5. When the shop completes work, the maintenance order is closed → asset status returns to "available" → waterfall recalculates, potentially resolving shortfalls that previously required cross-district sourcing
 6. Machine shop backlog is visible to the CEO: "12 assets in shop, oldest has been there 18 days, 4 expected back this week"
 7. Shop priority insight: "Expediting 2 wing valves in the Midland shop (expected April 12) would eliminate the need for a cross-district transfer from Keithville for Job #1055"
+
+---
+
+### UF16: Frac Schedule Arrival & Re-Plan
+
+*Added 2026-04-13. Frac schedules from customers shift roughly every 2 weeks; today Delmar manually re-keys them and figures out impact in his head. This flow formalizes intake and ripple analysis.*
+
+**Current State:**
+1. Customer emails or calls with an updated frac schedule (e.g., new pad start date, dropped well, sequence change)
+2. Delmar interprets the update and manually edits affected job rows in the spreadsheet
+3. Cascading impact (does this break another job's allocation?) is reasoned through manually
+4. No record of what changed between schedule versions; the "old" schedule is overwritten
+
+**Future State:**
+1. New schedule is ingested (manual entry in Phase 1; email parsing in a later phase) and stored as a new schedule version linked to the customer
+2. System diffs the new version against the prior accepted version: dates moved, jobs added, jobs dropped, sequence changes
+3. Ripple analysis runs the planner against the new schedule and flags any job that goes from "covered" to "shortfall" or vice versa
+4. CEO/President reviews the diff + impact summary and accepts (commits) or rejects (keeps prior version)
+5. On accept, all downstream allocations and forecasts update; rejected schedules are archived for audit
+
+---
+
+### UF17: Sub-Rental Procurement & Vendor Management
+
+*Added 2026-04-13. Sub-rentals are ~$200K/month with no vendor registry, insurance tracking, or rate history -- closing the Pain Point #5 gap.*
+
+**Current State:**
+1. Waterfall lands on Priority 3 or 6 (sub-rental)
+2. Delmar or DM calls a sub-rental vendor from memory
+3. Negotiates rate and availability; equipment ships
+4. Insurance, liability, rate history all live in Delmar's head; no vendor scoring
+
+**Future State:**
+1. System maintains a **sub-rental vendor registry**: contact info, equipment offered, rate history, insurance certificates ($15M+ requirement per Spartan policy), expiration dates, qualification status
+2. When the waterfall hits Priority 3 or 6, system suggests vendors that can supply the needed equipment locally with current insurance on file
+3. CEO/DM creates a **sub-rental order** referencing the vendor, equipment, rate, expected start/end
+4. Sub-rental equipment is registered as a temporary asset (ownership_class = sub-rental, vendor link) and follows the same loadout/check-in flow as owned/consignment
+5. On return, vendor is paid; rate and performance history update
+6. Vendor scorecard tracks: on-time delivery, equipment quality, rate competitiveness
+
+---
+
+### UF18: Job Close-Out & Financial Reconciliation
+
+*Added 2026-04-13. End-to-end thread that ties UF8 (return), UF10 (consignment statements), and UF17 (sub-rental payback) to a single "close the books on a job" workflow.*
+
+**Current State:**
+1. Job ends, equipment returns
+2. Customer is invoiced separately by accounting
+3. Sub-rental partners are paid based on whatever ad-hoc record exists
+4. Consignment partners get monthly statements compiled at month-end (UF10)
+5. Disconnected -- no single view of "what did we make on Job #1042?"
+
+**Future State:**
+1. Job status transitions to "complete" once all loadout tickets have matching receiving tickets (or discrepancies resolved per UF8)
+2. System auto-generates a **job close-out summary**: total days, equipment used by ownership class, days deployed per asset, sub-rental days/cost, consignment days (rolled into next monthly statement), customer invoice amount, gross margin
+3. Outstanding items (open discrepancies, unpaid sub-rentals, missing certs) block close-out until resolved
+4. Closed jobs flow into the consignment statement engine (UF10) and the customer invoice queue
+5. Per-job profitability becomes a reportable metric
+
+---
+
+### UF19: Emergency Reroute / Mass Rebalancing
+
+*Added 2026-04-13. Single-shortfall workflow (UF3) doesn't handle Delmar's "negative six, reroute the whole company" experience -- a cascading event that affects multiple near-term jobs simultaneously.*
+
+**Current State:**
+1. A job goes deeply negative or a large piece of equipment fails / disappears
+2. Delmar manually walks every near-term job to figure out who can be sourced from where, in what order
+3. Hot-shot trucking is dispatched at premium cost
+4. Multiple customer phone calls; multiple DM phone calls; chaos
+
+**Future State:**
+1. CEO triggers **Emergency Reroute mode** (or system auto-suggests it when shortfall ripples beyond a threshold of jobs)
+2. System pulls all impacted jobs in the next N days into a single triage view
+3. For each impacted job, runs UF3 + UF13 in parallel; presents a unified rebalancing plan that minimizes total disruption (lowest combined cost, fewest customer calls)
+4. CEO/President can lock priority jobs (these MUST be filled), and the system rebalances around the locks
+5. Approved plan generates the full set of transfer orders, sub-rental orders, and customer call list in one batch
+6. Plan includes a "what we couldn't fix" section -- jobs that need customer renegotiation or deferral
+
+---
+
+### UF20: Consignment Partner Onboarding -- Asset Intake
+
+*Added 2026-04-13. UF4 covers the deal/admin side of consignment partnerships; UF20 handles the physical receipt of partner equipment.*
+
+**Current State:**
+1. Partner delivers equipment to a Spartan yard
+2. Yard crew unloads; someone may or may not log serial numbers immediately
+3. Delmar or his quality guy eventually walks the yard to register what arrived
+4. Equipment is added to the partner's Excel tab; KPA records may or may not be created
+
+**Future State:**
+1. Partner agreement is in place (UF4); system has an expected manifest of incoming equipment
+2. Yard supervisor opens the **Partner Intake** mobile flow → scans/enters each asset's serial as it's unloaded
+3. For each asset: equipment type confirmed (image visual confirmation), photographed, tagged with a durable QR plate (Section 3.6), KPA cert status checked
+4. System reconciles received vs. expected; flags discrepancies (extras, missing, wrong type)
+5. On completion, all received assets are live in the Equipment Registry as ownership_class = consignment, owner = partner, located at the receiving yard, status = available
+
+---
+
+### UF21: Customer Brand-Conversion Campaign
+
+*Added 2026-04-13. Delmar actively converts customers from Best Way → 3E for margin and equity reasons; today this is tribal knowledge with no funnel or attribution.*
+
+**Current State:**
+1. Delmar identifies a customer running Best Way valves who could be converted to 3E
+2. Pitches them based on performance data he carries in his head ("3E performs better in Haynesville as isolation/zipper")
+3. Wins or loses the conversion; no record of attempts, outcomes, or revenue impact
+
+**Future State:**
+1. System maintains **brand-by-basin performance data** (e.g., 3E vs. Best Way in Haynesville on isolation valves) drawn from job history
+2. **Conversion candidates** are flagged automatically: customers running brands where Spartan has thin margin and a viable consignment alternative exists
+3. Sales/Delmar logs each conversion attempt: customer, target brand swap, talking points used, outcome (won | lost | pending), close date
+4. Won conversions are tracked: revenue from converted equipment, equity accrual, partner utilization impact
+5. Lost conversions capture the reason (price, performance objection, customer relationship) -- feeds back into talking-point refinement
 
 ---
 
@@ -743,7 +948,8 @@ Sub-assemblies (e.g., frac stacks) are combinations of individual assets that sh
 #### F4: Consignment Management
 - Track consignment equipment within the same system as owned equipment
 - Auto-generate monthly consignment reports per partner (matching current Excel format: serial number, job, days, rate, total)
-- Calculate equity accrual per partner with running balance
+- Calculate equity accrual per partner with running balance using `gross_rental_revenue x partner_equity_rate` (see §1.5.1) -- store per-asset and roll up per-partner
+- Surface per-asset equity balance and net "purchase-down" position (agreed_purchase_price - equity_balance) on the consignment dashboard
 - Show consignment utilization alongside owned utilization
 - Support standby rate calculations (different rate when equipment is assigned but idle)
 - Report export: PDF and Excel formats
@@ -883,6 +1089,7 @@ Track assets in the machine shop so they're visible to the planning system.
 - **Audit trail:** Every asset movement, status change, and assignment must be logged with user + timestamp. Delmar's reputation is built on honesty -- the system must be the proof.
 
 ### 3.5 Out of Scope (Phase 1)
+- **Asset classes outside Delmar's master spreadsheet** -- adapters, low-utilization yard staples, consumables, shop tooling, vehicles, and any equipment not currently planned at the company level. These remain managed by district yard processes (Basis, KPA, manual) and may be added in later phases once the in-scope model is proven.
 - Full KPA integration (Phase 3 -- need to talk to quality manager first)
 - Automated frac schedule ingestion (schedules arrive via email/phone -- manual entry for now)
 - Geo-tracker / NFC tag integration (current hardware is unreliable)
@@ -907,9 +1114,9 @@ Current state: assets are labeled with painted, stamped, or tagged asset numbers
 
 ---
 
-## 4. Design System -- "Atlas"
+## 4. Design System -- "Leonidas"
 
-Atlas is Spartan Energy Services' internal asset management platform. The visual identity is derived from the Spartan Energy brand -- their logo, website (spartansenergy.com), and the industrial character of their operations.
+Leonidas is Spartan Energy Services' internal asset management platform. The visual identity is derived from the Spartan Energy brand -- their logo, website (spartansenergy.com), and the industrial character of their operations.
 
 ### 4.1 Color Palette
 
@@ -1121,3 +1328,100 @@ Not planned for Phase 0-1. If requested, the dark theme would invert to:
 ## 9. Confidentiality Notice
 
 All information in this document is confidential to Spartan Energy Services and VectisOS. Delmar has explicitly requested that no business details be shared externally. This PRD is for internal VectisOS project planning only.
+
+---
+
+## 10. Glossary / Acronyms
+
+### Leonidas / PRD Conventions
+| Term | Definition |
+|------|-----------|
+| **Leonidas** | Internal name for the Spartan asset management system being built. Named by Delmar on the 2026-04-07 call (riffing on Alex's Greek heritage after Alex initially proposed "Atlas"). |
+| **PRD** | Product Requirements Document (this file) |
+| **UF#** | User Flow (e.g., UF3 = Shortage Resolution Waterfall) |
+| **F#** | Functional Requirement (e.g., F2 = Job Planning Board) |
+| **BOM** | Bill of Materials -- the component list that defines a sub-assembly template |
+| **SOW** | Statement of Work -- VectisOS consulting engagement scope |
+| **NDA** | Non-Disclosure Agreement -- required before Spartan shares operational data |
+
+### Spartan Operations
+| Term | Definition |
+|------|-----------|
+| **CEO** | Chief Executive Officer (Delmar) -- owns asset planning |
+| **President** | Don -- partners with CEO on planning, owns sales |
+| **DM** | District Manager -- runs day-to-day operations at one of three districts |
+| **District** | Spartan operating region: Keithville LA, Midland TX, Pleasanton TX |
+| **Yard** | Physical equipment staging location at a district |
+| **Hot Shot** | Premium-rate expedited trucking (~2x scheduled freight rate) used for urgent transfers |
+| **Loadout** | The act and record of shipping equipment from a yard to a job site |
+| **Standby** | Equipment assigned but idle; billed at a reduced rate to consignment partners |
+| **Redress** | Maintenance procedure for valves -- disassembly, inspection, reseal, test |
+
+### Equipment & Technical
+| Term | Definition |
+|------|-----------|
+| **Serviceless Valve** | High-utilization hydraulic valve that requires less field maintenance; ~200% the cost of a standard valve but faster to turn around |
+| **Wing Valve** | Side-outlet valve on a frac stack |
+| **Master Valve** | Primary isolation valve on the wellhead/frac stack |
+| **Zipper Valve** | Valve used in zipper manifold operations to alternate fracs between wells |
+| **Javelin** | Zipper manifold using a swing arm (similar mechanism to a cement truck); replaces traditional zipper tech |
+| **Frac Stack** | Sub-assembly: master valve + wings + zippers + spools + tees deployed as one unit on a wellhead |
+| **Spool** | Pipe segment used to space components in a stack (rotating spool, spacer spool) |
+| **Studded Tee** | T-shaped fitting with studded flanges |
+| **Cross** | Four-way fitting |
+| **Accumulator** | Hydraulic pressure vessel that stores energy to actuate hydraulic valves |
+| **Frac Iron** | General term for high-pressure pipe/fittings used during fracturing |
+| **HYD** | Hydraulic actuation |
+| **Man** | Manual actuation |
+| **K** | Pressure rating in thousand PSI (e.g., 15K = 15,000 PSI) |
+| **Pad** | Multi-well drilling/completion site (e.g., 6-well pad) |
+| **Frac Schedule** | Customer's planned sequence of fracturing operations across wells/pads |
+| **Isolation Valve** | Valve used to isolate sections of the wellhead during operations |
+
+### Brands & Serial Conventions
+| Term | Definition |
+|------|-----------|
+| **Best Way (BWV-####)** | Valve brand; Spartan sub-rents from Best Way (no consignment relationship) |
+| **Maverick (MAV / MAVI / MV)** | Consignment partner; serials prefixed `MAV-####` |
+| **3E** | Consignment partner; greaseless valve brand performing well in Haynesville |
+| **SE** | Brand of unknown meaning -- to be confirmed on-site |
+| **Encompass / Crescent 50 / State Ranger / Blue May / State Queen C3 / State Project / Mark 5** | Master valve brand variants tracked in inventory |
+
+### Customers & External Systems
+| Term | Definition |
+|------|-----------|
+| **BPX** | Customer (BP's onshore US business) |
+| **Civitas** | Customer |
+| **PPX / Rockcliffe / Lewis / Xpand / Silverhill / Chesapeake** | Customers / operators referenced in transcript |
+| **Haynesville** | Major US natural gas basin (LA/TX) |
+| **KPA** | Spartan's quality/certification management system; tracks redress, test, and inspection records by serial number |
+| **Basis** | Spartan's existing ERP/asset system (also referred to as "DASIS"); supposed to track everything but underutilized due to data-entry friction |
+| **FET** | Forum Energy Technologies -- Alex's current employer |
+| **VectisOS** | Alex's consulting practice |
+
+### Industry / Financial
+| Term | Definition |
+|------|-----------|
+| **PO** | Purchase Order |
+| **P&L** | Profit & Loss statement |
+| **EBITDA** | Earnings Before Interest, Taxes, Depreciation, and Amortization |
+| **SLA** | Service Level Agreement |
+| **Equity Accrual** | Cents-per-rental-dollar credit Spartan earns toward eventual purchase of consignment equipment (typically 25-33¢/$) |
+| **Sub-rental** | Equipment rented from a third party to fulfill a job when owned + consignment supply is insufficient |
+| **Consignment** | Equipment owned by a partner but operated and managed by Spartan, with monthly revenue share and equity accrual |
+
+### Tech / Architecture
+| Term | Definition |
+|------|-----------|
+| **PWA** | Progressive Web App -- web app with offline + mobile capabilities, no app store |
+| **API** | Application Programming Interface |
+| **CSV** | Comma-Separated Values |
+| **PDF** | Portable Document Format |
+| **QR** | Quick Response (2D barcode) |
+| **NFC** | Near Field Communication (tap-to-read tag tech) |
+| **RFID** | Radio Frequency Identification |
+| **UV** | Ultraviolet (referring to label durability) |
+| **CTA** | Call to Action (UI button) |
+| **KPI** | Key Performance Indicator |
+| **CRUD** | Create, Read, Update, Delete |
+| **RLS** | Row-Level Security (Supabase access control model) |

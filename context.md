@@ -1,17 +1,17 @@
 # Spartan — Context
 
 ## Overview
-Spartan Energy Services project — building "Atlas" product. PRD drafted with mockup screenshots.
+Spartan Energy Services project — building "Leonidas" product. PRD drafted with mockup screenshots.
 
 ## Repository
-- **GitHub:** https://github.com/asheehan923/spartan-atlas
+- **GitHub:** https://github.com/asheehan923/spartan-leonidas
 - **Local path:** `VectisOS/Projects/Spartan/`
 
 ## Key Files
 | File | Purpose |
 |------|---------|
-| `PRD-atlas.md` | Atlas product PRD |
-| `atlas-mockup/` | UI mockup files |
+| `PRD-leonidas.md` | Leonidas product PRD |
+| `atlas-mockup/` | UI mockup files (legacy folder name; contents are Leonidas mockup) |
 | `Spartan-Energy-Services-V2.webp` | Company branding/logo |
 | `Screenshot *.png` | UI/reference screenshots |
 

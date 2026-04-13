@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Atlas - Spartan Energy Services</title>
+<title>Leonidas - Spartan Energy Services</title>
 <link href="https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&family=PT+Serif:wght@400;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 /* ============================================
@@ -1447,29 +1447,35 @@ body {
       <span class="icon">&#9881;</span> Assemblies
       <span class="coming-soon-badge">Phase 1</span>
     </a>
-    <a class="sidebar-link coming-soon">
+    <a class="sidebar-link" onclick="showScreen('transfer-order')">
       <span class="icon">&#8634;</span> Transfers
-      <span class="coming-soon-badge">Phase 1</span>
+    </a>
+    <a class="sidebar-link" onclick="showScreen('shortage-waterfall')">
+      <span class="icon">&#9888;</span> Shortage Waterfall
     </a>
   </div>
 
   <div class="sidebar-section">
     <div class="sidebar-section-label">Management</div>
-    <a class="sidebar-link coming-soon">
+    <a class="sidebar-link" onclick="showScreen('consignment')">
       <span class="icon">&#9733;</span> Consignment
-      <span class="coming-soon-badge">Phase 1</span>
     </a>
-    <a class="sidebar-link coming-soon">
-      <span class="icon">&#9650;</span> Utilization
-      <span class="coming-soon-badge">Phase 1</span>
+    <a class="sidebar-link" onclick="showScreen('monthly-statement')">
+      <span class="icon">&#9783;</span> Monthly Statement
+    </a>
+    <a class="sidebar-link" onclick="showScreen('sub-rental')">
+      <span class="icon">&#8644;</span> Sub-Rental Vendors
+    </a>
+    <a class="sidebar-link" onclick="showScreen('capital-planning')">
+      <span class="icon">&#9650;</span> Capital Planning
     </a>
     <a class="sidebar-link coming-soon">
       <span class="icon">&#9874;</span> Machine Shop
-      <span class="coming-soon-badge">Phase 1</span>
+      <span class="coming-soon-badge">Phase 2</span>
     </a>
     <a class="sidebar-link coming-soon">
       <span class="icon">&#9823;</span> Workforce
-      <span class="coming-soon-badge">Phase 1</span>
+      <span class="coming-soon-badge">Phase 2</span>
     </a>
   </div>
 
@@ -2671,12 +2677,861 @@ body {
   </div>
 </div>
 
+<!-- ============ F4: CONSIGNMENT PARTNER DASHBOARD ============ -->
+<div class="screen-panel" id="screen-consignment">
+  <div class="page-header">
+    <div class="page-title">Consignment Partner Dashboard</div>
+    <div class="page-title-bar"></div>
+    <div class="page-subtitle">Partner equipment under Spartan management &bull; Running equity accrual &bull; Monthly revenue share</div>
+  </div>
+  <div class="page-body">
+
+    <div class="kpi-row">
+      <div class="kpi-card">
+        <div class="kpi-value font-mono">$7.0M</div>
+        <div class="kpi-label">Consigned Equipment Value</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-value font-mono">118</div>
+        <div class="kpi-label">Consigned Assets</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-value font-mono" style="color:var(--status-deployed)">$117K</div>
+        <div class="kpi-label">Partner Payouts (Mar)</div>
+        <div class="kpi-change up">&uarr; $9K vs Feb</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-value font-mono" style="color:var(--gold)">$34.2K</div>
+        <div class="kpi-label">Equity Accrued (Mar)</div>
+        <div class="kpi-change up">Running total $428K</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-value font-mono">94%</div>
+        <div class="kpi-label">Consignment Utilization</div>
+      </div>
+    </div>
+
+    <div class="section-header">Partners</div>
+    <div class="section-bar"></div>
+    <div class="data-table-wrap">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Partner</th>
+            <th>Serial Prefix</th>
+            <th>Assets</th>
+            <th>Revshare %</th>
+            <th>Equity Rate</th>
+            <th>Mar Payout</th>
+            <th>Mar Equity</th>
+            <th>Equity Balance (Cumulative)</th>
+            <th>Purchase-Down Remaining</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr onclick="showScreen('monthly-statement')">
+            <td><strong>3E</strong> <span class="status-badge deployed">Primary</span></td>
+            <td class="font-mono">3E-</td>
+            <td class="font-mono fw-700">70</td>
+            <td class="font-mono">70%</td>
+            <td class="font-mono fw-700" style="color:var(--gold)">$0.33 / $</td>
+            <td class="font-mono">$77,210</td>
+            <td class="font-mono" style="color:var(--gold)">$25,479</td>
+            <td class="font-mono fw-700">$312,840</td>
+            <td class="font-mono">$2.48M / $2.79M</td>
+          </tr>
+          <tr onclick="showScreen('monthly-statement')">
+            <td><strong>MAV</strong> (Maverick)</td>
+            <td class="font-mono">MAV-</td>
+            <td class="font-mono fw-700">48</td>
+            <td class="font-mono">75%</td>
+            <td class="font-mono fw-700" style="color:var(--gold)">$0.25 / $</td>
+            <td class="font-mono">$40,120</td>
+            <td class="font-mono" style="color:var(--gold)">$10,030</td>
+            <td class="font-mono fw-700">$115,680</td>
+            <td class="font-mono">$1.09M / $1.20M</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section-header mt-24">3E &mdash; Asset-Level Equity Position</div>
+    <div class="section-bar"></div>
+    <div class="data-table-wrap">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Serial</th>
+            <th>Type</th>
+            <th>Current Job</th>
+            <th>Days YTD</th>
+            <th>Gross Rental YTD</th>
+            <th>Equity Accrued</th>
+            <th>Agreed Purchase</th>
+            <th>Remaining to Buy</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr onclick="showScreen('component-detail')">
+            <td class="font-mono fw-700">3E-00814</td>
+            <td>Wings Hyd 4" 15K</td>
+            <td>BPX Permian Pad 7</td>
+            <td class="font-mono">88</td>
+            <td class="font-mono">$14,520</td>
+            <td class="font-mono fw-700" style="color:var(--gold)">$4,792</td>
+            <td class="font-mono">$38,000</td>
+            <td class="font-mono">$33,208</td>
+            <td><span class="status-badge deployed">Deployed</span></td>
+          </tr>
+          <tr>
+            <td class="font-mono fw-700">3E-00815</td>
+            <td>Wings Hyd 4" 15K</td>
+            <td>Rockcliffe Haynesville 12</td>
+            <td class="font-mono">92</td>
+            <td class="font-mono">$15,180</td>
+            <td class="font-mono fw-700" style="color:var(--gold)">$5,009</td>
+            <td class="font-mono">$38,000</td>
+            <td class="font-mono">$32,991</td>
+            <td><span class="status-badge deployed">Deployed</span></td>
+          </tr>
+          <tr>
+            <td class="font-mono fw-700">3E-00903</td>
+            <td>7 15 Masters</td>
+            <td>Diamondback Midland B12</td>
+            <td class="font-mono">81</td>
+            <td class="font-mono">$28,350</td>
+            <td class="font-mono fw-700" style="color:var(--gold)">$9,355</td>
+            <td class="font-mono">$64,000</td>
+            <td class="font-mono">$54,645</td>
+            <td><span class="status-badge deployed">Deployed</span></td>
+          </tr>
+          <tr>
+            <td class="font-mono fw-700">3E-00904</td>
+            <td>7 15 Masters</td>
+            <td>In yard &mdash; Midland</td>
+            <td class="font-mono">62</td>
+            <td class="font-mono">$21,700</td>
+            <td class="font-mono fw-700" style="color:var(--gold)">$7,161</td>
+            <td class="font-mono">$64,000</td>
+            <td class="font-mono">$56,839</td>
+            <td><span class="status-badge" style="background:rgba(74,222,128,0.18);color:var(--status-available)">Available</span></td>
+          </tr>
+          <tr>
+            <td class="font-mono fw-700">3E-01027</td>
+            <td>7-1/16 15 Zip MV</td>
+            <td>Ovintiv Eagle Ford 5</td>
+            <td class="font-mono">74</td>
+            <td class="font-mono">$25,900</td>
+            <td class="font-mono fw-700" style="color:var(--gold)">$8,547</td>
+            <td class="font-mono">$72,000</td>
+            <td class="font-mono">$63,453</td>
+            <td><span class="status-badge deployed">Deployed</span></td>
+          </tr>
+          <tr style="opacity:0.6">
+            <td colspan="9" style="text-align:center; font-style:italic; color:var(--slate)">&mdash; 65 more 3E assets &mdash;</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div style="margin-top:24px; display:flex; gap:12px;">
+      <button class="btn btn-primary" onclick="showScreen('monthly-statement')">Generate March Statement</button>
+      <button class="btn btn-secondary" onclick="showScreen('flows-index')">View Onboarding Flow (UF4)</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============ F4: MONTHLY STATEMENT (UF10) ============ -->
+<div class="screen-panel" id="screen-monthly-statement">
+  <div class="page-header">
+    <div class="breadcrumb">
+      <a onclick="showScreen('consignment')">Consignment</a>
+      <span>&rsaquo;</span>
+      <span>Monthly Statement</span>
+    </div>
+    <div class="page-title">Consignment Statement &mdash; 3E &mdash; March 2026</div>
+    <div class="page-title-bar"></div>
+    <div class="page-subtitle">Auto-generated from movement ledger &bull; Matches partner statement format</div>
+  </div>
+  <div class="page-body">
+
+    <div class="filter-row">
+      <select class="filter-select">
+        <option>3E</option>
+        <option>MAV (Maverick)</option>
+      </select>
+      <select class="filter-select">
+        <option>March 2026</option>
+        <option>February 2026</option>
+        <option>January 2026</option>
+      </select>
+      <button class="btn btn-secondary btn-sm">Export PDF</button>
+      <button class="btn btn-secondary btn-sm">Export Excel</button>
+      <button class="btn btn-primary btn-sm">Email to Partner</button>
+    </div>
+
+    <div style="background:var(--charcoal); padding:24px; border-left:4px solid var(--gold); margin-bottom:24px;">
+      <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+        <div>
+          <div style="font-family:var(--font-heading); font-size:22px; font-weight:700; color:var(--bone);">3E Energy Services</div>
+          <div style="color:var(--slate); margin-top:4px;">Statement Period: March 1&ndash;31, 2026</div>
+          <div style="color:var(--slate);">Statement Date: 2026-04-01</div>
+          <div style="color:var(--slate);">Terms: Net 15</div>
+        </div>
+        <div style="text-align:right;">
+          <div style="font-family:var(--font-heading); font-size:12px; text-transform:uppercase; letter-spacing:2px; color:var(--slate);">Total Due to Partner</div>
+          <div class="font-mono fw-700" style="font-size:36px; color:var(--gold); margin-top:4px;">$77,210.00</div>
+          <div style="color:var(--slate); margin-top:8px; font-size:13px;">+ Equity Accrued: <span class="font-mono" style="color:var(--bone)">$25,479</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-header">Asset-Level Detail &mdash; March 2026</div>
+    <div class="section-bar"></div>
+    <div class="data-table-wrap">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Serial</th>
+            <th>Equipment</th>
+            <th>Well / Job</th>
+            <th>Days</th>
+            <th>Day Rate</th>
+            <th>Gross Rental</th>
+            <th>Partner Share (70%)</th>
+            <th>Equity (33%)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="font-mono fw-700">3E-00814</td>
+            <td>Wings Hyd 4" 15K</td>
+            <td>BPX Permian Pad 7</td>
+            <td class="font-mono">31</td>
+            <td class="font-mono">$165</td>
+            <td class="font-mono">$5,115</td>
+            <td class="font-mono">$3,581</td>
+            <td class="font-mono" style="color:var(--gold)">$1,688</td>
+          </tr>
+          <tr>
+            <td class="font-mono fw-700">3E-00815</td>
+            <td>Wings Hyd 4" 15K</td>
+            <td>Rockcliffe Haynesville 12</td>
+            <td class="font-mono">31</td>
+            <td class="font-mono">$165</td>
+            <td class="font-mono">$5,115</td>
+            <td class="font-mono">$3,581</td>
+            <td class="font-mono" style="color:var(--gold)">$1,688</td>
+          </tr>
+          <tr>
+            <td class="font-mono fw-700">3E-00816</td>
+            <td>Wings Hyd 4" 15K</td>
+            <td>Lewis Permian 4A</td>
+            <td class="font-mono">26</td>
+            <td class="font-mono">$165</td>
+            <td class="font-mono">$4,290</td>
+            <td class="font-mono">$3,003</td>
+            <td class="font-mono" style="color:var(--gold)">$1,416</td>
+          </tr>
+          <tr>
+            <td class="font-mono fw-700">3E-00903</td>
+            <td>7" 15K Service Less Master</td>
+            <td>Diamondback Midland B12</td>
+            <td class="font-mono">22</td>
+            <td class="font-mono">$350</td>
+            <td class="font-mono">$7,700</td>
+            <td class="font-mono">$5,390</td>
+            <td class="font-mono" style="color:var(--gold)">$2,541</td>
+          </tr>
+          <tr>
+            <td class="font-mono fw-700">3E-00904</td>
+            <td>7" 15K Service Less Master</td>
+            <td>BPX Permian Pad 7</td>
+            <td class="font-mono">18</td>
+            <td class="font-mono">$350</td>
+            <td class="font-mono">$6,300</td>
+            <td class="font-mono">$4,410</td>
+            <td class="font-mono" style="color:var(--gold)">$2,079</td>
+          </tr>
+          <tr>
+            <td class="font-mono fw-700">3E-01027</td>
+            <td>7-1/16" 15K Zipper MV Hyd</td>
+            <td>Ovintiv Eagle Ford 5</td>
+            <td class="font-mono">19</td>
+            <td class="font-mono">$395</td>
+            <td class="font-mono">$7,505</td>
+            <td class="font-mono">$5,254</td>
+            <td class="font-mono" style="color:var(--gold)">$2,477</td>
+          </tr>
+          <tr>
+            <td class="font-mono fw-700">3E-01028</td>
+            <td>7-1/16" 15K Zipper MV Hyd</td>
+            <td>Coterra Marcellus 8H</td>
+            <td class="font-mono">23</td>
+            <td class="font-mono">$395</td>
+            <td class="font-mono">$9,085</td>
+            <td class="font-mono">$6,360</td>
+            <td class="font-mono" style="color:var(--gold)">$2,998</td>
+          </tr>
+          <tr style="opacity:0.6">
+            <td colspan="8" style="text-align:center; font-style:italic; color:var(--slate)">&mdash; 63 more line items &mdash;</td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr style="background:var(--engine); font-weight:700;">
+            <td colspan="5">TOTAL &mdash; 70 assets, 2,156 rental days</td>
+            <td class="font-mono fw-700">$110,300</td>
+            <td class="font-mono fw-700">$77,210</td>
+            <td class="font-mono fw-700" style="color:var(--gold)">$25,479</td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+
+    <div style="margin-top:16px; padding:16px; background:var(--gunmetal); border-left:3px solid var(--gold); font-size:13px; color:var(--slate);">
+      <strong style="color:var(--bone)">How equity works:</strong> Every rental dollar on 3E assets accrues $0.33 toward Spartan's eventual purchase. YTD equity accrued across all 3E assets: <span class="font-mono" style="color:var(--gold)">$312,840</span> against <span class="font-mono">$2,788,000</span> in agreed purchase prices. Running balance is applied against any future asset purchase.
+    </div>
+  </div>
+</div>
+
+<!-- ============ F10: SHORTAGE RESOLUTION WATERFALL (UF3) ============ -->
+<div class="screen-panel" id="screen-shortage-waterfall">
+  <div class="page-header">
+    <div class="page-title">Shortage Resolution Waterfall</div>
+    <div class="page-title-bar"></div>
+    <div class="page-subtitle">Alert: <strong style="color:var(--status-critical)">Wings Hyd 4" 15K shortfall at Midland</strong> &bull; Triggered by Diamondback Midland B12 loadout</div>
+  </div>
+  <div class="page-body">
+
+    <div style="background:var(--charcoal); border-left:4px solid var(--status-critical); padding:20px; margin-bottom:24px;">
+      <div style="font-family:var(--font-heading); font-size:18px; font-weight:700; color:var(--bone); margin-bottom:8px;">
+        &#9888; -6 Wings Hyd 4" 15K at Midland on April 15
+      </div>
+      <div style="color:var(--slate); font-size:14px;">
+        Diamondback Midland B12 needs 10 valves starting April 15. Midland has 4 available. Current company-wide position: 60 deployed, 0 available. Resolution required.
+      </div>
+    </div>
+
+    <div class="section-header">Waterfall Priority &mdash; Evaluation in Order</div>
+    <div class="section-bar"></div>
+
+    <div style="display:flex; flex-direction:column; gap:12px; margin-bottom:24px;">
+
+      <div style="background:var(--charcoal); border-left:4px solid var(--muted); padding:16px; opacity:0.5;">
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+          <div>
+            <span class="font-mono fw-700" style="color:var(--muted);">PRIORITY 1</span>
+            &nbsp;<strong>Local Owned &mdash; Midland</strong>
+          </div>
+          <span class="status-badge" style="background:rgba(165,165,165,0.15); color:var(--muted);">Exhausted &bull; 4 of 6 available</span>
+        </div>
+        <div style="margin-top:6px; color:var(--slate); font-size:13px;">Insufficient. Using all 4 owned units from Midland yard.</div>
+      </div>
+
+      <div style="background:var(--charcoal); border-left:4px solid var(--muted); padding:16px; opacity:0.5;">
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+          <div>
+            <span class="font-mono fw-700" style="color:var(--muted);">PRIORITY 2</span>
+            &nbsp;<strong>Local Consignment &mdash; Midland</strong>
+          </div>
+          <span class="status-badge" style="background:rgba(165,165,165,0.15); color:var(--muted);">Exhausted &bull; 2 of 6 available</span>
+        </div>
+        <div style="margin-top:6px; color:var(--slate); font-size:13px;">Using 2 MAV units from Midland yard (MAV-0412, MAV-0418). Margin ~30% + 25% equity accrual.</div>
+      </div>
+
+      <div style="background:var(--charcoal); border-left:4px solid var(--status-critical); padding:16px; opacity:0.5;">
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+          <div>
+            <span class="font-mono fw-700" style="color:var(--status-critical);">PRIORITY 3</span>
+            &nbsp;<strong>Local Sub-Rental &mdash; Midland</strong>
+          </div>
+          <span class="status-badge" style="background:rgba(239,68,68,0.18); color:var(--status-critical);">Skipped (check cross-district first)</span>
+        </div>
+        <div style="margin-top:6px; color:var(--slate); font-size:13px;">Best Way Midland would quote ~$230/day each. ~5% margin, zero equity.</div>
+      </div>
+
+      <div style="background:var(--charcoal); border-left:4px solid var(--status-available); padding:20px;">
+        <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+          <div style="flex:1;">
+            <div>
+              <span class="font-mono fw-700" style="color:var(--status-available);">PRIORITY 4 &mdash; RECOMMENDED</span>
+              &nbsp;<strong>Cross-District Owned &mdash; Keithville</strong>
+            </div>
+            <div style="margin-top:10px; color:var(--bone); font-size:14px;">
+              <strong>6 units available at Keithville</strong> (Rockcliffe Haynesville 12 released Apr 14).
+            </div>
+            <div style="margin-top:8px; color:var(--slate); font-size:13px;">
+              Freight: ~$3,200 hotshot Keithville &rarr; Midland (~560 mi, 10 hr). Net margin still ~28% after freight &mdash; better than sub-rental by ~23 pts.
+            </div>
+          </div>
+          <div style="text-align:right; margin-left:24px;">
+            <div class="font-mono fw-700" style="font-size:24px; color:var(--status-available);">+$41K</div>
+            <div style="font-size:11px; color:var(--slate); text-transform:uppercase; letter-spacing:1.5px;">vs Sub-Rental</div>
+            <button class="btn btn-primary btn-sm" style="margin-top:12px;" onclick="showScreen('transfer-order')">Create Transfer &rarr;</button>
+          </div>
+        </div>
+      </div>
+
+      <div style="background:var(--charcoal); border-left:4px solid var(--muted); padding:16px; opacity:0.6;">
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+          <div>
+            <span class="font-mono fw-700" style="color:var(--muted);">PRIORITY 5</span>
+            &nbsp;<strong>Cross-District Consignment &mdash; Pleasanton</strong>
+          </div>
+          <span class="font-mono" style="color:var(--slate)">6 units avail &bull; Freight ~$1,900</span>
+        </div>
+        <div style="margin-top:6px; color:var(--slate); font-size:13px;">Secondary option. Margin ~28% + 25&ndash;33% equity. Consider if Priority 4 unavailable.</div>
+      </div>
+
+      <div style="background:var(--charcoal); border-left:4px solid var(--muted); padding:16px; opacity:0.5;">
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+          <div>
+            <span class="font-mono fw-700" style="color:var(--muted);">PRIORITY 6</span>
+            &nbsp;<strong>Cross-District Sub-Rental</strong>
+          </div>
+          <span class="font-mono" style="color:var(--slate)">Last resort</span>
+        </div>
+        <div style="margin-top:6px; color:var(--slate); font-size:13px;">~5% margin, zero equity. Avoid unless all prior priorities exhausted.</div>
+      </div>
+
+    </div>
+
+    <div style="margin-top:16px; padding:16px; background:var(--gunmetal); border-left:3px solid var(--spartan-red); font-size:13px; color:var(--slate);">
+      <strong style="color:var(--bone)">Why this ordering matters:</strong> Owned &rarr; Consignment &rarr; Sub-Rental is hard-coded across all flows. Consignment beats sub-rental by ~25 margin points + 25&ndash;33&cent; equity per rental dollar (see <a onclick="showScreen('consignment')" style="color:var(--gold); cursor:pointer; text-decoration:underline;">Consignment Dashboard</a>). Cross-district owned beats cross-district consignment only when freight is below the margin differential.
+    </div>
+  </div>
+</div>
+
+<!-- ============ F5: CAPITAL PLANNING (UF11) ============ -->
+<div class="screen-panel" id="screen-capital-planning">
+  <div class="page-header">
+    <div class="page-title">Capital Planning</div>
+    <div class="page-title-bar"></div>
+    <div class="page-subtitle">Equipment types >90% utilization for 3+ months &bull; Replaces Delmar's blue-cell capital plan</div>
+  </div>
+  <div class="page-body">
+
+    <div class="kpi-row">
+      <div class="kpi-card">
+        <div class="kpi-value font-mono" style="color:var(--status-critical)">4</div>
+        <div class="kpi-label">Buy Candidates (>95%, 3+ mo)</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-value font-mono" style="color:var(--status-shop)">3</div>
+        <div class="kpi-label">Watch List (90&ndash;95%, 2+ mo)</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-value font-mono">$1.9M</div>
+        <div class="kpi-label">Proposed Capex (Q2)</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-value font-mono" style="color:var(--gold)">$428K</div>
+        <div class="kpi-label">Offsettable by Equity</div>
+      </div>
+    </div>
+
+    <div class="section-header">Buy Candidates &mdash; Sustained High Utilization</div>
+    <div class="section-bar"></div>
+    <div class="data-table-wrap">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Equipment Type</th>
+            <th>Fleet Size</th>
+            <th>Jan</th>
+            <th>Feb</th>
+            <th>Mar</th>
+            <th>Trend</th>
+            <th>Waterfall Hit Rate</th>
+            <th>Est Unit Cost</th>
+            <th>Recommendation</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>7 15 Service Less Masters</strong></td>
+            <td class="font-mono">45</td>
+            <td class="font-mono text-red">100%</td>
+            <td class="font-mono text-red">100%</td>
+            <td class="font-mono text-red">100%</td>
+            <td>
+              <div class="util-bar-wrap"><div class="util-bar red" style="width:100%"></div></div>
+            </td>
+            <td class="font-mono">P6 &times; 4 months &bull; 11 sub-rentals</td>
+            <td class="font-mono">$64K</td>
+            <td><button class="btn btn-primary btn-sm">Buy 6 units &mdash; $384K</button></td>
+          </tr>
+          <tr>
+            <td><strong>Wings Hyd 4" 15K</strong></td>
+            <td class="font-mono">62</td>
+            <td class="font-mono text-red">97%</td>
+            <td class="font-mono text-red">98%</td>
+            <td class="font-mono text-red">97%</td>
+            <td>
+              <div class="util-bar-wrap"><div class="util-bar red" style="width:97%"></div></div>
+            </td>
+            <td class="font-mono">P4 &times; 2, P5 &times; 1</td>
+            <td class="font-mono">$38K</td>
+            <td><button class="btn btn-primary btn-sm">Buy 8 units &mdash; $304K</button></td>
+          </tr>
+          <tr>
+            <td><strong>Javelin</strong></td>
+            <td class="font-mono">8</td>
+            <td class="font-mono text-red">100%</td>
+            <td class="font-mono text-red">100%</td>
+            <td class="font-mono text-red">100%</td>
+            <td>
+              <div class="util-bar-wrap"><div class="util-bar red" style="width:100%"></div></div>
+            </td>
+            <td class="font-mono">Always short &bull; 9 sub-rentals</td>
+            <td class="font-mono">$215K</td>
+            <td><button class="btn btn-primary btn-sm">Buy 2 units &mdash; $430K</button></td>
+          </tr>
+          <tr>
+            <td><strong>7 15 Zippers MV Hyd</strong></td>
+            <td class="font-mono">38</td>
+            <td class="font-mono text-amber">93%</td>
+            <td class="font-mono text-amber">94%</td>
+            <td class="font-mono text-amber">95%</td>
+            <td>
+              <div class="util-bar-wrap"><div class="util-bar amber" style="width:95%"></div></div>
+            </td>
+            <td class="font-mono">P2 &times; 3 (3E consignment)</td>
+            <td class="font-mono">$72K</td>
+            <td><button class="btn btn-secondary btn-sm">Consign 4 more &mdash; 3E</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section-header mt-24">Watch List</div>
+    <div class="section-bar"></div>
+    <div class="data-table-wrap">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Equipment Type</th>
+            <th>Fleet</th>
+            <th>3-mo Avg</th>
+            <th>Trend</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>7-1/16 15M Rotating Spool</td>
+            <td class="font-mono">52</td>
+            <td class="font-mono text-amber">87%</td>
+            <td>
+              <div class="util-bar-wrap"><div class="util-bar amber" style="width:87%"></div></div>
+            </td>
+            <td>Watch</td>
+          </tr>
+          <tr>
+            <td>Accumulator</td>
+            <td class="font-mono">72</td>
+            <td class="font-mono text-amber">91%</td>
+            <td>
+              <div class="util-bar-wrap"><div class="util-bar amber" style="width:91%"></div></div>
+            </td>
+            <td>Watch &mdash; mostly consignment</td>
+          </tr>
+          <tr>
+            <td>5 15 HYD Wing</td>
+            <td class="font-mono">34</td>
+            <td class="font-mono">84%</td>
+            <td>
+              <div class="util-bar-wrap"><div class="util-bar amber" style="width:84%"></div></div>
+            </td>
+            <td>Watch</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ============ F9: TRANSFER ORDER (UF12) ============ -->
+<div class="screen-panel" id="screen-transfer-order">
+  <div class="page-header">
+    <div class="page-title">Inter-District Transfer Order</div>
+    <div class="page-title-bar"></div>
+    <div class="page-subtitle">Generated from Shortage Waterfall &bull; Keithville &rarr; Midland &bull; 6 units &bull; ~$3,200 freight</div>
+  </div>
+  <div class="page-body">
+
+    <div style="background:var(--charcoal); padding:20px; margin-bottom:24px; display:grid; grid-template-columns:1fr 1fr 1fr; gap:20px;">
+      <div>
+        <div style="text-transform:uppercase; font-size:11px; letter-spacing:1.5px; color:var(--slate);">From</div>
+        <div style="font-family:var(--font-heading); font-size:20px; font-weight:700; color:var(--bone); margin-top:4px;">Keithville, LA</div>
+        <div style="color:var(--slate); margin-top:4px; font-size:13px;">Main Yard &bull; 2131 Hwy 171</div>
+      </div>
+      <div style="text-align:center; align-self:center;">
+        <div style="font-size:24px; color:var(--gold);">&rarr;</div>
+        <div style="color:var(--slate); font-size:12px;">~560 mi &bull; 10 hr</div>
+        <div class="font-mono" style="color:var(--bone); margin-top:4px;">$3,200 est freight</div>
+      </div>
+      <div>
+        <div style="text-transform:uppercase; font-size:11px; letter-spacing:1.5px; color:var(--slate);">To</div>
+        <div style="font-family:var(--font-heading); font-size:20px; font-weight:700; color:var(--bone); margin-top:4px;">Midland, TX</div>
+        <div style="color:var(--slate); margin-top:4px; font-size:13px;">Main Yard &bull; 1404 W Industrial Ave</div>
+      </div>
+    </div>
+
+    <div class="section-header">Assets on This Transfer</div>
+    <div class="section-bar"></div>
+    <div class="data-table-wrap">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Serial</th>
+            <th>Equipment</th>
+            <th>Ownership</th>
+            <th>Current Status</th>
+            <th>Available After</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="font-mono fw-700">SPT-04122</td>
+            <td>Wings Hyd 4" 15K</td>
+            <td><span class="ownership-dot owned"></span> Owned</td>
+            <td>Rockcliffe Haynesville 12</td>
+            <td class="font-mono">Apr 14</td>
+          </tr>
+          <tr>
+            <td class="font-mono fw-700">SPT-04138</td>
+            <td>Wings Hyd 4" 15K</td>
+            <td><span class="ownership-dot owned"></span> Owned</td>
+            <td>Rockcliffe Haynesville 12</td>
+            <td class="font-mono">Apr 14</td>
+          </tr>
+          <tr>
+            <td class="font-mono fw-700">SPT-04201</td>
+            <td>Wings Hyd 4" 15K</td>
+            <td><span class="ownership-dot owned"></span> Owned</td>
+            <td>In Keithville yard</td>
+            <td class="font-mono">Now</td>
+          </tr>
+          <tr>
+            <td class="font-mono fw-700">SPT-04207</td>
+            <td>Wings Hyd 4" 15K</td>
+            <td><span class="ownership-dot owned"></span> Owned</td>
+            <td>In Keithville yard</td>
+            <td class="font-mono">Now</td>
+          </tr>
+          <tr>
+            <td class="font-mono fw-700">SPT-04244</td>
+            <td>Wings Hyd 4" 15K</td>
+            <td><span class="ownership-dot owned"></span> Owned</td>
+            <td>In Keithville yard</td>
+            <td class="font-mono">Now</td>
+          </tr>
+          <tr>
+            <td class="font-mono fw-700">SPT-04251</td>
+            <td>Wings Hyd 4" 15K</td>
+            <td><span class="ownership-dot owned"></span> Owned</td>
+            <td>In Keithville yard</td>
+            <td class="font-mono">Now</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px; margin-top:24px;">
+      <div>
+        <div class="section-header">Schedule</div>
+        <div class="section-bar"></div>
+        <div style="background:var(--charcoal); padding:16px; font-size:14px;">
+          <div style="display:flex; justify-content:space-between; padding:6px 0; border-bottom:1px solid var(--gunmetal);">
+            <span style="color:var(--slate);">Pickup</span>
+            <span class="font-mono">Apr 14, 06:00 CT</span>
+          </div>
+          <div style="display:flex; justify-content:space-between; padding:6px 0; border-bottom:1px solid var(--gunmetal);">
+            <span style="color:var(--slate);">Arrival (Midland)</span>
+            <span class="font-mono">Apr 14, 18:00 CT</span>
+          </div>
+          <div style="display:flex; justify-content:space-between; padding:6px 0; border-bottom:1px solid var(--gunmetal);">
+            <span style="color:var(--slate);">Staged for loadout</span>
+            <span class="font-mono">Apr 15, 05:00 CT</span>
+          </div>
+          <div style="display:flex; justify-content:space-between; padding:6px 0;">
+            <span style="color:var(--slate);">On Diamondback site</span>
+            <span class="font-mono">Apr 15, 08:00 CT</span>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="section-header">Cost Summary</div>
+        <div class="section-bar"></div>
+        <div style="background:var(--charcoal); padding:16px; font-size:14px;">
+          <div style="display:flex; justify-content:space-between; padding:6px 0; border-bottom:1px solid var(--gunmetal);">
+            <span style="color:var(--slate);">Hotshot (Keithville &rarr; Midland)</span>
+            <span class="font-mono">$3,200</span>
+          </div>
+          <div style="display:flex; justify-content:space-between; padding:6px 0; border-bottom:1px solid var(--gunmetal);">
+            <span style="color:var(--slate);">Cost avoided vs sub-rental</span>
+            <span class="font-mono" style="color:var(--status-available);">-$41,000</span>
+          </div>
+          <div style="display:flex; justify-content:space-between; padding:6px 0;">
+            <span style="color:var(--slate);">Net benefit (30-day job)</span>
+            <span class="font-mono fw-700" style="color:var(--gold);">+$37,800</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:24px; display:flex; gap:12px;">
+      <button class="btn btn-primary">Approve Transfer &amp; Generate Loadout</button>
+      <button class="btn btn-secondary">Modify</button>
+      <button class="btn btn-secondary" onclick="showScreen('shortage-waterfall')">&larr; Back to Waterfall</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============ F6: SUB-RENTAL VENDOR LIST (UF17) ============ -->
+<div class="screen-panel" id="screen-sub-rental">
+  <div class="page-header">
+    <div class="page-title">Sub-Rental Vendors</div>
+    <div class="page-title-bar"></div>
+    <div class="page-subtitle">Last-resort sourcing &bull; ~5% margin, zero equity &bull; ~$200K/mo current spend</div>
+  </div>
+  <div class="page-body">
+
+    <div style="background:var(--gunmetal); border-left:3px solid var(--status-critical); padding:16px; margin-bottom:24px; font-size:13px; color:var(--slate);">
+      <strong style="color:var(--bone)">Why this screen exists:</strong> Sub-rental is the waterfall's Priority 3/6. Margin is ~5% vs ~30% for consignment &mdash; "they cut us out." This screen tracks where we're bleeding and makes cost visible so it stops being invisible. Every row here is a capital-planning signal (see <a onclick="showScreen('capital-planning')" style="color:var(--gold); cursor:pointer; text-decoration:underline;">Capital Planning</a>).
+    </div>
+
+    <div class="kpi-row">
+      <div class="kpi-card">
+        <div class="kpi-value font-mono" style="color:var(--status-critical)">$198K</div>
+        <div class="kpi-label">Sub-Rental Spend (Mar)</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-value font-mono">$9.9K</div>
+        <div class="kpi-label">Margin Captured (~5%)</div>
+        <div class="kpi-change down">vs $59K if consigned</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-value font-mono">27</div>
+        <div class="kpi-label">Active Sub-Rental Units</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-value font-mono">14</div>
+        <div class="kpi-label">Waterfall P3/P6 Hits (Mar)</div>
+      </div>
+    </div>
+
+    <div class="section-header">Vendors</div>
+    <div class="section-bar"></div>
+    <div class="data-table-wrap">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Vendor</th>
+            <th>Serial Prefix</th>
+            <th>Active Units</th>
+            <th>Mar Spend</th>
+            <th>Typical Margin</th>
+            <th>Primary District</th>
+            <th>Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Best Way</strong></td>
+            <td class="font-mono">BWV-</td>
+            <td class="font-mono fw-700">18</td>
+            <td class="font-mono">$142,000</td>
+            <td class="font-mono text-red">~5%</td>
+            <td>Midland / Pleasanton</td>
+            <td style="color:var(--slate); font-size:13px;">Low-margin, aggressive pricing. No equity. "They cut us out."</td>
+          </tr>
+          <tr>
+            <td><strong>West Texas Hotshot</strong></td>
+            <td class="font-mono">WTH-</td>
+            <td class="font-mono fw-700">6</td>
+            <td class="font-mono">$38,000</td>
+            <td class="font-mono text-red">~4%</td>
+            <td>Pleasanton</td>
+            <td style="color:var(--slate); font-size:13px;">Trucking + rental combined. Margin near zero after freight.</td>
+          </tr>
+          <tr>
+            <td><strong>Haynesville Rentals</strong></td>
+            <td class="font-mono">HVR-</td>
+            <td class="font-mono fw-700">3</td>
+            <td class="font-mono">$18,000</td>
+            <td class="font-mono text-amber">~7%</td>
+            <td>Keithville</td>
+            <td style="color:var(--slate); font-size:13px;">Small op; responsive; slightly better rates.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section-header mt-24">Active Sub-Rental Units</div>
+    <div class="section-bar"></div>
+    <div class="data-table-wrap">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Serial</th>
+            <th>Vendor</th>
+            <th>Equipment</th>
+            <th>On Job</th>
+            <th>Day Rate (paid)</th>
+            <th>Day Rate (billed)</th>
+            <th>Days YTD</th>
+            <th>Margin YTD</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="font-mono fw-700">BWV-0772</td>
+            <td>Best Way</td>
+            <td>Wings Hyd 4" 15K</td>
+            <td>Ovintiv Eagle Ford 5</td>
+            <td class="font-mono">$230</td>
+            <td class="font-mono">$242</td>
+            <td class="font-mono">52</td>
+            <td class="font-mono text-amber">$624</td>
+          </tr>
+          <tr>
+            <td class="font-mono fw-700">BWV-0809</td>
+            <td>Best Way</td>
+            <td>7 15 Masters</td>
+            <td>Diamondback Midland B12</td>
+            <td class="font-mono">$445</td>
+            <td class="font-mono">$468</td>
+            <td class="font-mono">44</td>
+            <td class="font-mono text-amber">$1,012</td>
+          </tr>
+          <tr>
+            <td class="font-mono fw-700">WTH-0114</td>
+            <td>West Texas Hotshot</td>
+            <td>Javelin</td>
+            <td>Lewis Permian 4A</td>
+            <td class="font-mono">$1,850</td>
+            <td class="font-mono">$1,925</td>
+            <td class="font-mono">18</td>
+            <td class="font-mono text-amber">$1,350</td>
+          </tr>
+          <tr style="opacity:0.6">
+            <td colspan="8" style="text-align:center; font-style:italic; color:var(--slate)">&mdash; 24 more sub-rental units &mdash;</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
 <!-- ============ USER FLOWS INDEX ============ -->
 <div class="screen-panel" id="screen-flows-index">
   <div class="page-header">
     <div class="page-title">User Flows</div>
     <div class="page-title-bar"></div>
-    <div class="page-subtitle">16 operational workflows documented with current state and Atlas future state</div>
+    <div class="page-subtitle">21 operational workflows documented with current state and Leonidas future state</div>
   </div>
   <div class="page-body">
     <div class="flow-grid" id="flow-grid">
@@ -2951,6 +3806,100 @@ const userFlows = [
       { text: "CEO reviews the conflict report and either: (a) approves the date change and accepts/resolves the shortfalls, (b) modifies the date to a different window that avoids conflicts, or (c) cancels the change", screen: "planning" },
       { text: "If approved, the system updates the job schedule, recalculates all dashboards, and notifies affected DMs of changes to their district's availability", screen: null },
       { text: "All date changes are logged in the job's audit trail with before/after dates, who changed it, and what conflicts were flagged", screen: null }
+    ],
+    hasWaterfall: false
+  },
+  {
+    id: "UF17", title: "Sub-Rental Vendor Procurement",
+    purpose: "When the Shortage Waterfall exhausts owned and consignment options (Priorities 1-5), Leonidas must issue a sub-rental PO to a third-party vendor (Best Way, West Texas Hotshot, Haynesville Rentals) with day-rate lock, expected return date, and vendor-prefixed serials so sub-rented units do not contaminate the owned/consignment fleet.",
+    currentSteps: [
+      "Spreadsheet has no vendor record — DM calls vendor, confirms availability, negotiates rate verbally",
+      "PO written by hand or in a separate Word doc; day-rate and return date tracked in DM's notebook",
+      "Sub-rented units arrive at the yard without serials in the spreadsheet — yard hand writes them on a clipboard",
+      "At month-end, AP scrambles to match vendor invoices to jobs; disputes are common because there is no single source of truth",
+      "No running view of total sub-rental spend by vendor or by job"
+    ],
+    futureSteps: [
+      { text: "Waterfall Priority 6 triggers — CEO clicks 'Issue Sub-Rental PO'", screen: "shortage-waterfall" },
+      { text: "System presents preferred vendors ranked by historical day rate, on-time delivery, and current outstanding unit count", screen: "sub-rental" },
+      { text: "CEO selects vendor, confirms day rate, expected out / expected return dates, and job to charge against", screen: "sub-rental" },
+      { text: "System auto-generates vendor-prefixed serials (BWV-, WTH-, HVR-) and registers them as assets with ownership_class = 'sub_rental' so they appear in the fleet view but are flagged and excluded from equity/utilization metrics", screen: "inventory" },
+      { text: "PO PDF is generated and emailed to vendor; loadout ticket appears on the mobile app for yard verification when units arrive", screen: "mobile-checkout" },
+      { text: "Dashboard shows open sub-rental spend per vendor and per job in real time", screen: "sub-rental" }
+    ],
+    hasWaterfall: true
+  },
+  {
+    id: "UF18", title: "Job Close-Out & Demob Reconciliation",
+    purpose: "When a job ends, every asset that was checked out must be accounted for: returned to its home yard, transferred to the next job, scrapped, or flagged missing. Today demob is a spreadsheet audit that often takes a week and routinely loses track of 2-3% of consignment units per job.",
+    currentSteps: [
+      "DM prints the original loadout sheet and walks the location with the yard hand",
+      "Each unit is ticked off by hand; anything missing is circled for follow-up",
+      "Spreadsheet is updated row-by-row back at the office, often days later",
+      "Consignment partners have no visibility — they call to ask where their equipment is",
+      "Scrap decisions happen verbally; no photo or condition record"
+    ],
+    futureSteps: [
+      { text: "DM opens the job on mobile, taps 'Start Demob' — system pre-populates the expected return list from the original loadout ticket plus any mid-job adds", screen: "mobile-checkout" },
+      { text: "Yard hand scans each returning unit; serial mismatch triggers smart verification (photo + condition note)", screen: "mobile-checkout" },
+      { text: "Units can be routed three ways at scan time: back-to-yard (checkin), direct-to-next-job (transfer), or scrap (with photo + reason). Each path writes a different movement_type to the ledger", screen: "mobile-checkout" },
+      { text: "Unreturned units are auto-flagged 'missing' on the ledger with a 72-hour SLA before they escalate to the CEO's dashboard", screen: "inventory" },
+      { text: "Job close-out report shows: equity earned by partner, sub-rental days invoiced, scrap value written off, missing unit list", screen: "monthly-statement" },
+      { text: "Consignment partners see their assets return on the partner dashboard in real time", screen: "consignment" }
+    ],
+    hasWaterfall: false
+  },
+  {
+    id: "UF19", title: "Emergency Reroute (In-Flight Asset Redirection)",
+    purpose: "A truck loaded for Job A is still at the yard (or en route) when Job B goes critical and needs those exact assets. Today this requires phone calls to the driver, manual spreadsheet edits in two places, and often a full demob-then-reloadout that wastes a half day. Leonidas must support a single-action reroute that preserves the ledger audit trail.",
+    currentSteps: [
+      "CEO calls DM, DM calls driver, driver turns around or is redirected",
+      "Both job rows in the spreadsheet are manually edited — error-prone",
+      "Loadout ticket for Job A is voided with pen; new ticket for Job B is written by hand",
+      "If the driver has already left district, the equipment is sometimes shipped twice (wasting freight)"
+    ],
+    futureSteps: [
+      { text: "CEO opens the in-flight loadout ticket, taps 'Reroute'", screen: "mobile-checkout" },
+      { text: "Selects destination job from the conflict-filtered job list (only jobs where the equipment set matches the requirement are shown)", screen: "planning" },
+      { text: "System posts a single transfer movement to the ledger — the original loadout is not voided, the reroute is a continuation with a reason code", screen: null },
+      { text: "Both affected jobs auto-recalculate availability and the Shortage Waterfall for any new shortfalls created by the reroute", screen: "planning" },
+      { text: "Driver receives updated destination + ticket on the mobile app; yard is notified of any units that still need to be pulled to backfill Job A", screen: "mobile-checkout" },
+      { text: "Freight cost delta is captured for the capital/cost analytics view", screen: "capital-planning" }
+    ],
+    hasWaterfall: true
+  },
+  {
+    id: "UF20", title: "Partner Asset Intake (New Consignment)",
+    purpose: "When a consignment partner (3E, MAV, future partners) delivers new assets to a Spartan yard, each unit must be registered with its partner-specific equity rate, partner serial, and purchase-down schedule so equity accrual starts on day one. Missing or mis-tagged intake is the #1 source of month-end equity disputes.",
+    currentSteps: [
+      "Partner emails a packing list; assets arrive at the yard",
+      "Yard hand tags units with ad-hoc labels; spreadsheet row added days later",
+      "Equity rate is often copied from the wrong partner template, creating silent downstream errors",
+      "Purchase-down schedule is tracked in a separate Excel file that only the CEO maintains"
+    ],
+    futureSteps: [
+      { text: "Partner uploads packing list (CSV or PDF) to their partner portal, or AP enters it on the consignment intake screen", screen: "consignment" },
+      { text: "System creates asset rows with ownership_class = 'consignment', partner_id, partner_equity_rate, and purchase_down_target pre-filled from the partner's contract", screen: "consignment" },
+      { text: "Yard hand scans inbound units on mobile; serial mismatch vs. packing list triggers a smart-verification photo flow", screen: "mobile-checkout" },
+      { text: "On successful intake, the ledger posts an intake_consignment movement and the asset becomes available for loadout", screen: "inventory" },
+      { text: "Partner dashboard immediately reflects the new unit count and projected month-one equity accrual", screen: "consignment" }
+    ],
+    hasWaterfall: false
+  },
+  {
+    id: "UF21", title: "Brand-Conversion / Asset Reclassification",
+    purpose: "When an asset's identity changes — consignment unit purchased down to owned, owned unit sold to a partner, sub-assembly broken into components, or a unit brand-converted after refurb — Leonidas must post a reclassification movement that preserves the full history while updating the asset's ownership class, equity participation, and serial prefix prospectively.",
+    currentSteps: [
+      "Today these events are invisible in the spreadsheet — a consignment-to-owned purchase-down is handled by deleting a row from one tab and adding it to another",
+      "Historical rental-day / equity data is lost in the transition, making partner statements impossible to reconstruct",
+      "Sub-assembly breaks are tracked in a paper shop log that does not reconcile to the fleet view"
+    ],
+    futureSteps: [
+      { text: "Authorized user opens the asset detail and taps 'Reclassify'", screen: "component-detail" },
+      { text: "Selects reclassification type: purchase-down, sale-to-partner, sub-break, brand-convert. System requires a reason code and supporting document upload", screen: "component-detail" },
+      { text: "Ledger posts paired movements (e.g., return_to_partner + intake_owned) so prior history remains queryable but future rental days accrue to the new ownership class", screen: null },
+      { text: "Partner equity statement is auto-closed on the reclass date; purchase-down payment is queued for AP", screen: "monthly-statement" },
+      { text: "For sub_break events, component assets are re-enabled as available inventory with their original serials; the parent assembly is retired", screen: "assembly-detail" }
     ],
     hasWaterfall: false
   }
@@ -3339,7 +4288,7 @@ function showFlowDetail(flowId) {
   });
 
   // Future state
-  bodyHtml += '<div class="flow-section-label" style="margin-top:40px">Future State (Atlas)</div>';
+  bodyHtml += '<div class="flow-section-label" style="margin-top:40px">Future State (Leonidas)</div>';
   flow.futureSteps.forEach((step, i) => {
     const screenRef = step.screen ? `<div class="flow-step-screen-ref" onclick="showScreen('${step.screen}')">&#8594; View ${step.screen.replace('-', ' ').replace(/\b\w/g, l => l.toUpperCase())} Screen</div>` : '';
     bodyHtml += `<div class="flow-step">

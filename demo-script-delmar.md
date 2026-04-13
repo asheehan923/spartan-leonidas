@@ -1,9 +1,9 @@
-# Atlas Demo Script — Delmar Walkthrough
+# Leonidas Demo Script — Delmar Walkthrough
 
 **Audience:** Delmar (CEO, Spartan Energy Services)
-**Format:** Screen share of live mockup (spartan-atlas.vercel.app)
+**Format:** Screen share of live mockup (spartan-leonidas.vercel.app)
 **Duration:** 30–40 minutes
-**Goal:** Validate that Atlas captures how Delmar actually works, surface what's wrong or missing, and confirm priority order for Phase 1 build.
+**Goal:** Validate that Leonidas captures how Delmar actually works, surface what's wrong or missing, and confirm priority order for Phase 1 build.
 
 ---
 
@@ -36,7 +36,7 @@ Let him respond. He'll probably add color or correct something. That's good — 
 
 ---
 
-## 2. New Work Order — Current vs. Atlas (10–12 min)
+## 2. New Work Order — Current vs. Leonidas (10–12 min)
 
 ### 2a. Set the Scene (Current State)
 
@@ -50,7 +50,7 @@ Let Delmar describe it. He'll say something like: "I open the spreadsheet, add a
 
 Click **+ NEW WORK ORDER** tab on the Planning Board.
 
-> "Here's the same thing in Atlas. Same job — Vital Energy, Wolfcamp A-9H Pad, Midland, starting April 14."
+> "Here's the same thing in Leonidas. Same job — Vital Energy, Wolfcamp A-9H Pad, Midland, starting April 14."
 
 Walk through the form top to bottom:
 
@@ -198,6 +198,6 @@ That last question is the most important. His answer tells you what Phase 1 shou
 ## After the Call
 
 1. Send a follow-up email within 24 hours summarizing what he confirmed, what he corrected, and what new requirements surfaced
-2. Update PRD-atlas.md with any corrections
+2. Update PRD-leonidas.md with any corrections
 3. Update the mockup if he flagged anything visual
 4. Draft Phase 1 scope based on his answer to "what would make the biggest dent"
